@@ -11,7 +11,6 @@ function Home() {
         let valueCheck = e.target.checked 
             Setinput((prev) => {
                 const NewValue = valueCheck ? [...prev, valueItem] : prev.filter(ele => ele !== valueItem)
-                console.log(NewValue)
                 return NewValue;
             }) 
     }
