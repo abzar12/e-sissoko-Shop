@@ -21,6 +21,12 @@ body{
 input{
     outline: none;
 }
+.input{
+    outline: none;resize: none;
+}
+.input:focus{
+    border: 3px solid rgb(8, 209, 8);
+}
 .ac_search input:focus{
     border: 2px solid green;
 }
