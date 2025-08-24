@@ -1,8 +1,15 @@
+import AddProduct from "./AddProduct"
 import Home from "./Home"
-export default function App(){
+import { Routes, Route } from "react-router-dom"
+export default function App() {
   return (
     <>
-    <Home />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<AddProduct />} />
+      </Routes>
     </>
+
+
   )
 }
