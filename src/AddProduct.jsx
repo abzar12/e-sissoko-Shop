@@ -87,7 +87,7 @@ function AddProduct() {
                     {/* Product Image */}
                     <div className="mb-3">
                         <label htmlFor="">Product Image</label>
-                        <input type="file" name="Img_url" value={fileImage.value} onChange={handleFile} id="" className="input border w-full py-[5px] rounded-lg" />
+                        <input type="file" name="Img_url" onChange={handleFile} id="" className="input border w-full py-[5px] rounded-lg" />
                     </div>
                     <div className="ac-btn">
                         <button type="submit" className="border rounded-lg bg-green-600 w-full py-2 text-white">Add Product</button>
