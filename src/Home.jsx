@@ -63,7 +63,7 @@ function Home() {
                             {filtersByCategory}
                         </div>
                         <div className="ac-Price">
-                            <h2 className="text-[1.1rem] my-3 font-bold uppercase font-[lora]">Price </h2>
+                            <h2 className="text-[1.1rem] my-3 font-bold uppercase font-[lora]">Price</h2>
                             {filtersByPrice}
                         </div>
                         <div className="ac-Color">
