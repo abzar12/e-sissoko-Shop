@@ -1,3 +1,4 @@
+import { stringify } from "postcss";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -62,9 +63,9 @@ function EditProduct() {
         formData.append("Category", item.Category);
         formData.append("Description", item.Description);
         formData.append("Id", item.Id);
-        if (file && file.length > 0) {
+        if (file ) {
             formData.append("Img_url", file)
-        }else{
+        } else {
             formData.append("OldImage", item.OldImage)
         }
         try {
@@ -86,7 +87,8 @@ function EditProduct() {
             //     Description: ""
             // });
             // setFile("")
-            console.log(formData)
+            console.log("this a form data " + formData)
+            console.log("this a file: " + file);
         } catch (Error) {
             console.log('Client side error:', Error);
         }
