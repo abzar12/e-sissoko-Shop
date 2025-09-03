@@ -1,6 +1,7 @@
 import { stringify } from "postcss";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function EditProduct() {
     const [item, setItem] = useState({
@@ -14,12 +15,13 @@ function EditProduct() {
         OldImage: ""
     })
     const [file, setFile] = useState("")
-    const [searchParams] = useSearchParams();
-    const Id = searchParams.get("Id")
+    const [searchParams] = useSearchParams();// use for search a word to the url sent to frontend
+    const Id = searchParams.get("Id") // Id is searching onto url
+    const navigate = useNavigate(); // use for navigate with different page
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await fetch(`http://localhost:5330/product/edit-product?id=${Id}`);
+                const resp = await fetch(`http://localhost:5330/product/show-product?id=${Id}`);
                 if (!resp.ok) {
                     throw new Error(`Could not fetch data error: ${resp.status}`)
                 }
@@ -51,7 +53,6 @@ function EditProduct() {
     }
     const handlefile = (e) => {
         setFile(e.target.files[0])
-        console.log(e.target.files[0]);
     }
     const HandleSubmit = async (e) => {
         e.preventDefault();
@@ -64,7 +65,8 @@ function EditProduct() {
         formData.append("Description", item.Description);
         formData.append("Id", item.Id);
         if (file ) {
-            formData.append("Img_url", file)
+            formData.append("Img_url", file);
+            formData.append("OldImage", item.OldImage)
         } else {
             formData.append("OldImage", item.OldImage)
         }
@@ -77,18 +79,16 @@ function EditProduct() {
                 throw new Error(`Client Error: the data can not be save !! ${resp.status}`);
             }
             const data = await resp.json();
-            console.log(item);
-            // setItem({
-            //     Name: "",
-            //     Price: "",
-            //     Color: "",
-            //     Quantity: "",
-            //     Category: "",
-            //     Description: ""
-            // });
-            // setFile("")
-            console.log("this a form data " + formData)
-            console.log("this a file: " + file);
+            setItem({
+                Name: "",
+                Price: "",
+                Color: "",
+                Quantity: "",
+                Category: "",
+                Description: ""
+            });
+            setFile("");
+            navigate("/")
         } catch (Error) {
             console.log('Client side error:', Error);
         }
@@ -153,7 +153,7 @@ function EditProduct() {
                         <input type="file" name="Img_url" onChange={handlefile} className="input text-gray-600 border w-full py-[5px] rounded-lg" />
                         <div className="flex flex-wrap mt-3 p-2 gap-5">
                             <label >Old image</label>
-                            <img src={` http://localhost:5330/public/img/${file}`} alt={file} className="h-32" />
+                            <img src={` http://localhost:5330/public/img/${item.OldImage}`} alt={file} className="h-32" />
                             {/* {
                                 file && (
                                     <label >New image</label>
