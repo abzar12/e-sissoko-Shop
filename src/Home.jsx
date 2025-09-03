@@ -21,10 +21,11 @@ function Home() {
     }
     // fetching the product on the table
     // filters data to the server
+    const queryStringFilter = encodeURIComponent(JSON.stringify(query));
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await fetch(`http://localhost:5330/product/show-product?query=${query}`);
+                const resp = await fetch(`http://localhost:5330/product/show-product?query=${queryStringFilter}`);
                 if (!resp.ok) {
                     throw new Error(`Please Check : ${resp.status}`)
                 }
