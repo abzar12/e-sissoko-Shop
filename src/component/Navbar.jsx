@@ -6,12 +6,12 @@ export default function Navbar() {
    
     return (
         <>
-            <div className="ac-navbar">
-                <div className="ac-logo ">
+            <div className="ac-navbar bg-[#2B2B2B] text-white max-w-[95%] rounded-xl mx-auto">
+                <div className="ac-logo content-center">
                     <label htmlFor="">LOGO</label>
                 </div>
                 <div className="ac_search">
-                    <input type="text" placeholder="Search..." id="search-items"/>
+                    <input type="text" placeholder="Search..." id="search-items" className="  bg-transparent" />
                     <div className="search-icon">
                         <FaSearch />
                     </div>
