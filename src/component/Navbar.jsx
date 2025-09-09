@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa"
 import { FaRegHeart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
@@ -18,9 +19,14 @@ export default function Navbar() {
                 </div>
                 <div className="side_btn">
                     <div className="btn-icon"><button type="button bg-transparent "><FaRegHeart className="text-[20px]"/></button></div>
-                    <div className="btn-icon"><button type="button bg-transparent"><FaUser className="text-[20px]"/></button></div>
+                    <div className="btn-icon relative group">
+                         <Link to="/e-sissoko/log-in" className="" ><button type="button bg-transparent"><FaUser className="text-[20px]"/></button></Link> 
+                         <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-20px] text-sm rounded-lg bg-gray-300 text-black w-16">Log-In</span>
+                    </div>
+                    
                     <div className="btn-icon"><button type="button bg-transparent"><FaShoppingCart className="text-[20px]"/></button></div>
                 </div>
+                
             </div>
         </>
     )
