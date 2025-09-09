@@ -40,17 +40,17 @@ function Home() {
     // handle filters 
     const filtersByCategory = filter.Category.map((item, index) => (
         <div className="" key={index}>
-            <input type="checkbox" onChange={(e) => handleQuery(e, "Category")} id={item.toLowerCase()} value={(item == "All") ? "" : item} /> <label className="text-[15px] font-[lora]">{item}</label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Category")} id={item.toLowerCase()} value={(item == "All") ? "" : item} /> <label className="text-[15px] font-[lora] hover:text-gray-600 ">{item}</label>
         </div>
     ))
     const filtersByPrice = filter.Price.map((item, index) => (
         <div className="" key={index}>
-            <input type="checkbox" onChange={(e) => handleQuery(e, "Price")} id={item.toLowerCase()} value={item} /> <label className="text-[15px] font-[lora]">{item} <span>GHS</span></label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Price")} id={item.toLowerCase()} value={item} /> <label className="text-[15px] font-[lora] hover:text-gray-600">{item} <span>GHS</span></label>
         </div>
     ))
     const filterByColor = filter.Color.map((item, index) => (
         <div className="" key={index}>
-            <input type="checkbox" onChange={(e) => handleQuery(e, "Color")} id={item.toLowerCase()} value={item == "All" ? "" : item} /> <label className="text-[15px] ">{item}</label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Color")} id={item.toLowerCase()} value={item == "All" ? "" : item} /> <label className="text-[15px]  font-[lora] hover:text-gray-600">{item}</label>
         </div>
     ))
 
@@ -89,7 +89,7 @@ function Home() {
                                         <p className="text-[18px] font-[Open-Sans]"> <span className="text-[16px] font-[Merriweather] mr-2 font-bold">Price:</span>{P.Price} GHS</p>
                                     </div>
                                     <div className="Add_btn mx-3 mt-2">
-                                        <Link to={auth ? `/product/edit-product?Id=${P.Id_phone}` : `/product/product-detail?${P.Id_phone}`} > <button type="button" className="border-gray-500 hover:border-green-700 font-[Merriweather] border rounded-[50px] relative py-1 w-full mb-2 transition-all duration-[0.2s] ease-in hover:text-white "> {auth ? "Edit Product" : "Add to Cart"}</button> </Link>
+                                        <Link to={auth ? `/product/edit-product?Id=${P.Id_phone}` : `/product/product-detail?${P.Id_phone}`} > <button type="button" className="border-gray-500 hover:bg-[#2B2B2B] font-[Merriweather] border rounded-[50px] relative py-1 w-full mb-2 transition-all duration-[0.2s] ease-in hover:text-white "> {auth ? "Edit Product" : "Add to Cart"}</button> </Link>
                                     </div>
                                 </div>
                             ))
