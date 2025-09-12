@@ -24,7 +24,7 @@ body{
 }
 .ac_search input{
     padding: 5px 45px 5px 15px;
-    @apply border border-stone-500 min-w-full outline-none rounded-lg focus:border-stone-200;
+    @apply border border-white/60 min-w-full outline-none rounded-lg focus:border-stone-200;
 }
 .ac_search .search-icon{
     @apply bg-stone-200 h-[90%] top-0 right-0 absolute m-0.5 rounded-e-md px-3 pt-2;
