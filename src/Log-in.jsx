@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-
-import "./style/login.css"
+import "./component/style/login.css"
 
 function Login() {
     const [input, setInput] = useState({
@@ -13,30 +12,34 @@ function Login() {
         const value = e.target.value;
         const name = e.target.name
         // handling input values
-            setInput(prev => {
-                return ({...prev, [name]: value})
-            })
-        }
-        // handling submit 
-         const HandleSubmit = async (e) =>{
-            e.preventDefault();
+        setInput(prev => {
+            return ({ ...prev, [name]: value })
+        })
+    }
+    // handling submit 
+    const HandleSubmit = async (e) => {
+        e.preventDefault();
 
-            const formdata = new FormData();
-            formdata.append("Email", input.Email),
+        const formdata = new FormData();
+        formdata.append("Email", input.Email),
             formdata.append("Password", input.Password)
-            try{
-                const resp = await fetch("http://localhos:5330/login",{
-                    method: "POST",
-                    credentials: 'includes',
-                    body: JSON.stringify(formdata)
-                });
-                const data = await resp.json();
-                console.log(data);
+        try {
+            const resp = await fetch("http://localhost:5330/api/login-me", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                body: JSON.stringify({
+                    Email: input.Email,
+                    Password: input.Password
+                })
+            });
+            const data = await resp.json();
+            console.log(data);
 
-            }catch(ERR){
-                console.log("Frontend: data failed ");
-            }
-            }
+        } catch (ERR) {
+            console.log("Frontend: data failed ", ERR);
+        }
+    }
 
     return (
         <>
