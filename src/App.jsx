@@ -2,6 +2,8 @@ import AddProduct from "./AddProduct"
 import Home from "./Home"
 import EditProduct from "./EditProduct"
 import Login from "./Log-in"
+
+import { useTheme } from "./themeContext"
 import { Routes, Route } from "react-router-dom"
 export default function App() {
   return (
@@ -13,7 +15,5 @@ export default function App() {
         <Route path="/e-sissoko/log-in/" element={<Login />} />
       </Routes>
     </>
-
-
   )
 }
