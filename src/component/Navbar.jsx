@@ -7,8 +7,8 @@ export default function Navbar() {
 
     return (
         <>
-            <div className="ac-navbar bg-[#2B2B2B] text-white max-w-[95%] rounded-xl mx-auto">
-                <div className="ac-logo content-center">
+            <div className="ac-navbar ">
+                <div className="ac-logo ">
                     <label htmlFor="">LOGO</label>
                 </div>
                 <div className="ac_search">
@@ -17,7 +17,7 @@ export default function Navbar() {
                         <FaSearch />
                     </div>
                 </div>
-                <div className="side_btn">
+                <div className="side_btn flex gap-5">
                     <div className="btn-icon"><button type="button bg-transparent "><FaRegHeart className="text-[20px]" /></button></div>
                     <div className="btn-icon relative group ">
                         <Link to="/e-sissoko/log-in" className="" ><button type=" button hover:text-white/50 bg-transparent "><FaUser className="text-[20px] " /></button></Link>
