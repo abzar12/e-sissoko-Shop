@@ -1,0 +1,108 @@
+@import url("./theme.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ----------------------header------------------- */
+body {
+    font-size: var(--font-size);
+}
+
+/* ----------------------body------------------- */
+/*---------------------------- side bar filters------------------*/
+.ac-filter {
+    @apply bg-[var(--bg-secondary)] rounded-xl m-5;
+}
+
+.container h2 {
+    @apply text-[1.1rem] text-center mb-5 font-bold uppercase font-[lora];
+}
+
+.ac-filter .container {
+    @apply p-5 relative;
+}
+
+/*------------------End of Filter------------------- */
+/* ------------------------------------section-card------------------------------------ */
+.section-card {
+    @apply px-5 pt-10 h-[90vh] overflow-y-scroll bg-[var(--bg-primary)] m-5 rounded-lg;
+}
+
+.section-card .ac_Items {
+    @apply grid grid-cols-4 gap-y-12 gap-x-5;
+}
+
+.section-card .ac_Items .items {
+    @apply shadow-[0px_1px_7px_5px_var(--bg-secondary)] rounded-xl pt-2;
+}
+
+.ac_Items .items .card-image {
+    @apply h-[200px] overflow-hidden;
+}
+
+.ac_Items .items .card-image img {
+    @apply h-full w-full object-contain hover:scale-110 transition duration-200 ease-in
+}
+
+.ac_Items .items .ac_textItem {
+    @apply m-3 h-[120px] p-2;
+}
+
+.ac_textItem .title {
+    font-size: var(--text-size);
+    font-family: var(--font-family);
+    font-weight: bold;
+}
+
+.ac_textItem .desc {
+    @apply text-[0.9rem]
+}
+
+.ac_textItem .price span {
+    font-size: var(--text-size);
+    font-weight: bold;
+}
+
+.ac_textItem .price {
+    @apply font-normal text-[1rem];
+}
+
+.ac_textItem .price .special {
+    @apply font-normal text-[1rem] line-through;
+}
+
+.ac_Items .card_btn {
+    @apply text-center my-2 mx-3
+}
+
+.ac_Items .card_btn button {
+    @apply border w-full rounded-full py-1 border-[var(--bg-color-primary)] hover:bg-[var(--bg-color-primary)] hover:text-[var(--bg-primary)] transition duration-300 ease-in;
+}
+
+/*------------------End of section card------------------- */
+
+/* .ac-Category::before{
+    @apply absolute content-[""] transition-all duration-300 h-3 w-3 rounded-full bg-[#B3B3B3] top-[25px] right-[-7px] hover:bg-[#331C08];
+}
+.ac-Category::after{
+    @apply absolute content-[""] transition-all duration-300 h-[210px] w-[2px] bg-[#B3B3B3] top-[25px] right-[-2px] hover:bg-[#331C08];
+}
+.ac-Price::before{
+    @apply absolute content-[""] transition-all duration-300 h-3 w-3 rounded-full bg-[#B3B3B3] top-[230px] right-[-7px] hover:bg-[#331C08];
+}
+.ac-Price::after{
+    @apply absolute content-[""] transition-all duration-300 h-[160px] w-[2px] bg-[#B3B3B3] top-[230px] right-[-2px] hover:bg-[#331C08];
+}
+.ac-Color::before{
+    @apply absolute content-[""] transition-all duration-300 h-3 w-3 rounded-full bg-[#B3B3B3] top-[378px] right-[-7px] hover:bg-[#331C08];
+}
+.ac-Color::after{
+    @apply absolute content-[""] transition-all duration-300 h-[264px] w-[2px] bg-[#B3B3B3] top-[378px] right-[-2px] hover:bg-[#331C08];
+} */
+/* -------------------------------card-------------- */

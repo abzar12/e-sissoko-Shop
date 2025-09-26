@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --bg-color-primary:rgb(30,41,59); 
+    --bg-color: rgb(100, 116, 139);
+    --text-color: #000000;
+    --text-size: 1.1rem ;
+    --bg-primary: rgb(255, 255, 255);
+    --bg-secondary: rgb(226, 232, 240);
+    --font-family: 'Merriweather', sans-serif;
+}
+/* dark theme */
+[data-theme="dark"] {
+  --bg-color: #111827;
+  --text-color: #f9fafb;
+  --primary-color: #6366f1;
+}
+/* Red Theme */
+[data-theme="red"] {
+  --bg-color: #fff1f2;
+  --text-color: #7f1d1d;
+  --primary-color: #dc2626;
+}
+
+/* Green Theme */
+[data-theme="green"] {
+  --bg-color: #f0fdf4;
+  --text-color: #064e3b;
+  --primary-color: #10b981;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+  --bg-color: #eff6ff;
+  --text-color: #1e3a8a;
+  --primary-color: #3b82f6;
+}
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: sans-serif;
+}
