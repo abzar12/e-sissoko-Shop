@@ -7,6 +7,7 @@
     --bg-primary: rgb(255, 255, 255);
     --bg-secondary: rgb(226, 232, 240);
     --font-family: 'Merriweather', sans-serif;
+    --btn-color: rgb(71, 85, 105) ;
 }
 /* dark theme */
 [data-theme="dark"] {
@@ -33,10 +34,4 @@
   --bg-color: #eff6ff;
   --text-color: #1e3a8a;
   --primary-color: #3b82f6;
-}
-body {
-  background: var(--bg-color);
-  color: var(--text-color);
-  margin: 0;
-  font-family: sans-serif;
 }
