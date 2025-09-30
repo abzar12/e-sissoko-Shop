@@ -91,11 +91,20 @@ function Home() {
                                     </div>
                                     <div className="ac_textItem">
                                         <p className="title">{P.Nom}</p>
-                                        <p className="desc">{P.Description}</p>
-                                        <p className="price"><span> Price:</span>{P.Price_Promo ? P.Price_Promo : P.Price} GHS  <span className="special">{P.Price_Promo ? P.Price : ""}</span> </p>
+                                        {/* <p className="desc">{P.Description}</p> */}
+                                        <p className="price"><span> Price:</span>{P.Price_Promo ? P.Price_Promo : P.Price} GHS </p>
+                                        <p className="price"> <span className="special">{P.Price_Promo ? P.Price + " GHS" : ""} </span></p>
+                                        {
+                                            (P.Price_Promo || P.Price_Promo != 0 )  && (
+                                                <div className="PromoContent">
+                                                    <h1>Promotion</h1>
+                                                </div>
+                                            )
+                                        }
+
                                     </div>
                                     <div className="card_btn">
-                                        <Link to={auth ? `/product/edit-product?Id=${P.Id_phone}` : `/product/product-detail?${P.Id_phone}`} >
+                                        <Link to={auth ? `/product/edit-product?Id=${P.Id_phone}` : `/shop/product-detail?Id=${P.Id_phone}`} >
                                             <button type="button"> {auth ? "Edit Product" : "Add to Cart"}</button>
                                         </Link>
                                     </div>
