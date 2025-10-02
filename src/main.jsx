@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import ThemeProvider from './themeContext.jsx'
+import ThemeProvider from './pages/themeContext.jsx'
 import "./component/style/theme.css"
 import "./index.css"
 import App from './App.jsx'
