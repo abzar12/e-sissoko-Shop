@@ -1,0 +1,35 @@
+@import url("./theme.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label{
+    @apply font-bold block text-lg
+}
+.ac_form {
+    @apply border max-w-4xl mx-auto mt-5 sm:mx-auto p-6 bg-white shadow-lg rounded-2xl;
+}
+.Box{
+    @apply mb-3
+}
+.container-input{
+    @apply grid grid-cols-2 gap-3 w-full justify-between mb-3 
+}
+.container_3inputs{
+    @apply grid grid-cols-3 gap-3 w-full justify-between mb-3
+}
+.input{
+    @apply border w-full py-[5px] rounded-lg px-3 outline-none focus:border-green-500
+}
+.textarea{
+    @apply border w-full px-3 py-[5px] rounded-lg outline-none focus:border-green-500 ;
+}
+.p{
+    @apply text-sm text-gray-500 mb-2
+}
+.ac-btn button{
+    @apply border rounded-lg bg-green-600 w-full py-2 text-white hover:bg-green-900 font-[Lora] text-lg transition duration-300 ease-out;
+}
+.input .select{ 
+    @apply focus:bg-red-400 focus:outline-none
+}
