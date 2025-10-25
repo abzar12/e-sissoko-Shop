@@ -1,0 +1,70 @@
+.section-card {
+    @apply h-[90vh] overflow-y-scroll bg-[var(--bg-primary)] mx-5 rounded-lg ;
+}
+.container-slide{
+    @apply bg-[var(--bg-primary)] rounded-lg mx-5 ;
+}
+.container-slide .title{
+    @apply text-center text-white py-1 rounded-t-lg  w-[100%] text-3xl font-[Lora] bg-[rgb(220,38,38)] flex justify-center;
+}
+.section-card .title{
+    @apply text-center text-white py-1 rounded-t-lg  w-[100%] tracking-[3px] text-3xl font-[Lora] bg-[rgb(234,179,8)];
+}
+.ac_Items {
+    @apply grid lg:grid-cols-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-3  gap-x-2 my-7 mx-5
+}
+.ac_Items .items {
+    @apply shadow-[0px_1px_7px_1px_var(--bg-secondary)] rounded-xl pt-2 overflow-hidden  ;
+}
+.ac_Items .items .card-image.slide{
+    @apply h-[100px]
+}
+.ac_Items .items .card-image {
+    @apply h-[120px] overflow-hidden;
+}
+
+.ac_Items .items .card-image img {
+    @apply h-full w-full object-contain hover:scale-110 transition duration-200 ease-in
+}
+
+.ac_Items .items .ac_textItem {
+    @apply  p-2 relative;
+}
+
+.ac_textItem .Prod-title {
+    font-size: var(--text-size);
+    font-family: var(--font-family);
+    font-weight: bold;
+    line-clamp: 1;
+}
+
+.ac_textItem .desc {
+    @apply text-[0.9rem]
+}
+
+.ac_textItem .price span {
+    font-size: var(--text-size);
+    font-weight: bold;
+}
+
+.ac_textItem .price {
+    @apply font-normal text-[1rem];
+}
+
+.ac_textItem .price .special {
+    @apply font-normal text-[1rem] line-through ml-[20px];
+}
+/* ------------------Promotion design---------- */
+.ac_textItem .PromoContent{
+    @apply absolute right-[-5px] bg-[var(--text-color-promot)] rounded-l-[5px] top-14 overflow-hidden ;
+}
+.ac_textItem .PromoContent h1{
+    @apply  text-white px-2 py-1 text-[12px] text-[Lora] ;
+}
+.ac_Items .card_btn {
+    @apply text-center mb-2 mx-3
+}
+
+.ac_Items .card_btn Button {
+    @apply border w-full rounded-lg py-1 border-[var(--bg-color-primary)] bg-transparent hover:bg-[var(--bg-color-primary)] hover:text-[var(--bg-primary)];
+}
