@@ -3,7 +3,9 @@ import Hero from "../component/hero"
 import filter from '../../FiltersGetting'
 import "../component/style/home.css"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import ProductCard from "../component/ProductSection/ProductCard"
+import ProductCardSlide from "../component/ProductSection/ProductCardSlide"
+import Button from "../component/Button/button"
 function Home() {
     const [products, SetProducts] = useState([]);
     // const for the filters of product
@@ -19,6 +21,10 @@ function Home() {
             const NewValue = valueCheck ? [...prev[type], valueItem] : prev[type].filter(ele => ele !== valueItem)
             return { ...prev, [type]: NewValue };
         })
+    }
+    // ----------------handle values of select 
+    const handleValues = (value) => {
+        console.log(`abzar : ${value}`)
     }
     // fetching the product on the table
     // filters data to the server
@@ -40,28 +46,29 @@ function Home() {
     }, [query])
     // handle filters 
     const filtersByCategory = filter.Category.map((item, index) => (
-        <div className="" key={index}>
+        <div className="categories" key={index}>
             <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Category")} id={item.toLowerCase()} value={(item == "All") ? "" : item} /> <label className="text-[15px] font-[lora] hover:text-gray-600 ">{item}</label>
         </div>
     ))
     const filtersByPrice = filter.Price.map((item, index) => (
-        <div className="" key={index}>
+        <div className="categories" key={index}>
             <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Price")} id={item.toLowerCase()} value={item} /> <label className="text-[15px] font-[lora] hover:text-gray-600">{item} <span>GHS</span></label>
         </div>
     ))
     const filterByColor = filter.Color.map((item, index) => (
-        <div className="" key={index}>
+        <div className="categories" key={index}>
             <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Color")} id={item.toLowerCase()} value={item == "All" ? "" : item} /> <label className="text-[15px]  font-[lora] hover:text-gray-600">{item}</label>
         </div>
     ))
-
     return (
         <>
             <header >
                 <Hero />
             </header>
 
-            <main className="grid grid-cols-[1fr,4fr] ">
+            <main className="">
+                <div className="grid grid-cols-[1fr,4fr] ">
+                    {/* ---------aside */}
                 <aside className="ac-filter">
                     <div className="container">
                         <div className="ac-Category" >
@@ -78,41 +85,21 @@ function Home() {
                         </div>
                     </div>
                 </aside>
-                {/* card items */}
+                {/* ------------------New Arrivals Product------------------ */}
                 <section className="section-card ">
-                    <div className="ac_Items">
-                        {
-                            products.map((P, index) => (
-                                <div key={index} className="items">
-                                    <div className="card-image">
-                                        <Link to={`/product/product-detail?${P.Id_phone}`}>
-                                            <img src={`http://localhost:5330/public/img/${P.Image}`} alt={P.Image} />
-                                        </Link>
-                                    </div>
-                                    <div className="ac_textItem">
-                                        <p className="title">{P.Nom}</p>
-                                        {/* <p className="desc">{P.Description}</p> */}
-                                        <p className="price"><span> Price:</span>{P.Price_Promo ? P.Price_Promo : P.Price} GHS </p>
-                                        <p className="price"> <span className="special">{P.Price_Promo ? P.Price + " GHS" : ""} </span></p>
-                                        {
-                                            (P.Price_Promo || P.Price_Promo != 0) && (
-                                                <div className="PromoContent">
-                                                    <h1>Promotion</h1>
-                                                </div>
-                                            )
-                                        }
-
-                                    </div>
-                                    <div className="card_btn">
-                                        <Link to={auth ? `/product/edit-product?Id=${P.Id_phone}` : `/shop/product-detail?Id=${P.Id_phone}`} >
-                                            <button type="button"> {auth ? "Edit Product" : "Add to Cart"}</button>
-                                        </Link>
-                                    </div>
-                                </div>
-                            ))
-                        }
-
+                    <ProductCard title="New Arrivals" auth={auth} Products={products} />
+                    <div className="btn-down">
+                        <Button type="button" children="Download More" />
                     </div>
+                </section>
+                </div>
+                
+                {/* ------------------New Arrivals Product------------------ */}
+                <section className="section-cardSlide ">
+                    <ProductCardSlide title="Most Popular" reverse= "" auth={auth} Products={products} />
+                </section>
+                <section className="section-cardSlide ">
+                    <ProductCardSlide title="Recommended for You" reverse= "true" auth={auth} Products={products} />
                 </section>
             </main>
         </>
