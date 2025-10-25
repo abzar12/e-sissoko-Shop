@@ -23,76 +23,27 @@ body {
 .ac-filter {
     @apply bg-[var(--bg-secondary)] rounded-xl m-5;
 }
-
 .container h2 {
-    @apply text-[1.1rem] text-center mb-5 font-bold uppercase font-[lora];
+    @apply text-[1.1rem] text-center mt-5 font-bold uppercase font-[lora];
 }
 
 .ac-filter .container {
-    @apply p-5 relative;
+    @apply relative block ;
+}
+.container .categories{
+    @apply flex gap-3 
+}
+.container label{
+    @apply font-normal
 }
 
 /*------------------End of Filter------------------- */
-/* ------------------------------------section-card------------------------------------ */
-.section-card {
-    @apply px-5 pt-10 h-[90vh] overflow-y-scroll bg-[var(--bg-primary)] m-5 rounded-lg ;
-}
 
-.section-card .ac_Items {
-    @apply grid grid-cols-4 gap-y-12 gap-x-5;
+.btn-down{
+    @apply text-center w-full my-5 mx-auto
 }
-
-.section-card .ac_Items .items {
-    @apply shadow-[0px_1px_7px_5px_var(--bg-secondary)] rounded-xl pt-2 overflow-hidden;
-}
-
-.ac_Items .items .card-image {
-    @apply h-[200px] overflow-hidden;
-}
-
-.ac_Items .items .card-image img {
-    @apply h-full w-full object-contain hover:scale-110 transition duration-200 ease-in
-}
-
-.ac_Items .items .ac_textItem {
-    @apply m-3  p-2 relative;
-}
-
-.ac_textItem .title {
-    font-size: var(--text-size);
-    font-family: var(--font-family);
-    font-weight: bold;
-}
-
-.ac_textItem .desc {
-    @apply text-[0.9rem]
-}
-
-.ac_textItem .price span {
-    font-size: var(--text-size);
-    font-weight: bold;
-}
-
-.ac_textItem .price {
-    @apply font-normal text-[1rem];
-}
-
-.ac_textItem .price .special {
-    @apply font-normal text-[1rem] line-through ml-[50px];
-}
-/* ------------------Promotion design---------- */
-.ac_textItem .PromoContent{
-    @apply absolute right-[-15px] bg-[rgb(101,163,13)] rounded-l-lg top-12 overflow-hidden ;
-}
-.ac_textItem .PromoContent h1{
-    @apply  text-white px-2 py-1 text-[12px] text-[Lora] ;
-}
-.ac_Items .card_btn {
-    @apply text-center my-2 mx-3
-}
-
-.ac_Items .card_btn button {
-    @apply border w-full rounded-full py-1 border-[var(--bg-color-primary)] hover:bg-[var(--bg-color-primary)] hover:text-[var(--bg-primary)] transition duration-300 ease-in;
+.btn-down button{
+    @apply text-white border-[var(--bg-color-primary)] text-[var(--bg-color-primary)] hover:text-white hover:bg-[var(--bg-color-primary)] border py-2 px-5 rounded-lg  ;
 }
 
 /*------------------End of section card------------------- */

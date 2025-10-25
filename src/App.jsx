@@ -5,6 +5,7 @@ import Login from "./pages/Log-in"
 import ShopDetail from "./pages/shop_detail"
 import Test from "./pages/test"
 import Select from "./component/Select/select"
+import Reackform from "./component/formhooks/reackform"
 
 import { useTheme } from "./pages/themeContext"
 import { Routes, Route } from "react-router-dom"
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/shop/product-detail" element={<ShopDetail />} />
         <Route path="/shop/product" element={<Test />} />
         <Route path="/select" element={<Select />} />
+        <Route path="/ReactForm" element={<Reackform />} />
       </Routes>
     </>
   )

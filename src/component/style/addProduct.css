@@ -13,7 +13,7 @@ label{
     @apply mb-3
 }
 .container-input{
-    @apply grid grid-cols-2 gap-3 w-full justify-between mb-3 
+    @apply grid grid-cols-2 gap-3 w-full justify-between mb-3  
 }
 .container_3inputs{
     @apply grid grid-cols-3 gap-3 w-full justify-between mb-3
@@ -27,8 +27,8 @@ label{
 .p{
     @apply text-sm text-gray-500 mb-2
 }
-.ac-btn button{
-    @apply border rounded-lg bg-green-600 w-full py-2 text-white hover:bg-green-900 font-[Lora] text-lg transition duration-300 ease-out;
+.ac-btn{
+    @apply border rounded-lg text-center bg-green-600 w-full py-2 text-white hover:bg-green-900 font-[Lora] text-lg transition duration-300 ease-out;
 }
 .input .select{ 
     @apply focus:bg-red-400 focus:outline-none

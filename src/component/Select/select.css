@@ -13,7 +13,7 @@
     @apply absolute content-[""] top-1.5 right-0 text-3xl 
 }
 .dropdown{
-    @apply bg-gray-300 p-5 absolute top-9 left-0 content-[""] rounded-b-lg w-full
+    @apply bg-gray-300 p-5 absolute top-9 left-0 content-[""] rounded-b-lg w-full 
 }
 .dropdown .item{
     @apply hover:bg-green-500 focus:outline-none border-transparent focus:border-green-500 z-10 cursor-pointer my-1 px-2 py-0.5 rounded-md

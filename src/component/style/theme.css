@@ -8,6 +8,7 @@
     --bg-secondary: rgb(226, 232, 240);
     --font-family: 'Merriweather', sans-serif;
     --btn-color: rgb(71, 85, 105) ;
+    --text-color-promot: rgb(101,163,13); 
 }
 /* dark theme */
 [data-theme="dark"] {
