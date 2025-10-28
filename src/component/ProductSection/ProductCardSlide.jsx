@@ -11,12 +11,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import 'swiper/css';
 import { IoMdHelpCircle } from "react-icons/io";
-function ProductCardSlide({ title, Products, auth, reverse }) {
+function ProductCardSlide({ title, Products, auth, reverse, icon,titleClass }) {
     const swiperRef = useRef(null);
     return (
         <>
             <div className="container-slide">
-                <h1 className="title flex justify-center"> <FaAward className="text-yellow-300 text-4xl mr-3" /> {title}</h1>
+                <h1 className={`title flex justify-center ${titleClass}`}> {icon} {title}</h1>
                 <Swiper onSwiper={(swiper) => (swiperRef.current = swiper)} spaceBetween={10} breakpoints={{
                     320: { slidesPerView: 1, spaceBetween: 10, }, 640: { slidesPerView: 2, spaceBetween: 15, }, 768: { slidesPerView: 3, spaceBetween: 20, }, 1024: {   slidesPerView: 4,   spaceBetween: 25, }, 1280: {   slidesPerView: 6,   spaceBetween: 30, },
                 }} autoplay={{ delay: 2000, reverseDirection: `${reverse}` }} modules={[Autoplay, Pagination, Navigation]} className="ac_Items slide p-5">
@@ -32,7 +32,7 @@ function ProductCardSlide({ title, Products, auth, reverse }) {
                                             </Link>
                                             :
                                             <div className="Image_Erro w-full h-full flex items-center justify-center bg-gray-100">
-                                                <IoMdHelpCircle className="text-gray-400 w-16 h-16" />
+                                                < IoMdHelpCircle className="text-gray-400 w-16 h-16" />
                                             </div>
                                     }
 
