@@ -3,12 +3,12 @@ import Button from "../Button/button";
 import "./ProductCard.css"
 import { Link } from "react-router-dom";
 import { IoMdHelpCircle } from "react-icons/io";
-function ProductCard({ title, Products, auth }) {
+function ProductCard({ title, Products, auth, ac_ItemClass }) {
     return (
         <>
             <div className="">
                 <h1 className="title">{title}</h1>
-                <div className="ac_Items">
+                <div className={`ac_Items ${ac_ItemClass}`}>
                     {
                         Products.map((prod, index) => (
                             <div key={index} className="items">
@@ -29,7 +29,7 @@ function ProductCard({ title, Products, auth }) {
                                 <div className="ac_textItem">
                                     <p className="Prod-title">{prod.Name}</p>
                                     {/* <p className="desc">{prod.Description}</p> */}
-                                    <p className="price"><span> Price:</span>{prod.Promot_Price ? prod.Promot_Price : prod.Price} GHS </p>
+                                    <p className="price"><span> Price: </span>{prod.Promot_Price ? prod.Promot_Price : prod.Price} GHS </p>
                                     <p className="price"> <span className="special">{prod.Promot_Price ? prod.Price + " GHS" : ""} </span></p>
                                     {
                                         (prod.Promot_Price || prod.Promot_Price < 0) && (
@@ -42,7 +42,7 @@ function ProductCard({ title, Products, auth }) {
                                 </div>
                                 <div className="card_btn">
                                     <Link to={auth ? `/product/edit-product?Id=${prod.Id_phone}` : `/shop/product-detail?Id=${prod.Id_phone}`} >
-                                        <Button type="button" children= {auth ? "Edit Product" : "Add to Cart"} />
+                                        <Button type="button"  children= {auth ? "Edit Product" : "Add to Cart"} />
                                     </Link>
                                 </div>
                             </div>
