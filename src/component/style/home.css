@@ -21,14 +21,18 @@ body {
 /* ----------------------body------------------- */
 /*---------------------------- side bar filters------------------*/
 .ac-filter {
-    @apply bg-[var(--bg-secondary)] rounded-xl m-5;
+    @apply bg-[var(--bg-secondary)] rounded-xl m-3 px-0 min-w-[200px] max-w-[220px] relative;
+}
+
+.aside-btn{
+    @apply bg-[var(--bg-color)] flex items-center absolute mt-10 px-5 py-3 z-40 rounded-xl text-white
 }
 .container h2 {
-    @apply text-[1.1rem] text-center mt-5 font-bold uppercase font-[lora];
+    @apply text-[16px] text-center mt-5 font-bold uppercase font-[lora];
 }
 
 .ac-filter .container {
-    @apply relative block ;
+    @apply relative block mx-0 px-2;
 }
 .container .categories{
     @apply flex gap-3 
