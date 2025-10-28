@@ -6,6 +6,7 @@ import ShopDetail from "./pages/shop_detail"
 import Test from "./pages/test"
 import Select from "./component/Select/select"
 import Reackform from "./component/formhooks/reackform"
+import MyAlert from "./component/PopUp/myAlert"
 
 import { useTheme } from "./pages/themeContext"
 import { Routes, Route } from "react-router-dom"
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/shop/product" element={<Test />} />
         <Route path="/select" element={<Select />} />
         <Route path="/ReactForm" element={<Reackform />} />
+        <Route path="/myAlert" element={<MyAlert />} />
       </Routes>
     </>
   )
