@@ -3,11 +3,11 @@ import Button from "../Button/button";
 import "./ProductCard.css"
 import { Link } from "react-router-dom";
 import { IoMdHelpCircle } from "react-icons/io";
-function ProductCard({ title, Products, auth, ac_ItemClass }) {
+function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) {
     return (
         <>
             <div className="">
-                <h1 className="title">{title}</h1>
+                <h1 className={`title ${titleClass}` }> {Icon} {title}</h1>
                 <div className={`ac_Items ${ac_ItemClass}`}>
                     {
                         Products.map((prod, index) => (
