@@ -3,8 +3,13 @@ import { FaSearch } from "react-icons/fa"
 import { FaRegHeart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "./style/Navbar.css"
+import { useCallback } from "react";
 export default function Navbar() {
-
+    const Navigate = useNavigate()
+    const preload = localStorage.getItem('ordP');
+    const cartCount = preload ? JSON.parse(preload) : [] 
     return (
         <>
             <div className="ac-navbar ">
@@ -20,12 +25,14 @@ export default function Navbar() {
                 <div className="side_btn flex gap-5">
                     <div className="btn-icon"><button type="button bg-transparent "><FaRegHeart className="text-[20px]" /></button></div>
                     <div className="btn-icon relative group ">
-                        <Link to="/e-sissoko/log-in" className="" ><button type=" button hover:text-white/50 bg-transparent "><FaUser className="text-[20px] " /></button></Link>
+                        <button type=" button hover:text-white/50 bg-transparent " onClick={()=> Navigate('/e-sissoko/log-in')}><FaUser className="text-[20px] " /></button>
                         <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-20px] text-sm rounded-lg bg-gray-300 text-black w-[59px]">Log-In</span>
                     </div>
                     <div className="group relative">
-                        <div className="btn-icon"><button type="button bg-transparent"><FaShoppingCart className="text-[20px]" /></button></div>
-                        <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-10px] text-sm rounded-lg bg-gray-300 text-black ">Card</span>
+                        <div className="btn-icon"><button type="button bg-transparent" onClick={() =>{ Navigate('/shop/cart')}}><FaShoppingCart className="text-[20px]" />
+                        <label htmlFor="" className=" absolute top-[-10px] text-black bg-white rounded-full px-1.5 right-[-10px] text-sm"> {cartCount.length} </label>
+                        <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-10px] text-sm rounded-lg bg-gray-300 text-black ">Cart</span>
+                        </button></div>
                     </div>
                 </div>
 
