@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.ac-nav .ac-navbar {
+    @apply bg-[rgb(0,0,0,0.5)] absolute h-full w-full top-0 z-10 flex items-start pt-5 justify-between text-white px-5;
+}
+.ac-nav .ac_search{
+    @apply flex bg-white gap-2 text-black py-1 px-3 rounded-lg
+}
+.ac-nav .ac_search input{
+    @apply md:w-[250px] 
+}
+.ac-nav .ac_search .search-icon{
+    @apply py-1 text-xl; 
+}
+/*  for different component  */
+.ac-navbar {
+    @apply bg-[var(--bg-color-primary)] w-full h-[60px] flex items-center justify-between text-white px-5;
+}
+.ac_search{
+    @apply flex bg-white gap-2 text-black py-1 px-3 rounded-lg
+}
+.ac_search input{
+    @apply md:w-[250px] 
+}
+.ac_search .search-icon{
+    @apply py-1 text-xl; 
+}
