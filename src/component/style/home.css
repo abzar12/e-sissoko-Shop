@@ -25,7 +25,7 @@ body {
 }
 
 .aside-btn{
-    @apply bg-[var(--bg-color)] flex items-center absolute mt-10 px-5 py-3 z-40 rounded-xl text-white
+    @apply bg-[var(--bg-color)] items-center absolute mt-10 px-5 py-3 z-40 rounded-xl text-white
 }
 .container h2 {
     @apply text-[16px] text-center mt-5 font-bold uppercase font-[lora];
@@ -40,7 +40,12 @@ body {
 .container label{
     @apply font-normal
 }
-
+.is_large{
+    @apply sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 
+}
+.is_small{
+    @apply sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5
+}
 /*------------------End of Filter------------------- */
 
 .btn-down{

@@ -4,11 +4,12 @@ import ThemeProvider from './pages/themeContext.jsx'
 import "./component/style/theme.css"
 import "./index.css"
 import App from './App.jsx'
+import cartProvider from './component/Context/cartContext/cartContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-   <ThemeProvider>
-      <App />
+    <ThemeProvider>
+        <App />
     </ThemeProvider>
   </BrowserRouter>
 )
