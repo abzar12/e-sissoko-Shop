@@ -5,7 +5,8 @@ function Select({ items, onChance }) {
     // create useRef to handle click of outside 
     const dropdownRef = useRef(null)
     const [open, setOpen] = useState(false);
-    const [selected, setSelected] = useState([]) //store multiple value 
+    const [selected, setSelected] = useState([
+    ]) //store multiple value 
     const handleSelected = (value) => {
         let newSelected;
         if (selected.includes(value)) {

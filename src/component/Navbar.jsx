@@ -5,11 +5,12 @@ import { FaUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./style/Navbar.css"
-import { useCallback } from "react";
+import { useContext } from "react";
+import { Cartcontext } from "./Context/cartContext/cartContext";
 export default function Navbar() {
     const Navigate = useNavigate()
-    const preload = localStorage.getItem('ordP');
-    const cartCount = preload ? JSON.parse(preload) : [] 
+    const {cart} = useContext(Cartcontext)
+    const cartCount = cart.length || [] ;
     return (
         <>
             <div className="ac-navbar ">
@@ -29,10 +30,10 @@ export default function Navbar() {
                         <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-20px] text-sm rounded-lg bg-gray-300 text-black w-[59px]">Log-In</span>
                     </div>
                     <div className="group relative">
-                        <div className="btn-icon"><button type="button bg-transparent" onClick={() =>{ Navigate('/shop/cart')}}><FaShoppingCart className="text-[20px]" />
-                        <label htmlFor="" className=" absolute top-[-10px] text-black bg-white rounded-full px-1.5 right-[-10px] text-sm"> {cartCount.length} </label>
+                        <div className="btn-icon"><Link to="/shop/cart"><FaShoppingCart className="text-[20px]" />
+                        <label htmlFor="" className=" absolute top-[-10px] text-black bg-white rounded-full px-1.5 right-[-10px] text-sm"> {cartCount} </label>
                         <span className="absolute top-full opacity-0 cursor-default group-hover:opacity-100 transition px-2 py-1 left-[-10px] text-sm rounded-lg bg-gray-300 text-black ">Cart</span>
-                        </button></div>
+                        </Link></div>
                     </div>
                 </div>
 
