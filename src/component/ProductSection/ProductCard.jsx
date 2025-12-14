@@ -7,19 +7,27 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
     return (
         <>
             <div className="">
-                <h1 className={`title ${titleClass}` }> {Icon} {title}</h1>
+                <h1 className={`title ${titleClass}`}> {Icon} {title}</h1>
                 <div className={`ac_Items ${ac_ItemClass}`}>
                     {
                         Products.map((prod, index) => (
                             <div key={index} className="items">
                                 <div className="card-image">
                                     {
-                                        prod.Image_Name
-                                            ?
-                                            <Link to={`/product/product-detail?${prod.Id_phone}`}>
-                                                <img src={`http://localhost:5330/public/img/${prod.Image_Name}`} alt={prod.Image} />
+                                        prod.Image_Name ? (
+                                            <Link to={`/shop/product-detail?Id=${prod.Slug}`}>
+                                                {(() => {
+                                                    const Image = JSON.parse(prod.Image_Name);
+                                                    return (
+                                                        <img
+                                                            src={`http://localhost:7000/public/upload/Product_img/${Image[0]}`}
+                                                            alt={Image[0]}
+                                                            className="w-full h-full object-cover" />
+                                                    );
+                                                }
+                                                )()}
                                             </Link>
-                                            :
+                                        ) :
                                             <div className="Image_Erro w-full h-full flex items-center justify-center bg-gray-100">
                                                 <IoMdHelpCircle className="text-gray-400 w-16 h-16" />
                                             </div>
@@ -41,8 +49,8 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
 
                                 </div>
                                 <div className="card_btn">
-                                    <Link to={auth ? `/product/edit-product?Id=${prod.Id_phone}` : `/shop/product-detail?Id=${prod.Id_phone}`} >
-                                        <Button type="button"  children= {auth ? "Edit Product" : "Add to Cart"} />
+                                    <Link to={auth ? `/product/edit-product?Id=${prod.Slug}` : `/shop/product-detail?Id=${prod.Slug}`} >
+                                        <Button type="button" children={auth ? "Edit Product" : "Add to Cart"} />
                                     </Link>
                                 </div>
                             </div>
@@ -50,7 +58,7 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
                     }
 
                 </div>
-            </div>
+            </div >
         </>
     )
 }

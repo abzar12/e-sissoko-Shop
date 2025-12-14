@@ -27,8 +27,8 @@ function ProductCardSlide({ title, Products, auth, reverse, icon,titleClass }) {
                                     {
                                         prod.Image_Name
                                             ?
-                                            <Link to={`/product/product-detail?${prod.Id_phone}`}>
-                                                <img src={`http://localhost:5330/public/img/${prod.Image_Name}`} alt={prod.Image} />
+                                            <Link to={`/product/product-detail?${prod.slug}`}>
+                                                <img src={`http://localhost:7000/public/upload/Product_img/${prod.Image_Name}`} alt={prod.Image} />
                                             </Link>
                                             :
                                             <div className="Image_Erro w-full h-full flex items-center justify-center bg-gray-100">
