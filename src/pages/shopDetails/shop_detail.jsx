@@ -27,6 +27,7 @@ function ShopDetail() {
     const [product, setproduct] = useState({
         uuid: 1,
         id: 0,
+        instock: 0,
         name: "",
         quantity: "",
         sub_total: "",
@@ -59,7 +60,7 @@ function ShopDetail() {
     // update the product of anychanging 
     useEffect(() => {
         setproduct((prev) => {
-            return { ...prev, id: Id, name: data.Name, image: data.Image_Name, uuid: data.uuid, quantity: quantity, sub_total: total, price: Price, is_added: true }
+            return { ...prev, id: Id, instock: data.Quantity, name: data.Name, image: data.Image_Name, uuid: data.uuid, quantity: quantity, sub_total: total, price: Price, is_added: true }
         })
     }, [quantity, total])
     // update quantity of any change 
