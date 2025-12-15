@@ -1,6 +1,6 @@
 import AddProduct from "./pages/AddProduct"
 import Home from "./pages/Home"
-import EditProduct from "./pages/EditProduct"
+import EditProduct from "./pages/editProduct/EditProduct"
 import Login from "./pages/Log-in"
 import ShopDetail from "./pages/shopDetails/shop_detail"
 import Test from "./pages/test"

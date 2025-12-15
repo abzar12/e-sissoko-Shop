@@ -49,7 +49,7 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
 
                                 </div>
                                 <div className="card_btn">
-                                    <Link to={auth ? `/product/edit-product?Id=${prod.Slug}` : `/shop/product-detail?Id=${prod.Slug}`} >
+                                    <Link to={auth ? `/product/edit-product?Id=${prod.uuid}` : `/shop/product-detail?Id=${prod.Slug}`} >
                                         <Button type="button" children={auth ? "Edit Product" : "Add to Cart"} />
                                     </Link>
                                 </div>
