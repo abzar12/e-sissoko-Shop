@@ -67,7 +67,6 @@ function AddProduct() {
     const handleFile = (e) => {
         const files = Array.from(e.target.files);
         SetFileImage(files);
-        console.log('Abzar this is making you tired', files)
     };
     // function for handling submition 
     const onSubmit = async (data) => {
