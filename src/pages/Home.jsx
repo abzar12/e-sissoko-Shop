@@ -14,7 +14,6 @@ import ProductCard from "../component/ProductSection/ProductCard"
 import ProductCardSlide from "../component/ProductSection/ProductCardSlide"
 import Button from "../component/Button/button"
 import Loading from "../component/loading/Loading"
-import BtnLoading from "../component/loading/BtnLoading"
 function Home() {
     const [is_loading, setloading] = useState(false)
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
@@ -23,7 +22,7 @@ function Home() {
     // const for the filters of product
     const [query, Setquery] = useState({ Category: [], Price: [], Color: [] })
     // authentification
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useState(true);
     const queryString = new URLSearchParams(query).toString();
     // funtion to hanldle the product to be save
     const handleQuery = (e, type) => {
