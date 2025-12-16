@@ -11,7 +11,7 @@ const useFetch = () => {
         async function GetData() {
             try {
 
-                const resp = await fetch(`http://localhost:7000/product/slug/${Id}`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/slug/${Id}`);
                 if (resp.status != 201) {
                     throw new Error("Product Could not fetch in API: ", resp.status)
                 }
