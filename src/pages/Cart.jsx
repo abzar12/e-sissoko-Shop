@@ -23,7 +23,6 @@ function Cart() {
         localStorage.setItem('ordP', JSON.stringify(cartItem));
     }, [cart])
     const images = cartItem.map(item => JSON.parse(item.image))
-    const instock = cartItem.map(item => JSON.parse(item.instock))
     const Not_Enough_Quantity = () => {
         setTimeout(() => {
             toast.error(("Not enough quantity available \n "), {
@@ -35,7 +34,7 @@ function Cart() {
                     primary: "orange",
                 }
             })
-        }, 700);
+        }, 500);
     }
     return (
         <>
@@ -53,7 +52,7 @@ function Cart() {
                                     <div className="img flex h-[80px] gap-3 items-center ">
                                         {
                                             images.map((item, index) => (
-                                                <img key={index} src={`http://localhost:7000/public/upload/Product_img/${item[0]}`} alt={item.name} className="h-full w-fit" />
+                                                <img key={item} src={`http://localhost:7000/public/upload/Product_img/${item[0]}`} alt={item.name} className="h-full w-fit" />
                                             ))
                                         }
                                         <div className="">
@@ -63,7 +62,7 @@ function Cart() {
                                         </div>
                                     </div>
                                     <div className="cart-content">
-                                        <Button children='+' onClick={() => instock > item.quantity ? IncreaseQuantity(item.id) : Not_Enough_Quantity()} className="px-2 mr-2 bg-[var(--bg-color)] hover:bg-[var(--bg-color-primary)] font-semibold text-white rounded-md content-center text-xl" />
+                                        <Button children='+' onClick={() => item.instock > item.quantity ? IncreaseQuantity(item.id) : Not_Enough_Quantity()} className="px-2 mr-2 bg-[var(--bg-color)] hover:bg-[var(--bg-color-primary)] font-semibold text-white rounded-md content-center text-xl" />
                                         <span className="text-[rgb()]">{item.quantity} </span>
                                         <Button children='-' onClick={() => DecreaseQuantity(item.id)} className="px-2 ml-2 bg-[var(--bg-color)] hover:bg-[var(--bg-color-primary)] font-semibold text-white rounded-md content-center text-xl" />
                                     </div>

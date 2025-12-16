@@ -22,7 +22,7 @@ function Home() {
     // const for the filters of product
     const [query, Setquery] = useState({ Category: [], Price: [], Color: [] })
     // authentification
-    const [auth, setAuth] = useState(true);
+    const [auth, setAuth] = useState(false);
     const queryString = new URLSearchParams(query).toString();
     // funtion to hanldle the product to be save
     const handleQuery = (e, type) => {
@@ -40,7 +40,7 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await fetch(`http://localhost:7000/product/`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/`);
                 if (!resp.ok) {
                     throw new Error(`Please Check : ${resp.status}`)
                 }

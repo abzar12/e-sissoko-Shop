@@ -24,7 +24,7 @@ function Login() {
         formdata.append("Email", input.Email),
             formdata.append("Password", input.Password)
         try {
-            const resp = await fetch("http://localhost:5330/api/login-me", {
+            const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/login-me`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: 'include',
