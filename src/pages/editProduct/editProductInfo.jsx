@@ -11,23 +11,19 @@ function ProductInfo({ data, uuid }) {
         Model: z.string().min(2, "Model field must be at least 2 characters"),
         Category: z.string().min(2, "Category is required"),
         Price: z
-            .string()
-            .min(2, "Price is required")
-            .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-                message: "Price must be a positive number"
-            }),
-        Promot_Price: z
-            .string()
-            .min(2, "Promot Price is require")
-            .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-                message: "Promot Price must be a positive number"
-            }),
+            .preprocess(
+                (val) => Number(val),
+                z.number().positive("Price must be a positive number")
+            ),
+        Promot_Price: z.preprocess(
+            (val) => (val === "" || val == null ? undefined : Number(val)),
+            z.number().nonnegative("Promot Price must be positive").optional()
+        ),
         Quantity: z
-            .string()
-            .min(1, "Quantity is required")
-            .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-                message: "Quantity must be a number greater than 0"
-            }),
+            .preprocess(
+                (val) => Number(val),
+                z.number().positive("Quantity is required")
+            ),
         Color: z.string().min(2, "Color field must be at least 2 characters"),
         // Size: z.string().min(2, "Size field must be at least 2 characters").optional(),
         // Weight: z.string().min(2, "Weight field must be at least 2 characters").optional(),
@@ -37,13 +33,16 @@ function ProductInfo({ data, uuid }) {
         Warranty: z.string().min(2, "Warranty field is incorrect "),
         Contact_Email: z.string().min(1, { message: "Please Email is required" }).email({ message: 'Invalid Email format' }),
         Description: z.string().min(100, "Description must be at least 100 characters"),
-        Img_url: z
-            .any()
-            .refine((file) => file && file.length > 0, {
-                message: "File must be at least 1 image"
-            })
-    }
-    )
+        Img_url: z.any().optional()
+    })
+        .refine(
+            (data) =>
+                !data.Promot_Price || data.Promot_Price < data.Price,
+            {
+                message: "Promotion price must be less than regular price",
+                path: ["Promot_Price"],
+            }
+        );
     // useForm to handle form submit
     const { register, handleSubmit, formState: { errors }, reset } = useForm({
         mode: "value",
@@ -56,6 +55,7 @@ function ProductInfo({ data, uuid }) {
             Color: data.Color,
             Price: data.Price,
             Promot_Price: data.Promot_Price,
+            Shipping: data.Shipping,
             Quantity: data.Quantity,
             Delivery: data.Delivery,
             Warranty: data.Warranty,
@@ -87,27 +87,23 @@ function ProductInfo({ data, uuid }) {
             }
         })
         try {
-            const resp = await fetch(`http://localhost:7000/product/${uuid}`, {
-                method : "PUT",
-                body : formData
+            const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/${uuid}`, {
+                method: "PUT",
+                body: formData
             })
-            if(!resp.ok){
+            if (!resp.ok) {
                 throw new Error(`Client Error, Status: ${resp.status}`);
             }
             const data = await resp.json()
             console.log(data)
             reset({
-                Name : "", Brand : "", Category : "", Model : "", Color : "", Price : "", Promot_Price : "", Quantity : "", Delivery : "", Warranty : "", Contact_Email : "", Description : "", Img_url : null
+                Name: "", Brand: "", Category: "", Model: "", Color: "", Price: "", Promot_Price: "", Shipping: "", Quantity: "", Delivery: "", Warranty: "", Contact_Email: "", Description: "", Img_url: null
             })
         } catch (error) {
             console.log(`CLient Error: ${error.message}`)
         }
     }
-    useEffect(() => {
-        if (data) {
-
-        }
-    }, [data])
+    const Oldimages = data.Image_Name ? JSON.parse(data.Image_Name) : []
     return (
         <>
             <div className="ac_form border max-w-[700px] mt-5 mx-5 sm:mx-auto p-6 bg-white shadow-lg rounded-2xl">
@@ -170,8 +166,9 @@ function ProductInfo({ data, uuid }) {
                                 <option value="black">Black</option>
                                 <option value="white">White</option>
                                 <option value="red">Red</option>
+                                <option value="blue">blue</option>
                                 <option value="brown">Brown</option>
-                                <option value="Gray">Gray</option>
+                                <option value="gray">Gray</option>
                                 <option value="yellow">Yellow</option>
                                 <option value="other">Other</option>
                             </select>
@@ -199,7 +196,7 @@ function ProductInfo({ data, uuid }) {
                     {/* Product Shipping */}
                     <div className="mb-3">
                         <label htmlFor="">Shipping</label>
-                        <input type="text" {...register("Shipping", { required: true }, { require: true })} name="Shipping" className="input text-gray-600 border w-full py-[5px] rounded-lg px-3" />
+                        <input type="text" {...register("Shipping", { require: true })} name="Shipping" className="input text-gray-600 border w-full py-[5px] rounded-lg px-3" />
                     </div>
                     <p className="text-red-300">{errors.Shipping?.message}</p>
                     {/* Product Description */}
@@ -215,7 +212,11 @@ function ProductInfo({ data, uuid }) {
                         <input type="file" multiple name="Img_url" {...register("Img_url", { onChange: ((e) => handlefile(e)) })} className="input text-gray-600 border w-full py-[5px] rounded-lg" />
                         <div className="flex flex-wrap mt-3 p-2 gap-5">
                             <label >Old image</label>
-                            <img src={` http://localhost:5330/public/img/${data?.OldImage}`} className="h-32" />
+                            {
+                                Oldimages.map((images, index) => (
+                                    <img key={index} src={`${import.meta.env.VITE_API_URL}/public/upload/Product_img/${images}`} className="h-32" />
+                                ))
+                            }
                         </div>
                     </div>
                     <div className="">

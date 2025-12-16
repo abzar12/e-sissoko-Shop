@@ -1,3 +1,4 @@
+
 const ProductInfo = ({ product }) => {
     if (!product) return null;
 
