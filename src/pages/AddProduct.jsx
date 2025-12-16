@@ -212,15 +212,17 @@ function AddProduct() {
                     <div className="container_3inputs">
                         <div className="">
                             <label htmlFor="" className="">Color</label>
-                            <input
-                                type="text"
-                                defaultValue="Abzar_Camara"
-                                placeholder="e.g Black"
-                                name="Color"
-                                id=""
-                                className={`input ${errors.Color ? "border-red-600" : "border"}`}
-                                {...register("Color")}
-                            />
+                             <select name="Color" {...register("Color", { required: true })} className={`input ${errors.Color ? "border-red-600" : "border"}`}>
+                                <option value="">Select Color</option>
+                                <option value="black">Black</option>
+                                <option value="white">White</option>
+                                <option value="red">Red</option>
+                                <option value="Blue">blue</option>
+                                <option value="brown">Brown</option>
+                                <option value="Gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                                <option value="other">Other</option>
+                            </select>
                         </div>
                         <div className="">
                             <label htmlFor="" className="">Size</label>

@@ -20,7 +20,7 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
                                                     const Image = JSON.parse(prod.Image_Name);
                                                     return (
                                                         <img
-                                                            src={`http://localhost:7000/public/upload/Product_img/${Image[0]}`}
+                                                            src={`${import.meta.env.VITE_API_URL}/public/upload/Product_img/${Image[0]}`}
                                                             alt={Image[0]}
                                                             className="w-full h-full object-cover" />
                                                     );
