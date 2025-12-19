@@ -3,7 +3,7 @@ import Button from "../Button/button";
 import "./ProductCard.css"
 import { Link } from "react-router-dom";
 import { IoMdHelpCircle } from "react-icons/io";
-function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) {
+function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
     return (
         <>
             <div className="">
@@ -49,8 +49,8 @@ function ProductCard({ title, Products, auth, ac_ItemClass, titleClass, Icon }) 
 
                                 </div>
                                 <div className="card_btn">
-                                    <Link to={auth ? `/product/edit-product?Id=${prod.uuid}` : `/shop/product-detail?Id=${prod.Slug}`} >
-                                        <Button type="button" children={auth ? "Edit Product" : "Add to Cart"} />
+                                    <Link to={`/shop/product-detail?Id=${prod.Slug}`} >
+                                        <Button type="button" children="Add to Cart" />
                                     </Link>
                                 </div>
                             </div>

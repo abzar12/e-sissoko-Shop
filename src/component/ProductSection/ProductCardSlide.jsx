@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import 'swiper/css';
 import { IoMdHelpCircle } from "react-icons/io";
-function ProductCardSlide({ title, Products, auth, reverse, icon,titleClass }) {
+function ProductCardSlide({ title, Products, reverse, icon,titleClass }) {
     const swiperRef = useRef(null);
     return (
         <>
@@ -52,8 +52,8 @@ function ProductCardSlide({ title, Products, auth, reverse, icon,titleClass }) {
 
                                 </div>
                                 <div className="card_btn">
-                                    <Link to={auth ? `/product/edit-product?Id=${prod.Id_phone}` : `/shop/product-detail?Id=${prod.Id_phone}`} >
-                                        <Button type="button" children={auth ? "Edit Product" : "Add to Cart"} />
+                                    <Link to={`/shop/product-detail?Id=${prod.Id_phone}`} >
+                                        <Button type="button" children= "Add to Cart" />
                                     </Link>
                                 </div>
                             </SwiperSlide>
