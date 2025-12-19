@@ -14,7 +14,9 @@ import ProductCard from "../component/ProductSection/ProductCard"
 import ProductCardSlide from "../component/ProductSection/ProductCardSlide"
 import Button from "../component/Button/button"
 import Loading from "../component/loading/Loading"
+import { useLocation } from "react-router-dom"
 function Home() {
+    const location = useLocation()
     const [is_loading, setloading] = useState(false)
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
     const [limitPage, setlimitPage] = useState(10)
@@ -22,7 +24,7 @@ function Home() {
     // const for the filters of product
     const [query, Setquery] = useState({ Category: [], Price: [], Color: [] })
     // authentification
-    const [auth, setAuth] = useState(false);
+
     const queryString = new URLSearchParams(query).toString();
     // funtion to hanldle the product to be save
     const handleQuery = (e, type) => {
@@ -149,7 +151,7 @@ function Home() {
                                 // if Item found on data base ---------------------------------------
 
                                         <div className="">
-                                            < ProductCard title="New Arrivals" titleClass="text-white bg-[rgb(234,179,8)]" ac_ItemClass={filterbutton ? 'is_small' : 'is_large'} auth={auth} Products={products} />
+                                            < ProductCard title="New Arrivals" titleClass="text-white bg-[rgb(234,179,8)]" ac_ItemClass={filterbutton ? 'is_small' : 'is_large'} Products={products} />
                                             <div className="btn-down">
                                                 <Button type="button" onClick={() => setlimitPage(prev => prev + 10)} children="Download More" />
                                             </div>
@@ -167,15 +169,15 @@ function Home() {
                 </div>
                 {/* ------------------New Arrivals Product------------------ */}
                 <section className="section-cardSlide ">
-                    <ProductCardSlide title="Most Popular" titleClass="bg-red-600 text-white" reverse="" icon={<FaAward className="text-yellow-300 text-4xl mr-3" />} auth={auth} Products={products} />
+                    <ProductCardSlide title="Most Popular" titleClass="bg-red-600 text-white" reverse="" icon={<FaAward className="text-yellow-300 text-4xl mr-3" />} Products={products} />
                 </section>
                 {/* ------------------recommended section -------- */}
                 <section className="section-cardSlide ">
-                    <ProductCardSlide title="Recommended for You" titleClass="bg-[var(--bg-color-primary)] text-white" icon={<FaLightbulb className="text-blue-500 text-4xl mr-3" />} reverse="true" auth={auth} Products={products} />
+                    <ProductCardSlide title="Recommended for You" titleClass="bg-[var(--bg-color-primary)] text-white" icon={<FaLightbulb className="text-blue-500 text-4xl mr-3" />} reverse="true" Products={products} />
                 </section>
                 {/* ------------------Phone section -------- */}
                 <section className="section-card min-h[100vh] pb-5">
-                    <ProductCard title="Phone" titleClass="bg-[var(--bg-color-primary)] text-white" Icon={< FaPhone className="text-4xl" />} ac_ItemClass="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 " Products={products} auth={auth} />
+                    <ProductCard title="Phone" titleClass="bg-[var(--bg-color-primary)] text-white" Icon={< FaPhone className="text-4xl" />} ac_ItemClass="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 " Products={products} />
                 </section>
             </main >
             <footer>

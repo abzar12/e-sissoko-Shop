@@ -1,28 +1,32 @@
 import AddProduct from "./pages/AddProduct"
 import Home from "./pages/Home"
 import EditProduct from "./pages/editProduct/EditProduct"
-import Login from "./pages/Log-in"
+import Login from "./pages/logPage/Log-in"
 import ShopDetail from "./pages/shopDetails/shop_detail"
+import Dashboard from "./pages/userDashboard/dashboard"
+import ProtectUserRoute from "./component/Middleware/protectRoute"
 import Test from "./pages/test"
-import { useTheme } from "./pages/themeContext"
 import { Routes, Route } from "react-router-dom"
 import Cart from "./pages/Cart"
-import CartProvider from "./component/Context/cartContext/cartContext"
-
 export default function App() {
   return (
     <>
-      <CartProvider >
-        <Routes>
-          <Route path="/" element={<Home />} />
+      <Routes>
+        {/* PUBLIC ROUTE */}
+        <Route path="/" element={<Home />} />
+
+        <Route path="/e-sissoko/log-in" element={<Login />} />
+        <Route path="/shop/product-detail" element={<ShopDetail />} />
+        <Route path="/shop/product" element={<Test />} />
+        <Route path="/shop/cart" element={<Cart />} />
+        {/* PROTECT ROUTE */}
+        <Route element={<ProtectUserRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shop/add-product" element={<AddProduct />} />
           <Route path="/product/edit-product" element={<EditProduct />} />
-          <Route path="/e-sissoko/log-in/" element={<Login />} />
-          <Route path="/shop/product-detail" element={<ShopDetail />} />
-          <Route path="/shop/product" element={<Test />} />
-          <Route path="/shop/cart" element={<Cart />} />
-        </Routes>
-      </CartProvider>
+        </Route>
+
+      </Routes>
     </>
   )
 }

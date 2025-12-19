@@ -1,0 +1,25 @@
+@import url("./theme.css");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.ac-form{
+    @apply max-w-[400px] rounded-xl shadow-[1px_1px_15px_5px_rgb(30,41,59)] bg-[var(--bg-color-primary)] m-auto p-5 mt-28
+}
+.ac-form .title{
+    @apply text-center text-2xl font-[Merriwether] font-bold mb-3 text-white
+}
+.ac-form .icon{
+    @apply absolute top-0 bg-gray-500 p-[13px] content-center text-white
+}
+.ac-form .labelText{
+    @apply text-white text-[1.2rem] font-semibold font-[Lora] mb-1
+}
+.ac-form .input{
+    @apply pl-12 py-2 w-full rounded-e-lg border-2 focus:border-gray-600 outline-none
+}
+
+.ac-form .ac-btn{
+    @apply border transition-all duration-300 py-1.5 w-[100px] h-10 overflow-hidden bg-cover rounded-xl my-5 font-[Lora] text-[1.2rem] font-semibold bg-[var(--bg-color-primary)] hover:bg-[#2B2B2B] hover:text-white
+}

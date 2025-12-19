@@ -4,12 +4,16 @@ import ThemeProvider from './pages/themeContext.jsx'
 import "./component/style/theme.css"
 import "./index.css"
 import App from './App.jsx'
-import cartProvider from './component/Context/cartContext/cartContext.jsx'
+import CartProvider from './component/Context/cartContext/cartContext.jsx'
+import AuthProvider from './component/Context/authContext/authContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <ThemeProvider>
+    <AuthProvider >
+      <CartProvider>
         <App />
-    </ThemeProvider>
+      </CartProvider>
+    </AuthProvider>
+
   </BrowserRouter>
 )
