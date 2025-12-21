@@ -8,12 +8,13 @@ import toast, { Toaster } from 'react-hot-toast';
 
 function Cart() {
     const { RemoveFromCart, IncreaseQuantity, DecreaseQuantity, cart } = useContext(Cartcontext)
+    console.log("Cart rendered ")
     const [cartItem, setCartItem] = useState(cart)
     const sub_total = useMemo(() => {
-        const sum_subtotal = cartItem.reduce((acc , item) => {
-           return acc + item.sub_total
+        const sum_subtotal = cartItem.reduce((acc, item) => {
+            return acc + item.sub_total
         }, 0)
-        return sum_subtotal ? Number(sum_subtotal) : 0 
+        return sum_subtotal ? Number(sum_subtotal) : 0
     }, [cart, cartItem])
     console.log("Cart Items: ", cartItem)
     useEffect(() => {
@@ -22,7 +23,8 @@ function Cart() {
     useEffect(() => {
         localStorage.setItem('ordP', JSON.stringify(cartItem));
     }, [cart])
-    const images = cartItem.map(item => JSON.parse(item.image))
+    // const images = cartItem.map(item => JSON.parse(item))
+    // console.log("images abwar: ",images)
     const Not_Enough_Quantity = () => {
         setTimeout(() => {
             toast.error(("Not enough quantity available \n "), {
@@ -50,11 +52,8 @@ function Cart() {
                             cartItem.map(item => (
                                 <div className="w-full bg-[var(--bg-primary)] rounded-lg py-3 mb-3 px-3 flex items-center justify-between" key={item.id}>
                                     <div className="img flex h-[80px] gap-3 items-center ">
-                                        {
-                                            images.map((item, index) => (
-                                                <img key={item} src={`http://localhost:7000/public/upload/Product_img/${item[0]}`} alt={item.name} className="h-full w-fit" />
-                                            ))
-                                        }
+                                                  <img  src={`http://localhost:7000/public/upload/Product_img/${JSON.parse(item.image)[0]}`} className="h-full w-fit" />
+                                        
                                         <div className="">
                                             <h1 className="text-[1.1rem] font-semibold line-clamp-1">{item.name}</h1>
                                             <p className="text-[0.9rem]"><span className="font-semibold text-[1.1rem]"> Price: </span>{item.price} GHS</p>
