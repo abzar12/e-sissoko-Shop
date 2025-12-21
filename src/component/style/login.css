@@ -21,5 +21,5 @@
 }
 
 .ac-form .ac-btn{
-    @apply border transition-all duration-300 py-1.5 w-[100px] h-10 overflow-hidden bg-cover rounded-xl my-5 font-[Lora] text-[1.2rem] font-semibold bg-[var(--bg-color-primary)] hover:bg-[#2B2B2B] hover:text-white
+    @apply border transition-all duration-300 py-1.5 w-[100px] h-10 overflow-hidden bg-cover rounded-xl font-[Lora] text-[1.2rem] font-semibold bg-[var(--bg-color-primary)] hover:text-white
 }
