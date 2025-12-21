@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function FetchProduct(uuid){
+    console.log("fetchproduct rendered ")
     const [is_loading, setIs_loading] = useState(false)
     const [data, setData] = useState([])
      useEffect(() => {

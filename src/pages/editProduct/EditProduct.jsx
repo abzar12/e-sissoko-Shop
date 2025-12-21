@@ -10,14 +10,7 @@ function EditProduct() {
     const [searchParams] = useSearchParams();// use for search a word to the url sent to frontend
     const Id = searchParams.get("Id") // Id is searching onto url
     const {data, loading} = FetchProduct(Id)
-    // const [item, setItem] = useState({
-    //     Name: data.Name,
-    //     Price: data.Price,
-    //     Color
-    // })
-    const [file, setFile] = useState()
-    const navigate = useNavigate(); // use for navigate with different page
-
+    console.log("EditProduct page rendered")
     return (
         <>
         {

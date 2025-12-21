@@ -1,5 +1,6 @@
 
 const ProductInfo = ({ product }) => {
+    console.log("productInfo rendered ")
     if (!product) return null;
 
     const {

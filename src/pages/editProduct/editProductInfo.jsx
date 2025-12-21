@@ -103,6 +103,7 @@ function ProductInfo({ data, uuid }) {
             console.log(`CLient Error: ${error.message}`)
         }
     }
+    console.log("editproductInfo rendered ")
     const Oldimages = data.Image_Name ? JSON.parse(data.Image_Name) : []
     return (
         <>
