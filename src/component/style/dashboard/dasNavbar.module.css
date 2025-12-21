@@ -1,0 +1,51 @@
+.body {
+    @apply bg-white
+}
+
+.shortNavbar {
+    @apply  h-[60px] bg-[var(--bg-primary)] text-[var(--bg-color)] px-5 flex justify-between items-center
+}
+
+.shortNavbar .link {
+    @apply hover:text-[var(--text-color)] transition duration-300 ease-in ml-3
+}
+
+.content {
+    @apply flex justify-between text-lg items-center content-center
+}
+
+.form {
+    @apply border border-white rounded-lg mr-5
+}
+
+.input {
+    @apply min-w-0 max-w-[250px] px-5 py-1 bg-transparent outline-none focus:outline-none
+}
+
+.searchBox {
+    @apply border border-black rounded-lg min-w-[50px] max-w-[400px] relative py-0.5 pl-3 pr-12 overflow-hidden
+}
+
+.searchBox input {
+    @apply focus:outline-none w-full bg-transparent
+}
+
+.searchBox .ac_iconSearch {
+    @apply absolute top-0 right-0 text-2xl p-1.5 hover:text-[var(--bg-primary)] transition duration-300 ease-in bg-[var(--bg-color-primary)] h-full w-10
+}
+
+.ac_btn_Box {
+    @apply text-2xl relative
+}
+
+.ac_iconBell {
+    @apply my-2 ml-3 hover:text-[var(--text-color)] transition duration-300 ease-in
+}
+
+.ac_icon {
+    @apply text-2xl
+}
+
+.ac_btn_Box .notification {
+    @apply absolute top-[-7px] text-[18px]  right-0 content-center text-red-500
+}

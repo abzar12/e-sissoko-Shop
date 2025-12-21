@@ -1,0 +1,57 @@
+@import url("./theme.css");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+.shop_details{
+    @apply mb-3
+}
+.shop_container{
+    @apply px-5 bg-[var(--bg-secondary)] rounded-b-lg py-5
+}
+.productDesc{
+    @apply grid grid-cols-1 sm:grid-cols-2 w-full 
+}
+.productDesc .content{
+    @apply mt-5 mx-5 max-w-full overflow-hidden relative
+}
+.content h1{
+    @apply font-semibold text-2xl
+}
+.content p{
+    @apply font-semibold mb-3 line-clamp-3
+}
+.content .quantity{
+    @apply flex gap-3 
+}
+.content .quantity button{
+    @apply border text-white px-2 py-2 ml-3 bg-[var(--bg-color)] rounded-md hover:bg-[var(--bg-color-primary)]
+}
+.content .quantity .qtn_btn{
+    @apply flex items-center mt-[-10px]
+}
+.content p span{
+    @apply font-normal text-lg 
+}
+.content Button{
+    @apply px-3 rounded-lg py-2 w-[50%] m-auto hover:text-white 
+}
+.image {
+    @apply max-h-[600px] w-full 
+}
+.swiper{
+     @apply h-[450px] w-full bg-center bg-cover mb-5 rounded-lg
+}
+.swiper .img{
+    @apply h-full w-full object-cover
+}
+.thumbContainer{
+    @apply h-20 
+}
+.thumbSwiper{
+    @apply bg-cover bg-center h-20 rounded-lg border-2 hover:border-[var(--bg-color-secondary)]
+}
+.thumbSwiper img{
+    @apply h-full w-full object-cover rounded-lg 
+}

@@ -1,0 +1,5 @@
+
+
+.container{
+    @apply  h-[60px] bg-[var(--bg-color)] content-center text-center
+}

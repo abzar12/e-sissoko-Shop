@@ -1,0 +1,33 @@
+.shortAside {
+    @apply bg-[var(--bg-color-primary)] fixed top-0 h-[100vh] w-16 transition-all duration-300 ease-in
+}
+
+.shortAside.activeBtn {
+    @apply w-64 transition-all duration-300 ease-in
+}
+
+.container {
+    @apply grid grid-cols-1 text-white
+}
+
+.iconBox{
+    @apply h-[50px] content-center flex  items-center gap-5 mx-2 my-3 
+}
+.iconBox:hover{
+    @apply bg-[var(--bg-color)] rounded-lg cursor-pointer
+}
+.logo{
+    @apply  h-[60px] content-center flex  items-center gap-5 mx-2 border-b border-white 
+}
+ .icon{
+    @apply text-center text-4xl w-10 fixed left-3
+}
+.textIcon{
+    @apply ml-14 
+}
+.sidebtn{
+    @apply h-full w-full mt-7
+}
+.contActive{
+    @apply bg-[var(--bg-color)] rounded-lg 
+}
