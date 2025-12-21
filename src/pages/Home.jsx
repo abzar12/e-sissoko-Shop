@@ -17,6 +17,8 @@ import Loading from "../component/loading/Loading"
 import { useLocation } from "react-router-dom"
 function Home() {
     const location = useLocation()
+    console.log("Home rendered ")
+
     const [is_loading, setloading] = useState(false)
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
     const [limitPage, setlimitPage] = useState(10)

@@ -47,6 +47,8 @@ const ProductSchema = z.object({
 
 })
 function AddProduct() {
+    console.log("AddProduct rendered ")
+
     const [Alert, setAlert]=useState({
         is_show: false,
         status: false,

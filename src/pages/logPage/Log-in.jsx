@@ -10,6 +10,7 @@ import "../../component/style/login.css"
 import BtnLoading from "../../component/loading/BtnLoading";
 
 function Login() {
+    console.log("Login rendered ")
     const [isloading, setisloading] = useState(false)
     const [error, setError] = useState(null)
     const { setUser, setAccessToken, setIsAuth } = useContext(AuthContext)
@@ -27,8 +28,8 @@ function Login() {
     })
     // handling submit 
     const onSubmit = async (inputs) => {
+        setisloading(true)
         try {
-            setisloading(true)
             const resp = await fetch(`${import.meta.env.VITE_API_URL}/users/login-me`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -41,20 +42,20 @@ function Login() {
             if (!resp.ok || resp.status === 404) {
                 setError("Email or Password invalid")
                 throw new Error(`Error : ${resp.status}`);
-                
-                // reset()
             }
-            return navigate("/dashboard")
+            setTimeout(() => {
+                setisloading(false)
+                return navigate("/dashboard")
+            }, 1200);
         } catch (Error) {
             console.log("Client: data failed ", Error.message);
         } finally {
-            setisloading(false)
         }
     }
     return (
         <>
-            <div className="Login" onSubmit={handleSubmit(onSubmit)}>
-                <form action="" className="ac-form ">
+            <div className="Login" >
+                <form action="" className="ac-form " onSubmit={handleSubmit(onSubmit)}>
                     <h1 className="title">Log-in</h1>
                     <h2 className="text-center text-red-500">{error}</h2>
                     <div className="mb-5">
@@ -65,7 +66,7 @@ function Login() {
                         </div>
                         <p className="text-red-600">{errors.name?.message}</p>
                     </div>
-                    <div className="">
+                    <div className="mb-4">
                         <label className="labelText" >Password</label>
                         <div className="relative">
                             <label className="icon"><FaLock /></label>
@@ -73,9 +74,9 @@ function Login() {
                         </div>
                         <p className="text-red-600 text-lg">{errors.password?.message}</p>
                     </div>
-                    <div className="btn-submit text-center">
+                    <div className="btn-submit text-center text-white py-3">
                         {isloading ?
-                            <button type="submit" className="ac-btn"><BtnLoading /></button>
+                            <BtnLoading />
                             :
                             <button type="submit" className="ac-btn"> Login</button>
                         }
