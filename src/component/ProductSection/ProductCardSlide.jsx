@@ -19,7 +19,7 @@ function ProductCardSlide({ title, Products, reverse, icon,titleClass }) {
                 <h1 className={`title flex justify-center ${titleClass}`}> {icon} {title}</h1>
                 <Swiper onSwiper={(swiper) => (swiperRef.current = swiper)} spaceBetween={10} breakpoints={{
                     320: { slidesPerView: 1, spaceBetween: 10, }, 640: { slidesPerView: 2, spaceBetween: 15, }, 768: { slidesPerView: 3, spaceBetween: 20, }, 1024: {   slidesPerView: 4,   spaceBetween: 25, }, 1280: {   slidesPerView: 6,   spaceBetween: 30, },
-                }} autoplay={{ delay: 2000, reverseDirection: `${reverse}` }} modules={[Autoplay, Pagination, Navigation]} className="ac_Items slide p-5">
+                }} autoplay={{ delay: 2000, reverseDirection: `${reverse}` }} modules={[Autoplay, Pagination, Navigation]} className="ac_Items p-5">
                     {
                         Products.map((prod, index) => (
                             <SwiperSlide key={index} className="items">
