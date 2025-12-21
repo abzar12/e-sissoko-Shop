@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -6,7 +5,7 @@ const useFetch = () => {
     const [data, setData] = useState([])
     const [searchParam] = useSearchParams()
     const Id = searchParam.get("Id")
-
+    console.log("useShopFetch rendered ")
     useEffect(() => {
         async function GetData() {
             try {

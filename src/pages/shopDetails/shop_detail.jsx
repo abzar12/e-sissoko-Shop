@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import "../../component/style/Shopdetail.css"
+import style from "../../component/style/Shopdetail.module.css"
 import { React, useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from "react-router-dom";
 import { Navigation, Pagination, Autoplay, Thumbs } from "swiper/modules";
@@ -18,6 +18,7 @@ import Footer from "../../component/Footer";
 import useFetch from "./useShopFetch";
 import ProductInfo from "./productInfo";
 function ShopDetail() {
+    console.log("ShopDetails rendered ")
     // variable for images thumbnails 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     // variable for loading 
@@ -102,7 +103,6 @@ function ShopDetail() {
     }
     // image is getting in type object so we should parse it and then use map to be display
     const images = data?.Image_Name ? JSON.parse(data.Image_Name) : []
-    console.log(images)
     if (!product) {
         return null; // not found yet or invalid ID
     }
@@ -111,24 +111,24 @@ function ShopDetail() {
             <div><Toaster position="top-right"
                 reverseOrder={false} className="min-h-14" /></div>
             <Navbar />
-            <section className="shop-details mb-3">
-                <div className="shop-container">
-                    <div className="productDesc">
-                        <div className="image">
+            <section className={style.shop_details}>
+                <div className={style.shop_container}>
+                    <div className={style.productDesc}>
+                        <div className={style.image}>
                             {/* images swiper */}
                             <Swiper spaceBetween={30} thumbs={{ swiper: thumbsSwiper }} slidesPerView={1} modules={[Navigation, Thumbs]}>
                                 {
                                     images.map((image, index) => (
-                                        <SwiperSlide className="swiper" key={index}><img className="img" src={`http://localhost:7000/public/upload/Product_img/${image}`} alt={`Product image ${index + 1}`}></img></SwiperSlide>
+                                        <SwiperSlide className={style.swiper} key={index}><img className={style.img} src={`http://localhost:7000/public/upload/Product_img/${image}`} alt={`Product image ${index + 1}`}></img></SwiperSlide>
                                     ))
                                 }
                             </Swiper>
                             {/* thumbnail swiper */}
-                            <Swiper onSwiper={setThumbsSwiper} modules={[Thumbs]} slidesPerView={4} spaceBetween={10} watchSlidesProgress className="thumbContainer">
+                            <Swiper onSwiper={setThumbsSwiper} modules={[Thumbs]} slidesPerView={4} spaceBetween={10} watchSlidesProgress className={style.thumbContainer}>
                                 {images.map((img, index) => (
                                     <SwiperSlide
                                         key={index}
-                                        className="thumbSwiper"
+                                        className={style.thumbSwiper}
                                     >
                                         <img
                                             src={`http://localhost:7000/public/upload/Product_img/${img}`}
@@ -141,7 +141,7 @@ function ShopDetail() {
                         </div>
                         {
 
-                            <div className="content relative" key={data.Id_phone}>
+                            <div className={style.content} key={data.Id_phone}>
                                 {/*  show Name */}
                                 <h1>{data.Name}</h1>
                                 {/*  show Description */}
@@ -165,31 +165,31 @@ function ShopDetail() {
                                     )}
                                 </div>
                                 {/* button for handle Quantity (increase and derease) */}
-                                <div className="quant">
+                                <div className={style.quantity}>
                                     <p>Quantity :<span> {quantity} </span></p>
-                                    <div className="qtn_btn">
+                                    <div className={style.qtn_btn}>
                                         <button type="button" onClick={() => setQuantity(data.Quantity > quantity ? quantity + 1 : quantity)}> < FaPlus /></button>
                                         <button type="button" onClick={() => setQuantity(Math.max(0, quantity - 1))}> < FaMinus /></button>
                                     </div>
                                 </div>
                                 {/* ------total */}
                                 <div className="">
-                                    <p>Total : <span>{ total }</span></p>
+                                    <p>Total : <span>{total}</span></p>
                                 </div>
-                                <div className=" text-center">
+                                <div className="text-center">
                                     {
                                         is_added ?
                                             <Button
                                                 disabled={is_Loading}
                                                 children={is_Loading ? <BtnLoading /> : ' Remove to Card'}
-                                                className={`btn h-10 overflow-hidden content-center ${!is_Loading ? " bg-red-900 hover:bg-red-600 text-red-300" : "bg-[var(--btn-color)] hover:bg-[var(--bg-color-primary)] text-white"}`}
+                                                className={`${style.btn} h-10 overflow-hidden content-center ${!is_Loading ? " bg-red-900 hover:bg-red-600 text-red-300" : "bg-[var(--btn-color)] hover:bg-[var(--bg-color-primary)] text-white"}`}
                                                 onClick={() => RemoveCart()}
                                             />
                                             :
                                             <Button
                                                 disabled={quantity <= 0 && !is_added || is_Loading}
                                                 children={is_Loading ? <BtnLoading /> : "Add to Card"}
-                                                className={`btn h-10 overflow-hidden content-center bg-[var(--btn-color)] hover:bg-[var(--bg-color-primary)]`}
+                                                className={`${style.btn} h-10 overflow-hidden content-center bg-[var(--btn-color)] hover:bg-[var(--bg-color-primary)]`}
                                                 onClick={() => AddCart()}
                                             />
                                     }
