@@ -9,7 +9,7 @@ function ProtectUserRoute(){
         return (
             <>
             <div className="">
-                <loading />
+                <Loading />
             </div>
             </>
         )

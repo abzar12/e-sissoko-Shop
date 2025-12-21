@@ -25,7 +25,6 @@ export default function App() {
           <Route path="/shop/add-product" element={<AddProduct />} />
           <Route path="/product/edit-product" element={<EditProduct />} />
         </Route>
-
       </Routes>
     </>
   )

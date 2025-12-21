@@ -22,7 +22,7 @@ function AuthProvider({ children }) {
                 setUser(data.user)
                 setAccessToken(data.token)
                 setIsAuth(true)
-                console.log("1: Should be render firstly")
+                console.log("authContext rendered")
             } catch (error) {
                 setAccessToken(null);
                 setUser(null)
