@@ -1,10 +1,19 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
+import { number } from "zod";
 export const Cartcontext = createContext()
 const CartProvider = ({ children }) => {
     const [cart, setcart] = useState(() => {
         const stored = localStorage.getItem('ordP')
         return stored ? JSON.parse(stored) : [];
     });
+    const sub_Total = useMemo(() =>{
+        const Total = cart.reduce((acc, item ) =>{
+          return acc + item.sub_total
+        },0)
+        return Total ? Total : 0
+    }, [cart])
+    const ProductNumbers = cart.length ;
+    console.log("this is the Sub Total:", sub_Total + " :: " + ProductNumbers )
     const AddProductToCart = (product) => {
         //const existing = cart.find(item => item.id === product.id)
         setcart((prev) => {
@@ -48,7 +57,7 @@ const CartProvider = ({ children }) => {
     }, [cart]);
     // add product to cart 
     return (
-        <Cartcontext.Provider value={{ AddProductToCart, RemoveFromCart, IncreaseQuantity, DecreaseQuantity, cart }}>
+        <Cartcontext.Provider value={{ AddProductToCart, RemoveFromCart, IncreaseQuantity, DecreaseQuantity, cart, sub_Total, ProductNumbers }}>
             {children}
         </Cartcontext.Provider>
     )

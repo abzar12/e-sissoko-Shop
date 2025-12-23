@@ -5,17 +5,13 @@ import Button from "../component/Button/button";
 import { FaCartArrowDown } from "react-icons/fa6";
 import { Cartcontext } from "../component/Context/cartContext/cartContext";
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
-    const { RemoveFromCart, IncreaseQuantity, DecreaseQuantity, cart } = useContext(Cartcontext)
+    const navigate = useNavigate()
+    const { RemoveFromCart, IncreaseQuantity, DecreaseQuantity, cart, sub_Total } = useContext(Cartcontext)
     console.log("Cart rendered ")
     const [cartItem, setCartItem] = useState(cart)
-    const sub_total = useMemo(() => {
-        const sum_subtotal = cartItem.reduce((acc, item) => {
-            return acc + item.sub_total
-        }, 0)
-        return sum_subtotal ? Number(sum_subtotal) : 0
-    }, [cart, cartItem])
     console.log("Cart Items: ", cartItem)
     useEffect(() => {
         setCartItem(cart)
@@ -37,6 +33,10 @@ function Cart() {
                 }
             })
         }, 500);
+    }
+    const CheckOut = () =>{
+        console.log("click !!!!")
+       return navigate("/orders/checkout")
     }
     return (
         <>
@@ -86,8 +86,8 @@ function Cart() {
                         )
                 }
                 <div className="max-w-[500px] m-auto p-5 bg-[var(--bg-color-primary)] rounded-lg flex items-center justify-around flex-wrap">
-                    <p className="text-white text-[1.1rem] font-thin">Subtotal: <span className="text-[1.3rem] font-bold"> {sub_total} </span>GHS </p>
-                    <Button children="Check Out" className=" py-2 px-5 rounded-full bg-[var(--bg-color)] font-semibold hover:text-white" />
+                    <p className="text-white text-[1.1rem] font-thin">Subtotal: <span className="text-[1.3rem] font-bold"> {sub_Total} </span>GHS </p>
+                    <Button children="Check Out" onClick={CheckOut} className=" py-2 px-5 rounded-full bg-[var(--bg-color)] font-semibold hover:text-white" />
                 </div>
             </section>
             <Footer />
