@@ -6,6 +6,8 @@ import ShopDetail from "./pages/shopDetails/shop_detail"
 import Dashboard from "./pages/userDashboard/dashboard"
 import ProtectUserRoute from "./component/Middleware/protectRoute"
 import CheckOut from "./pages/checkOut/checkOut"
+import CustomersLogin from "./pages/logPage/customerLogin"
+import CustomersSignUp from "./pages/logPage/customerSignUp"
 import Test from "./pages/test"
 import { Routes, Route } from "react-router-dom"
 import Cart from "./pages/Cart"
@@ -28,6 +30,9 @@ export default function App() {
           <Route path="/shop/add-product" element={<AddProduct />} />
           <Route path="/product/edit-product" element={<EditProduct />} />
         </Route>
+        {/* Protect route Customer login */}
+        <Route path="/login-me" element={<CustomersLogin /> } />
+        <Route path="/signup-me" element={<CustomersSignUp /> } />
       </Routes>
     </>
   )
