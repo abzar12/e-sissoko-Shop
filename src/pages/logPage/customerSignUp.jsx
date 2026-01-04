@@ -95,7 +95,7 @@ function CustomersSignUp() {
                             <button type="button" disabled={ErrorExit} className={style.btn1} onClick={() => setNext(true)}>Next</button>
                         </div>
                         <div className={`${style.cardAccount} ${style.except}`}>
-                            <Link to="/login-me" className={style.Account}>Don't have an account <span>Register</span> </Link>
+                            <Link to="/login-me" className={style.Account}>Already have an account <span>Log-in</span> </Link>
                         </div>
                     </div>
                     <div className={`${style.cards} ${next ? "block mt-[20px] " : "hidden"}`}>
