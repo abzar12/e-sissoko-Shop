@@ -7,9 +7,12 @@
     @apply bg-[var(--bg-primary)] rounded-lg p-3 my-3
 }
  .title{
-    @apply border-b border-slate-400 text-[1.2rem] font-[Lora] 
+    @apply border-b border-slate-400 text-[1.1rem] font-[Lora] flex justify-between 
 }
-.customFields .CustomInfo .field{
+.title button{
+    @apply text-[rgb(163,230,53)]
+}
+.customFields .CustomInfo .field, .address{
     @apply text-[1.1rem] font-bold 
 }
 .customFields .CustomInfo .span{
@@ -25,6 +28,7 @@
 .form .field{
     @apply gap-5 text-[0.9rem] shadow-[0_1px_20px_-5px_rgba(67,56,202,0.35)] mb-3 content-center px-3 rounded-lg py-2
 }
+
 .form .field .label{
     @apply inline ml-5 font-normal 
 }
@@ -37,10 +41,36 @@
 .btnBox .btn{
     @apply px-5 py-2 border border-[var(--bg-color-primary)] bg-[var(--bg-color-primary)] text-white rounded-md
 }
-
+/* display the user value of form  */
+.ShowValue{
+    @apply rounded-lg my-5 px-3 pt-3
+}
+.ShowValue .field{
+    @apply  text-[0.9rem] shadow-[0_1px_20px_-5px_rgba(67,56,202,0.35)] mb-3 content-center pl-10 pr-3 rounded-lg py-2 relative 
+}
+.ShowValue .field::before{
+    content: "√";
+    position: absolute;
+    top: 11px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 100%;
+    background-color: rgb(163,230,53);
+    padding-left: 4px;
+    font-family: "";
+    color: white;
+}
+.address{
+    @apply shadow-[0_1px_20px_-5px_rgba(67,56,202,0.35)] mb-3 content-center px-3 rounded-lg py-2 relative
+}
+.address .info .span{
+    @apply text-[1rem] font-normal
+}
 /* payment fields */
 .payementFields .field{
-    @apply content-center my-5
+    @apply content-center my-5 
 }
 .payementFields .field .button{
     @apply rounded-sm w-20 h-14 relative content-center 
@@ -67,3 +97,47 @@
 .payementFields .field .button:hover .group{
     @apply absolute top-[60px] left-[20px] block text-white w-12 bg-yellow-500 rounded-md px-1
 }
+.payment_btnBox{
+    @apply px-3 my-3 w-full text-right bg-[var(--bg-color-primary)] rounded-lg text-white py-2 
+}
+.payment_btnBox .span{
+    @apply inline-block
+}
+.payment_btnBox .icon{
+    @apply inline-block text-2xl ml-2
+}
+/* Item section */
+.ItemsContainer .title{
+    @apply text-[rgb(234,179,8)] font-semibold text-2xl
+}
+.items{
+    @apply grid grid-cols-1 sm:grid-cols-2 gap-5 
+}
+.item{
+    @apply p-3 rounded-lg shadow-[1px_-2px_5px_rgb(250,204,21)] mt-3 mb-5
+}
+.ItemsContainer .shipping{
+    @apply text-sm font-semibold text-gray-500
+}
+.ItemsContainer .name{
+    @apply text-[0.9rem] font-semibold text-gray-800 
+}
+.ItemsContainer .quantity, .price, .sub_total{
+    @apply font-medium text-gray-700 font-semibold
+}
+.ItemsContainer .span{
+    @apply font-normal
+}
+.ItemsContainer .quantity{
+    @apply font-medium text-gray-700 bg-[rgb(163,230,53)] rounded-lg w-24 ml-auto px-2 
+}
+.ItemsContainer .imageBox{
+    @apply flex flex-wrap  items-center mb-3
+}
+.ItemsContainer .imageBox .img{
+    @apply bg-cover max-w-20 overflow-hidden  bg-red-500
+}
+.ItemsContainer .imageBox .img img{
+    @apply h-full
+}
+
