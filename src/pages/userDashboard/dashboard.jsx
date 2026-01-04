@@ -1,16 +1,20 @@
 import { Navigate } from "react-router-dom";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../component/Context/authContext/authContext";
+import { useState } from "react";
+import { useAuth } from "../../component/Context/authContext/authContext";
 import Aside from "../../component/dashboard/Aside";
 import style from "../../component/style/dashboard/dashboard.module.css"
 import Content from "../../component/dashboard/content";
 function Dashboard() {
-    const { user } = useContext(AuthContext)
+    const { user } = useAuth()
+    
     const [isopen, setIsopen] = useState(true)
     const handleClick = () =>{
         setIsopen(!isopen)
     }
-    console.log("Dashboard rendered ")
+    console.log("Dashboard rendered ") 
+    if(user.role !== "staff" || user.role !== "director"){
+        return <Navigate to="/" replace />
+    }
     return (
         <>
             <div className={style.container}>

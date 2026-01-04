@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import style from "../../component/style/dashboard/dasNavbar.module.css"
 import { BiMenu, BiSearch, BiBell } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
+import { useAuth } from "../Context/authContext/authContext";
 function Navbar({ onButtonClick }) {
+    const {user} = useAuth()
     return (
         <>
             <div className={style.ac_container}>
@@ -23,6 +25,9 @@ function Navbar({ onButtonClick }) {
                         </form>
                         <div className={style.ac_btn_Box}>
                             <button type="button"> <BiBell className={style.ac_iconBell} /> <span className={style.notification}>0</span></button>
+                        </div>
+                        <div className="">
+                            this is
                         </div>
                     </div>
                 </div>

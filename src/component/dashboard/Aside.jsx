@@ -19,7 +19,7 @@ function Aside({ isopen }) {
                             SideBarIconText.map((item, index) => (
                                 <div key={index} className={`${style.iconBox} `}>
                                     <item.icon  className={style.icon}/>
-                                    {isopen &&  <label className={style.textIcon} >{item.text}</label>}
+                                    {isopen && <Link to={item.url}> <label className={style.textIcon} >{item.text}</label></Link>  }
                                 </div>
                             ))
                         }

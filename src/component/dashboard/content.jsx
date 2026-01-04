@@ -1,5 +1,6 @@
 import style from "../../component/style/dashboard/dasContent.module.css"
 import Navbar from "./navbar"
+import { Outlet } from "react-router-dom"
 import Footer from "./footer"
 function Content({onButtonClick}) {
     return (
@@ -7,7 +8,7 @@ function Content({onButtonClick}) {
             <div className={style.container}>
                 <Navbar onButtonClick={onButtonClick}/>
                 <div className={style.main}>
-                    
+                    <Outlet />
                 </div>
                 <Footer />
             </div>
