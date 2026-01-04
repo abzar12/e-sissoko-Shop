@@ -4,7 +4,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import { FaLock } from "react-icons/fa";
-import { AuthContext } from "../../component/Context/authContext/authContext";
+import { useAuth } from "../../component/Context/authContext/authContext";
 import { MdEmail } from "react-icons/md";
 import "../../component/style/login.css"
 import BtnLoading from "../../component/loading/BtnLoading";
@@ -13,7 +13,7 @@ function Login() {
     console.log("Login rendered ")
     const [isloading, setisloading] = useState(false)
     const [error, setError] = useState(null)
-    const { setUser, setAccessToken, setIsAuth } = useContext(AuthContext)
+    const { login } = useAuth()
     const navigate = useNavigate()
     const schema = z.object({
         email: z.string().email("please the Email is required"),
@@ -38,11 +38,12 @@ function Login() {
             });
 
             const data = await resp.json();
-            // console.log(data);
-            if (!resp.ok || resp.status === 404) {
+            console.log(data);
+            if (!resp.ok) {
                 setError("Email or Password invalid")
                 throw new Error(`Error : ${resp.status}`);
             }
+            login(data.token, data.user);
             setTimeout(() => {
                 setisloading(false)
                 return navigate("/dashboard")
@@ -50,6 +51,8 @@ function Login() {
         } catch (Error) {
             console.log("Client: data failed ", Error.message);
         } finally {
+            setisloading(false)
+            reset()
         }
     }
     return (
