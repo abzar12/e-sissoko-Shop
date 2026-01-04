@@ -1,20 +1,25 @@
-import React, { useContext } from "react";
+import { useAuth } from "../Context/authContext/authContext";
 import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { AuthContext } from "../Context/authContext/authContext";
 import Loading from "../loading/Loading";
-function ProtectUserRoute(){
-    const {isloading, isAuth } = useContext(AuthContext) ;
-    if(isloading){
+function ProtectUserRoute({ Customer }) {
+    const { accessToken, isloading } = useAuth();
+    if (isloading) {
         return (
             <>
-            <div className="">
-                <Loading />
-            </div>
+                <div className="">
+                    <Loading />
+                </div>
             </>
         )
     }
-
-       return isAuth ? <Outlet /> : <Navigate to="/e-sissoko/log-in/" replace />  
+    if (accessToken) {
+        return <Outlet />
+    }
+    if (!accessToken && !Customer) {
+        return <Navigate to="/e-sissoko/log-in/" replace />
+    }
+    return <Navigate to="/login-me/" replace />
 }
+
 export default ProtectUserRoute

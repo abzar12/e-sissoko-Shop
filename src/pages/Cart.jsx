@@ -87,7 +87,7 @@ function Cart() {
                 }
                 <div className="max-w-[500px] m-auto p-5 bg-[var(--bg-color-primary)] rounded-lg flex items-center justify-around flex-wrap">
                     <p className="text-white text-[1.1rem] font-thin">Subtotal: <span className="text-[1.3rem] font-bold"> {sub_Total} </span>GHS </p>
-                    <Button children="Check Out" onClick={CheckOut} className=" py-2 px-5 rounded-full bg-[var(--bg-color)] font-semibold hover:text-white" />
+                    <Button children="Check Out" disabled={cart.length === 0} onClick={CheckOut} className=" py-2 px-5 rounded-full bg-[var(--bg-color)] font-semibold hover:text-white" />
                 </div>
             </section>
             <Footer />

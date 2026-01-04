@@ -1,45 +1,52 @@
-import React, { createContext, useEffect, useState } from "react";
-import { is } from "zod/locales";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext()
+const AuthContext = createContext(null)
 
-function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState()
-    const [isAuth, setIsAuth] = useState(false)
     const [user, setUser] = useState(null)
     const [isloading, setIsloading] = useState(true)
+    // logged in or logged out function
+    const login = (newtoken, userData) => {
+        setAccessToken(newtoken)
+        setUser(userData)
+    }
+    const logout = () => {
+        setAccessToken(null);
+        setUser(null);
+        fetch('/auth/logout', { credential: true })
+    }
     useEffect(() => {
-        async function getToken() {
+        const IniatialRefresh = async () => {
             try {
+                setIsloading(true)
                 const resp = await fetch(`${import.meta.env.VITE_API_URL}/refresh/api`, {
                     method: "POST",
-                    credentials: 'include'
+                    credentials: "include",
                 })
+                if (!resp.ok){
+                    console.log("Unauthorize request")
+                    throw new Error("Unauthorize request");
+                } 
                 const data = await resp.json()
-                if (!resp.ok) {
-                    throw new Error("Client Error, Status:", resp.status);
-                }
-                setUser(data.user)
                 setAccessToken(data.token)
-                setIsAuth(true)
-                console.log("authContext rendered")
+                setUser(data.user)
+                console.log("InitialAUth:", data)
             } catch (error) {
-                setAccessToken(null);
-                setUser(null)
-                setIsAuth(false)
-                console.log("Client Error:, ", error)
+                logout()
+                throw new Error(`Unauthorize request: : ${error}`);
             } finally {
                 setIsloading(false)
             }
         }
-        getToken()
+        IniatialRefresh()
     }, [])
     return (
         <>
-            <AuthContext.Provider value={{ accessToken, setAccessToken, user, setUser, isAuth, setIsAuth, isloading }} >
+            <AuthContext.Provider value={{ accessToken, user, login, logout, isloading }} >
                 {children}
             </AuthContext.Provider>
         </>
     )
 }
-export default AuthProvider
+export const useAuth = () => useContext(AuthContext)
