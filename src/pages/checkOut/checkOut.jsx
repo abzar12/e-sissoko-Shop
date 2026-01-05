@@ -3,9 +3,11 @@ import CheckOutInfo from "./checkOutInfo"
 import ItemInfo from "./itemInfo"
 import Navbar from "../../component/Navbar"
 import { useAuth } from "../../component/Context/authContext/authContext"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { Cartcontext } from "../../component/Context/cartContext/cartContext"
 function CheckOut() {
+    const navigate = useNavigate()
     const { user } = useAuth()
     const { cart, sub_Total, ProductNumbers } = useContext(Cartcontext)
     // my state
@@ -58,7 +60,8 @@ function CheckOut() {
                         throw new Error(`Failed, Status: ${data.message}`);
                     }
                     console.log("Ordered successfully !!!", data)
-                    //localStorage.clear()
+                    localStorage.clear()
+                    navigate("/shop/cart")
                 } catch (error) {
                     console.log(`CheckOut Error: ${error}`)
                     throw new Error(`CheckOut Error: ${error.message}`);
