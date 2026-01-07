@@ -1,0 +1,27 @@
+.container {
+    @apply relative h-[230px] sm:h-full mx-3
+}
+
+.container .title {
+    @apply text-center text-xl font-semibold mb-3 mt-3
+}
+
+.container .items {
+    @apply my-3 
+}
+
+.container .items .item {
+    @apply flex justify-between items-center my-2
+}
+
+.container .item .text {
+    @apply text-gray-500
+}
+
+.container .item .span {
+    @apply font-semibold
+}
+
+.container .btnBox {
+    @apply w-full text-center absolute bottom-6 bg-[var(--bg-color-primary)] rounded-xl py-2 text-gray-500 hover:text-white transition-all duration-300 
+}
