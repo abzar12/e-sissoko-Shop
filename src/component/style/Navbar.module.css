@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*  for different component  */
+.ac_navbar {
+    @apply bg-[var(--bg-color-primary)] w-full h-[60px] flex items-center justify-between text-white px-5;
+}
+
+.ac_search {
+    @apply flex bg-white gap-2 text-black py-1.5 px-3 rounded-lg
+}
+
+.ac_search input {
+    @apply md:w-[250px] outline-none focus:outline-none border-none
+}
+
+.ac_search .search_icon {
+    @apply pt-0.5 text-xl border-l-2 pl-2
+}
+
+.btnBox {
+    @apply flex justify-between w-[150px]
+}
+
+.btn_icon {
+    @apply relative
+}
+
+.btn_icon .iconBox {
+    @apply flex gap-1
+}
+
+.span {
+    @apply absolute top-full opacity-0 cursor-default transition px-2 py-1 left-[-10px] text-sm rounded-lg bg-gray-300 text-black
+}
+
+.btn_icon:hover .span {
+    @apply opacity-100
+}
+
+.loginContent {
+    @apply absolute bg-gray-400 w-[170px] -left-12 pt-5 pb-2 px-3 rounded-[5px] z-50 text-left mt-3 opacity-0 pointer-events-none overflow-hidden transition-all duration-200 ease-linear
+}
+.loginContent.expand{
+    @apply h-auto opacity-100 pointer-events-auto 
+}
+
+.loginContent .text{
+    @apply mb-3 py-1 rounded-sm pl-3 transition-all duration-300 ease-in font-[Poppins] 
+}
+
+.loginContent .text:hover {
+    @apply bg-white/50 text-black 
+}
+.except{
+    @apply mt-1
+}
