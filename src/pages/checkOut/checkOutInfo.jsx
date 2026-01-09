@@ -1,10 +1,9 @@
 import { GiCash } from "react-icons/gi";
 import { FaCcMastercard, FaCcVisa, } from "react-icons/fa"
 import style from "../../component/style/checkOut/CheckoutInfo.module.css"
-import { PaystackButton } from "react-paystack";
 import { useAuth } from "../../component/Context/authContext/authContext";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change, Edit, submitClicked, deleveryMethod, cart, total }) {
+function CheckOutInfo({ProductNumbers, handleOrdered, deleveryValues, Delevery_value_Change, Edit, submitClicked, deleveryMethod }) {
     const { user } = useAuth()
     console.log(user)
     return (
@@ -20,11 +19,11 @@ function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change,
                 <div className={style.deleveryFields}>
                     <div className={style.title}>
                     <h2 >Delivery Details</h2>
-                   {!EditDeleveryValue && <button type="button" onClick={Edit}>Edit</button>}
+                   {!deleveryValues.editDeleveryMethod && <button type="button" onClick={Edit}>Edit</button>}
                     </div>
                     {
                         // edit Section once the click on the button to edit delevery information
-                        EditDeleveryValue ? (
+                        deleveryValues.editDeleveryMethod ? (
                             <form action="" className={style.form}>
                                 <div className={style.field}>
                                     <input className={style.input} value="Door Delevery" disabled={deleveryMethod.includes("Pick up")} onChange={Delevery_value_Change} type="checkbox" name="DeleveryMethod" id="" />
@@ -70,7 +69,7 @@ function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change,
                         <h2 className={style.title}>Delevery within 24 hours</h2>
                         <div className={`${style.items} `}>
                             {
-                                cart.map((item, index) => (
+                                deleveryValues.cart.map((item, index) => (
                                     <div className="" key={index}>
                                         <div className={style.item}>
                                             <p className={style.shipping}>Shipping {index + 1}/{ProductNumbers}</p>
@@ -96,7 +95,7 @@ function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change,
                                                 Price: <span className={style.span}>{item.price}</span>
                                             </p>
                                             <p className={style.sub_total}>
-                                                Sub Total: <span className={style.span}>{total}</span>
+                                                Sub Total: <span className={style.span}>{deleveryValues.total}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -123,14 +122,8 @@ function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change,
                             </button>
                         </div>
                         <p>Please click on the following button to do your payment</p>
-                        <div className={style.payment_btnBox}>
-                            <PaystackButton email="user@example.com"
-                                amount={5000 * 100} // amount in kobo
-                                publicKey="YOUR_PUBLIC_KEY"
-                                text={`Pay Now (${total})`}
-                                onSuccess={(ref) => console.log("Paid!", ref)}
-                                onClose={() => console.log("Closed")}
-                                className={style.payment_btn} />
+                        <div className={`${style.payment_btnBox} `}>
+                            <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed ":""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() =>handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
                             <span className={style.span}> <FaArrowAltCircleRight className={style.icon}/></span>
                         </div>
                     </div>
@@ -139,4 +132,4 @@ function CheckOutInfo({ProductNumbers, EditDeleveryValue, Delevery_value_Change,
         </>
     )
 }
-export default CheckOutInfo
+export default CheckOutInfo;
