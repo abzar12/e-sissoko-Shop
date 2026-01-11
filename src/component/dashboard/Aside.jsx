@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import style from "../../component/style/dashboard/dasAside.module.css"
-import {SideBarIconText} from "../../../sideBarDarshboard.js"
+import { SideBarIconText } from "../../../sideBarDarshboard.js"
 // importing icon
 import { FaCarTunnel } from "react-icons/fa6";
 
@@ -11,22 +11,20 @@ function Aside({ isopen }) {
             <div className={`${style.shortAside} ${isopen ? style.activeBtn : null}`}>
                 <div className={style.container}>
                     <div className={style.logo}>
-                        <FaCarTunnel  className={style.icon}/>
-                      {isopen &&  <label className={style.textIcon} >E-sissoko</label>}
+                        <FaCarTunnel className={style.icon} />
+                        {isopen && <label className={style.textIcon} >E-sissoko</label>}
                     </div>
                     <div className={style.sidebtn}>
                         {
                             SideBarIconText.map((item, index) => (
-                                <div key={index} className={`${style.iconBox} `}>
-                                    <item.icon  className={style.icon}/>
-                                    {isopen && <Link to={item.url}> <label className={style.textIcon} >{item.text}</label></Link>  }
+                                <div key={index} >
+                                    <Link to="/dashboard/" className={`${style.iconBox} `}>
+                                        <item.icon className={style.icon} />
+                                        {isopen && <label className={style.textIcon} >{item.text}</label>}
+                                    </Link>
                                 </div>
                             ))
                         }
-                        
-                            
-                             
-                        
                     </div>
                 </div>
 
