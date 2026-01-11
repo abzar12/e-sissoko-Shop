@@ -1,0 +1,22 @@
+
+.container{
+    @apply w-full px-3 py-5 min-h-[170px]
+}
+.cards{
+    @apply flex justify-around flex-wrap gap-5 
+}
+.card{
+    @apply shadow-md bg-white min-w-[230px] max-w-[300px] min-h-[130px] mx-auto rounded-2xl p-3 font-[poppins] grid grid-cols-2
+}
+.card .cardSpan{
+    @apply text-[2rem] 
+}
+.card .value{
+    @apply text-[1.5rem] 
+}
+.cards .chartBar{
+    @apply  w-[100px] mt-5 max-h-[90px] grid grid-cols-5
+}
+.cards .chartBar .chat1{
+    @apply w-2.5 h-full bg-blue-200 rounded-md relative
+ }

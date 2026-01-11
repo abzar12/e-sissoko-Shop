@@ -11,10 +11,10 @@ function Dashboard() {
     const handleClick = () =>{
         setIsopen(!isopen)
     }
-    console.log("Dashboard rendered ") 
-    if(user.role !== "staff" || user.role !== "director"){
-        return <Navigate to="/" replace />
-    }
+    // if(user.role !== "staff" || user.role !== "director"){
+    //     console.log("User role::", user.role)
+    //     return <Navigate to="/" replace />
+    // }
     return (
         <>
             <div className={style.container}>
