@@ -1,62 +1,11 @@
 import style from "./dashome.module.css"
 import Chart from 'react-apexcharts';
+import { ChartBarOption } from "./DashhomeData/chartBar.js";
+import { ChartLineOption } from "./DashhomeData/chartBar.js";
+import { ChartPieOption } from "./DashhomeData/chartBar.js";
+import RecentOrderedTable from "./DashhomeData/dashomeTable.jsx";
 function DashHome() {
-    const ChartOption = {
-        chart: {
-            type: "bar",
-            foreColor: '#373d3f',
-            toolbar: {
-                show: false
-            },
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 5,
-                columnWidth: "10px"
-            },
-            zoom: {
-                enabled: false
-            }
-        },
-        
-        yaxis: {
-            show: false
-        },
 
-        grid: {
-            show: false
-        },
-
-        legend: {
-            show: false
-        },
-
-        tooltip: {
-            enabled: false
-        },
-
-        dataLabels: {
-            enabled: false
-        },
-        xaxis: {
-            labels: {
-                show: false // Hides the x-axis labels (category names/values)
-            },
-            axisTicks: {
-                show: false // Hides the small tick marks
-            },
-            axisBorder: {
-                show: false // Hides the horizontal axis line/bar
-            }
-        }
-    }
-    const series = [
-        {
-            name: "Sale",
-            data: [60, 70, 50, 100, 80, 10, 100]
-
-        }
-    ]
     return (
         <>
             <div className={style.container}>
@@ -66,9 +15,15 @@ function DashHome() {
                             <h1>Total Order</h1>
                             <p className={style.value}><span className={style.cardSpan}>$</span> 250 </p>
                         </div>
-                        <div className={style.chartBar}>
-                            <Chart options={ChartOption} series={series} type="bar" height={110} />
-                            <div className={style.Chart1}></div>
+                        <div className={style.chart}>
+                            <Chart className={style.Chart1} options={ChartBarOption.option} series={ChartBarOption.series} type="bar" height="100%" />
+                            <div className={style.chart1}></div>
+                            <div className={style.chart2}></div>
+                            <div className={style.chart3}></div>
+                            <div className={style.chart4}></div>
+                            <div className={style.chart5}></div>
+                            <div className={style.chart6}></div>
+                            <div className={style.chart7}></div>
                         </div>
                     </div>
                     <div className={style.card}>
@@ -77,7 +32,7 @@ function DashHome() {
                             <p className={style.value}><span className={style.cardSpan}>$</span> 250 </p>
                         </div>
                         <div className={style.chart}>
-
+                            <Chart options={ChartLineOption.option} series={ChartLineOption.series} height="100%" />
                         </div>
                     </div>
                     <div className={style.card}>
@@ -85,11 +40,15 @@ function DashHome() {
                             <h1>Weekly Sales</h1>
                             <p className={style.value}><span className={style.cardSpan}>$</span> 250 </p>
                         </div>
-                        <div className={style.chart}>
-
+                        <div className={style.chart} >
+                            <Chart options={ChartPieOption.options} series={ChartPieOption.series} type="donut" height="100%" />
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className={style.OrderTable}>
+                <h1 >Recent Orders</h1>
+                <RecentOrderedTable />
             </div>
         </>
     )
