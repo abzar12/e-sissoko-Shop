@@ -26,8 +26,8 @@ function Navbar({ onButtonClick }) {
                         <div className={style.ac_btn_Box}>
                             <button type="button"> <BiBell className={style.ac_iconBell} /> <span className={style.notification}>0</span></button>
                         </div>
-                        <div className="">
-                            this is
+                        <div className={style.UserName}>
+                            {user.username}
                         </div>
                     </div>
                 </div>
