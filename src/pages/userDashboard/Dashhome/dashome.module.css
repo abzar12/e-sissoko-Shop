@@ -1,4 +1,6 @@
-
+*{
+    box-sizing: border-box;
+}
 .container{
     @apply w-full px-3 py-5 min-h-[170px]
 }
@@ -6,17 +8,55 @@
     @apply flex justify-around flex-wrap gap-5 
 }
 .card{
-    @apply shadow-md bg-white min-w-[230px] max-w-[300px] min-h-[130px] mx-auto rounded-2xl p-3 font-[poppins] grid grid-cols-2
+    @apply shadow-md bg-white w-[300px] sm:h-[150px] h-[200px] m-auto rounded-2xl p-3 font-[poppins] grid sm:grid-flow-col 
 }
 .card .cardSpan{
-    @apply text-[2rem] 
+    @apply text-[1.3rem] sm:text-[2rem]
 }
 .card .value{
-    @apply text-[1.5rem] 
+    @apply text-[1.3rem] sm:text-[1.5rem]
 }
 .cards .chartBar{
-    @apply  w-[100px] mt-5 max-h-[90px] grid grid-cols-5
+    @apply  relative z-20 
 }
-.cards .chartBar .chat1{
-    @apply w-2.5 h-full bg-blue-200 rounded-md relative
+.card .chart{
+    @apply w-full  h-full overflow-hidden content-center object-fill relative z-10
+}
+.card .textContainer{
+    @apply   min-w-[110px] h-[50px] sm:h-auto overflow-hidden 
+}
+.cards .chart .chart1{
+    @apply w-[11px] content-[""] bg-blue-200 rounded-md -z-10 bottom-[32px] h-[88px] left-[17px] absolute hidden sm:block
  }
+ .cards .chart .chart2{
+    @apply w-[10px] content-[""] bg-blue-200 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[38px] hidden sm:block
+ }.cards .chart .chart3{
+    @apply w-[11px] content-[""] bg-blue-200 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[58px] hidden sm:block
+ }.cards .chart .chart4{
+    @apply w-[11px] content-[""] bg-blue-300 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[79px] hidden sm:block
+ }.cards .chart .chart5{
+    @apply w-[11px] content-[""] bg-blue-200 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[99px] hidden sm:block
+ }
+ .cards .chart .chart6{
+    @apply w-[11px] content-[""] bg-blue-200 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[120px] hidden sm:block
+ }
+ .cards .chart .chart7{
+    @apply w-[11px] content-[""] bg-blue-200 rounded-md absolute -z-10 bottom-[32px] h-[88px] left-[140px] hidden sm:block
+ }
+
+ /* order table */
+ .OrderTable{
+    @apply rounded-2xl bg-white flex justify-center mx-5 p-5 my-5 h-[400px] overflow-scroll
+ }
+ .OrderTable .titleBox{
+    @apply border-y-2 py-3 bg-gray-200 
+ }
+  .OrderTable .Title{
+    @apply  py-3 px-3 text-start
+ }
+ .OrderTable .Row{
+    @apply border-b-2
+ }
+ .OrderTable .Column{ 
+    @apply pr-5 text-start pl-3
+  }
