@@ -45,18 +45,55 @@
  }
 
  /* order table */
+.OrderContainer{
+   @apply bg-white rounded-2xl  mx-5 pb-5 mt-5 mb-10 h-[400px] overflow-hidden overflow-y-scroll 
+}
+.OrderContainer .OrderHeader{
+   @apply flex justify-between mb-5 bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] py-3 px-3  sticky top-0 
+}
+.OrderContainer .OrderTitle{
+   @apply  text-[1.1rem]  text-white
+}
  .OrderTable{
-    @apply rounded-2xl bg-white flex justify-center mx-5 p-5 my-5 h-[400px] overflow-scroll
+    @apply  mx-auto px-3 
  }
- .OrderTable .titleBox{
+.OrderTable .titleBox{
     @apply border-y-2 py-3 bg-gray-200 
  }
   .OrderTable .Title{
-    @apply  py-3 px-3 text-start
+    @apply  py-3 px-3 text-start 
+ }
+ .OrderHeader .FilterBox{
+   @apply border border-white px-5 py-1 rounded-xl 
+ }
+ .OrderHeader .FilterBox .filter{
+   @apply focus:outline-none outline-none bg-transparent w-full text-white
  }
  .OrderTable .Row{
-    @apply border-b-2
+    @apply border-b-2 
  }
  .OrderTable .Column{ 
-    @apply pr-5 text-start pl-3
+    @apply pr-5 pl-3 py-3
+  }
+
+  /* ------------Global Curves */
+
+  .GlobalCurves{
+   @apply mx-5 flex min-h-[400px] my-5  gap-5 flex-wrap lg:flex-nowrap text-[1rem]
+  }
+  .GlobalCurves .YearsCurve{
+   @apply bg-[var(--bg-primary)] rounded-[20px] sm:min-w-[600px] min-w-[250px] max-w-[700px] overflow-hidden pb-3 mx-auto 
+  }
+  .GlobalCurves .filterBox{
+   @apply flex justify-between  w-full bg-gray-300 py-4 rounded-t-[20px] px-5 text-black font-bold text-center
+  }
+  .GlobalCurves .filterBox .filter{
+   @apply bg-transparent px-5 py-1 shadow-[-0px_1px_5px_1px_rgb(255,255,255)] focus:outline-none rounded-lg text-[rgb(255,255,255)] cursor-pointer 
+  }
+  /* Mount orders */
+  .MounthOrder{
+   @apply bg-[var(--bg-primary)] rounded-[20px] min-w-[250px] max-w-[500px] lg:w-[100%] mx-auto
+  }
+  .Curve{
+   @apply w-full my-3 h-[300px]
   }
