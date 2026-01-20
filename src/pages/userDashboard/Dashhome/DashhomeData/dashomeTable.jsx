@@ -1,40 +1,56 @@
 
 import { createColumnHelper, useReactTable, getCoreRowModel, flexRender, getFilteredRowModel } from "@tanstack/react-table";
-import { Orders } from "./orders.js";
+import useDashboardFetch from "../../../../component/Context/DashboardContext/dashboardFetch";
 import style from "../dashome.module.css"
 import { useState } from "react";
-import { FaTrash, FaEye } from "react-icons/fa";
+import { FaTrash, FaEye, FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
 
 function RecentOrderedTable() {
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
-
+    let [page, setPage] = useState(1)
+    let [limit, setLimit] = useState(15)
+    const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?page=${page}&limit=${limit}`)
+    console.log("Orders ", data)
     const column = [
-        columnHelper.accessor("id", {
-            header: "Order ID"
+        columnHelper.accessor("ID", {
+            header: "Order_ID"
         }),
-        columnHelper.accessor("customer", {
-            header: "Customer"
+        columnHelper.accessor("Email", {
+            header: "Email"
         }),
-        columnHelper.accessor("product", {
-            header: "Products"
+        columnHelper.accessor("Products", {
+            header: "Products",
+            cell: ({ getValue }) => {
+                const product = getValue()
+                return (
+                    <span className=" line-clamp-1  ">{product}</span>
+                )
+            }
         }),
-        columnHelper.accessor("date", {
-            header: "Date"
+        columnHelper.accessor("Date", {
+            header: "Date",
+            cell: ({ getValue }) => {
+                const date = getValue()
+                const spliteDate = date.split("T")
+
+                return (<span className=" whitespace-nowrap ">{spliteDate[0]}</span>)
+            }
         }),
-        columnHelper.accessor("payment", {
+        columnHelper.accessor("Payment", {
             header: "Payment"
         }),
-        columnHelper.accessor("amount", {
+        columnHelper.accessor("Amount", {
             header: "Amount"
         }),
-        columnHelper.accessor("status", {
+        columnHelper.accessor("Status", {
             header: "Status",
-            accessoryKey: "status",
+            accessoryKey: "Status",
             cell: ({ getValue }) => {
                 const status = getValue().toLowerCase();
                 const ClassMap = {
-                    paid: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem]",
+                    paid: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
+                    comfirmed: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
                     pending: "bg-yellow-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     cancelled: "bg-red-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     delivered: "bg-green-600 px-3 py-1 rounded-full text-white text-[0.9rem]",
@@ -56,7 +72,7 @@ function RecentOrderedTable() {
     ]
 
     const table = useReactTable({
-        data: Orders,
+        data: data?.orders ?? [],
         columns: column,
         state: {
             columnFilters
@@ -65,7 +81,7 @@ function RecentOrderedTable() {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
-    console.log(table);
+    console.log("table:", table)
     return (
         <>
             <div className={style.OrderContainer}>
@@ -73,14 +89,14 @@ function RecentOrderedTable() {
                     <h1 className={style.OrderTitle}>Recent Orders</h1>
                     <div className={style.FilterBox}>
                         <select className={style.filter}
-                            value={table.getColumn("status").getFilterValue() ?? ""}
+                            value={table.getColumn("Status").getFilterValue() ?? ""}
                             onChange={(e) =>
-                                table.getColumn("status")?.setFilterValue(e.target.value)
+                                table.getColumn("Status")?.setFilterValue(e.target.value)
                             }
                         >
                             <option value="">All</option>
                             <option value="pending">Pending</option>
-                            <option value="paid">Paid</option>
+                            <option value="paid ">Paid</option>
                             <option value="Delivered">Delivered</option>
                             <option value="cancelled">Cancelled</option>
                         </select>
@@ -122,7 +138,13 @@ function RecentOrderedTable() {
                                 </tr>
                             ))}
                         </tbody>
+
                     </table>
+                    <div className={style.footer_btn}>
+                        <button onClick={() => setPage(prev => prev - 1)} disabled={page == 1} className={` ${page == 1 ? "text-gray-300" : null}`}><FaArrowAltCircleLeft /></button>
+                        <span className={style.span}>{data.offset} - {data.limitPage}</span>
+                        <button onClick={() => setPage(prev => prev + 1)} disabled={data?.orders?.length < 15} className={` ${data?.orders?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
+                    </div>
                 </div>
             </div>
 
