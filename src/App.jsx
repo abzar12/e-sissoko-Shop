@@ -32,7 +32,7 @@ export default function App() {
         <Route element={<ProtectUserRoute Customer={false} />}>
           <Route element={<Dashboard />} >
             {/* dashboard outlet */}
-            <Route path="/dashboard" element={<DashHome />} />
+            <Route path="/e-sissoko/dashboard" element={<DashHome />} />
             <Route path="/dashboard/add-product" element={<AddProduct />} />
             <Route path="/dashboard/edit-product" element={<EditProduct />} />
           </Route>

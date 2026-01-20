@@ -5,11 +5,10 @@ import { FaShippingFast, FaMoneyCheckAlt } from "react-icons/fa";
 
 
 export  const  SideBarIconText = [
-    {icon: MdDashboard, text:"Dashboard", url: "/dashboard"},
-    {icon: FaProductHunt, text:"Products"},
+    {icon: MdDashboard, text:"Dashboard", url: "/e-sissoko/dashboard"},
+    {icon: FaProductHunt, text:"Products", url: "/e-sissoko/dashboard/Products"},
     {icon: MdAddShoppingCart, text:"Orders"},
     {icon: FaPeopleLine, text:"Customers"},
     {icon: FaMoneyCheckAlt, text:"Payment"},
     {icon: FaShippingFast, text:"Shipping"}
-    
 ]
