@@ -11,10 +11,10 @@
     @apply shadow-md bg-white w-[300px] sm:h-[150px] h-[200px] m-auto rounded-2xl p-3 font-[poppins] grid sm:grid-flow-col 
 }
 .card .cardSpan{
-    @apply text-[1.3rem] sm:text-[2rem]
+    @apply text-[1.3rem] sm:text-[1.8rem]
 }
 .card .value{
-    @apply text-[1.3rem] sm:text-[1.5rem]
+    @apply text-[1.3rem] sm:text-[1.3rem]
 }
 .cards .chartBar{
     @apply  relative z-20 
@@ -90,10 +90,22 @@
   .GlobalCurves .filterBox .filter{
    @apply bg-transparent px-5 py-1 shadow-[-0px_1px_5px_1px_rgb(255,255,255)] focus:outline-none rounded-lg text-[rgb(255,255,255)] cursor-pointer 
   }
+
   /* Mount orders */
   .MounthOrder{
    @apply bg-[var(--bg-primary)] rounded-[20px] min-w-[250px] max-w-[500px] lg:w-[100%] mx-auto
   }
   .Curve{
    @apply w-full my-3 h-[300px]
+  }
+  .Curve .p{
+   @apply text-center pt-32 
+  }
+  /* ----------Table Footer------------- */
+
+  .footer_btn{
+   @apply text-[1.4rem] flex gap-5 text-[rgb(124,58,237)] my-3
+  }
+  .footer_btn .span{
+   @apply text-[0.9rem]
   }
