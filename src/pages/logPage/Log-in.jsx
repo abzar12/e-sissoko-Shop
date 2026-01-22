@@ -46,7 +46,7 @@ function Login() {
             login(data.token, data.user);
             setTimeout(() => {
                 setisloading(false)
-                return navigate("/dashboard")
+                return navigate("/e-sissoko/dashboard")
             }, 1200);
         } catch (Error) {
             console.log("Client: data failed ", Error.message);
