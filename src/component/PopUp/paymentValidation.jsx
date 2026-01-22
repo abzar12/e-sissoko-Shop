@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-
-function PaymentPopup({isShow, Reference, amount}) {
-    console.log("payment Validation: ", isShow + Reference + amount)
+import { useLocation, useNavigate } from "react-router-dom";
+import { Cartcontext } from "../Context/cartContext/cartContext";
+function PaymentPopup({isShow, Reference, Amount}) {
+    const {clearCart} = useContext(Cartcontext)
+    console.log("payment Validation: ", isShow + Reference + Amount)
+    const {isshow, reference, amount} = useLocation().state || {}
     const navigate = useNavigate();
-    const [show, setShow] = useState(isShow)
+    const _show = isShow || isshow
+    const _reference = Reference || reference
+    const _amount = Amount || amount
+    const [show, setShow] = useState(_show)
     const handleClose = () =>{
         setShow(!show)
     }
     if (!show) return null;
-
+    useEffect(() => {
+        clearCart()
+    }, [])
     return ReactDOM.createPortal(
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
             <div className="relative max-w-xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden">
@@ -35,15 +42,15 @@ function PaymentPopup({isShow, Reference, amount}) {
                         Thank you — your order has been placed successfully.
                     </p>
 
-                    {Reference && (
+                    { _reference && (
                         <p className="mt-3 text-sm text-gray-600">
-                            Order ID: <span className="font-medium text-gray-800">{Reference}</span>
+                            Order ID: <span className="font-medium text-gray-800">{ _reference}</span>
                         </p>
                     )}
 
-                    {amount && (
+                    {_amount && (
                         <p className="mt-1 text-sm text-gray-600">
-                            Total: <span className="font-semibold text-gray-800">GHS {amount}</span>
+                            Total: <span className="font-semibold text-gray-800">GHS {_amount}</span>
                         </p>
                     )}
 
@@ -52,7 +59,7 @@ function PaymentPopup({isShow, Reference, amount}) {
                         <button
                             onClick={() => {
                                 onClose?.();
-                                if (Reference) navigate(`/shop/cart`);
+                                if ( _reference) navigate(`/shop/cart`);
                                 else navigate("/shop/cart");
                             }}
                             className="w-full sm:w-auto px-5 py-2 rounded-lg bg-[var(--bg-color-primary)] text-white font-medium hover:opacity-90 transition"

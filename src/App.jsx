@@ -22,7 +22,8 @@ export default function App() {
       <Routes>
         {/* PUBLIC ROUTE */}
         <Route path="/" element={<Home />} />
-        <Route path="/payment/validated" element= {< PaymentPopup />} />
+        {/* verification popup ----------------*/} 
+        <Route path="/payment/validated" element= {< PaymentPopup />} /> 
         <Route path="/e-sissoko/log-in" element={<Login />} />
         <Route path="/shop/product-detail" element={<ShopDetail />} />
         <Route path="/shop/product" element={<Test />} />
