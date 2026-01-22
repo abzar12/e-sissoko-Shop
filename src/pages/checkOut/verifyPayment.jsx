@@ -48,7 +48,7 @@ function PaymentVerify() {
         <PaymentPopup
             isShow={data.isShow}
             Reference={data.Reference}
-            amount={data.amount /100}
+            Amount={data.amount /100}
         />)
 }
 export default PaymentVerify

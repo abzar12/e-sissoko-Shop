@@ -6,10 +6,11 @@ import { useAuth } from "../../component/Context/authContext/authContext"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Cartcontext } from "../../component/Context/cartContext/cartContext"
+// import PaymentPopup from "../../component/PopUp/paymentValidation"
 function CheckOut() {
     const navigate = useNavigate()
     const { user } = useAuth()
-    const { cart, sub_Total, ProductNumbers, clearCart } = useContext(Cartcontext)
+    const { cart, sub_Total, ProductNumbers } = useContext(Cartcontext)
     // my state
     const deleveryFees = 25;
     const [deleveryFormValues, setDeleveryFormValues] = useState({
@@ -68,8 +69,8 @@ function CheckOut() {
                 return 
             }
             console.log("Before remove:", localStorage.getItem("ordP"));
-            clearCart()
-            navigate("/shop/cart/")
+            navigate("/payment/validated", {state: {isshow: true, reference:data.response.OrderNumber, amount:data.response.ItemsTotal}  })
+            
         } catch (error) {
             console.log(`CheckOut Error: ${error}`)
             throw new Error(`CheckOut Error: ${error.message}`);
