@@ -14,6 +14,7 @@ import Dashboard from "./pages/userDashboard/dashboard"
 import EditProduct from "./pages/editProduct/EditProduct"
 import AddProduct from "./pages/AddProduct"
 import DashHome from "./pages/userDashboard/Dashhome/dashome"
+import DashProduct from "./pages/userDashboard/DashProducts/products"
 // Payment Url
 import PaymentVerify from "./pages/checkOut/verifyPayment"
 export default function App() {
@@ -34,8 +35,9 @@ export default function App() {
           <Route element={<Dashboard />} >
             {/* dashboard outlet */}
             <Route path="/e-sissoko/dashboard" element={<DashHome />} />
-            <Route path="/dashboard/add-product" element={<AddProduct />} />
-            <Route path="/dashboard/edit-product" element={<EditProduct />} />
+            <Route path="/e-dashboard/add-product" element={<AddProduct />} />
+            <Route path="/e-dashboard/edit-product" element={<EditProduct />} />
+            <Route path="/e-dashboard/product" element={<DashProduct />} />
           </Route>
 
         </Route>
