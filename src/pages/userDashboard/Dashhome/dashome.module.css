@@ -54,6 +54,9 @@
 .OrderContainer .OrderTitle{
    @apply  text-[1.1rem]  text-white
 }
+.tableContainer{
+   @apply overflow-scroll px-3
+}
  .OrderTable{
     @apply  mx-auto px-3 
  }
