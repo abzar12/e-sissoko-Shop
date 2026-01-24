@@ -44,13 +44,13 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/getAll`);
                 if (!resp.ok) {
                     throw new Error(`Please Check : ${resp.status}`)
                 }
                 const data = await resp.json();
                 console.log(data)
-                SetProducts(data.product);
+                SetProducts(data.response);
                 setloading(true)
 
             } catch (Err) {
