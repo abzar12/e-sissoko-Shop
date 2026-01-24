@@ -102,7 +102,7 @@ function RecentOrderedTable() {
                         </select>
                     </div>
                 </div>
-                <div className="overflow-scroll px-3">
+                <div className={style.tableContainer}>
                     <table className={style.OrderTable}>
                         <thead>
                             {

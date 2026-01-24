@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/src/zod.js";
 import z, { array } from "zod";
+import { useNavigate } from "react-router-dom";
 
 function ProductInfo({ data, uuid }) {
+    const navigate = useNavigate()
     const Schema = z.object({
         Name: z.string().min(2, "Name must be at least 2 characters"),
         Brand: z.string().min(2, "Brand must be at least 2 characters"),
@@ -99,6 +101,7 @@ function ProductInfo({ data, uuid }) {
             reset({
                 Name: "", Brand: "", Category: "", Model: "", Color: "", Price: "", Promot_Price: "", Shipping: "", Quantity: "", Delivery: "", Warranty: "", Contact_Email: "", Description: "", Img_url: null
             })
+            navigate("/e-dashboard/product");
         } catch (error) {
             console.log(`CLient Error: ${error.message}`)
         }
