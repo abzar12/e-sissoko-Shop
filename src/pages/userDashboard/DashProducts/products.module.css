@@ -1,0 +1,49 @@
+
+.container{
+    @apply bg-[var(--bg-primary)] mx-5 my-5 rounded-3xl min-h-[350px] overflow-scroll
+}
+.container .header{
+    @apply bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] px-5 rounded-t-3xl  flex justify-between h-[60px] items-center text-white
+}
+.header .mySelect{
+    @apply shadow-[-0px_1px_5px_1px_rgb(255,255,255)] px-5 py-1 rounded-xl 
+}
+.mySelect select{
+    @apply  focus:outline-none outline-none bg-transparent w-full text-white
+}
+.header .btnBox{
+    @apply shadow-[-0px_1px_3px_1px_rgb(255,255,255)] hover:shadow-[-0px_1px_10px_3px_rgb(255,255,255)] rounded-lg hover:bg-white hover:text-black transition-all duration-300
+}
+.btnBox p{
+    @apply inline-flex pb-1 pt-2 px-3
+}
+/*  table css  */
+.tableContainer{
+   @apply overflow-scroll px-3 h-[500px] mt-5
+}
+.headerBox {
+    @apply  mx-auto px-3
+}
+.titleBox{
+    @apply border-y-2 bg-gray-200
+} 
+.headerBox .title{
+    @apply  px-3 text-center
+}
+.tableContainer .Row{
+    @apply border-b-2 
+ }
+ .tableContainer .Column{ 
+    @apply pr-5 pl-3 py-3
+  } 
+.noFound{
+    @apply flex justify-center w-[150px] ml-48 content-center
+}
+  /* ----------Table Footer------------- */
+
+  .footer_btn{
+   @apply text-[1.4rem] flex gap-5 text-[rgb(124,58,237)] my-3
+  }
+  .footer_btn .span{
+   @apply text-[0.9rem]
+  }
