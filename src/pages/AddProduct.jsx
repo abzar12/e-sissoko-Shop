@@ -5,6 +5,7 @@ import MyAlert from "../component/PopUp/myAlert";
 import z from "zod";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import "../component/style/addProduct.css"
+import { Navigate } from "react-router-dom";
 
 const ProductSchema = z.object({
     Name: z.string().min(2, "Product name must be at least 2 characters"),
@@ -19,10 +20,8 @@ const ProductSchema = z.object({
         }),
     Promot_Price: z
         .string()
-        .min(1, "Discount Price is required")
-        .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-            message: "Discount Price must be a positive number",
-        }).optional(),
+        // .min(1, "Discount Price is required")
+        .optional(),
     Quantity: z
         .string()
         .min(1, "Quantity is required")
@@ -30,9 +29,9 @@ const ProductSchema = z.object({
             message: "Quantity must be a number greater than 0",
         }),
     Color: z.string().min(2, "Color field must be at least 2 characters"),
-    Size: z.string().min(2, "Size field must be at least 2 characters").optional(),
-    Weight: z.string().min(2, "Weight field must be at least 2 characters").optional(),
-    Dimensions: z.string().min(2, "Dimension is incorrect ").optional(),
+    Size: z.string().optional(),
+    Weight: z.string().optional(),
+    Dimensions: z.string().optional(),
     Shipping: z.string().min(2, "Shipping is required"),
     Delivery: z.string().min(2, "Delivery Time is required "),
     Warranty: z.string().min(2, "Warranty field is incorrect "),
@@ -48,8 +47,7 @@ const ProductSchema = z.object({
 })
 function AddProduct() {
     console.log("AddProduct rendered ")
-
-    const [Alert, setAlert]=useState({
+    const [Alert, setAlert] = useState({
         is_show: false,
         status: false,
         children: "",
@@ -75,7 +73,7 @@ function AddProduct() {
         const formData = new FormData();
         // Append form data
         Object.entries(data).forEach(([key, value]) => {
-            if(key != "Img_url"){
+            if (key != "Img_url") {
                 formData.append(key, value);
             }
         });
@@ -98,7 +96,7 @@ function AddProduct() {
             SetFileImage([]);
             console.log(`Status: ${resp.status} Message: ${data.message}`);
             setAlert((prev) => {
-                return {...prev, is_show: true, status: true, children: data.message}
+                return { ...prev, is_show: true, status: true, children: data.message }
             })
         } catch (err) {
             console.error("fetching Data failed: ", err);
@@ -108,44 +106,47 @@ function AddProduct() {
     // ---------------------------------------- return ------------------------------------------
     return (
         <>
-        <div className="">
-            < MyAlert show={Alert.is_show} children={Alert.children} status={Alert.status} onClose={(prev) => setAlert({...prev, is_show:false} )}/>
-        </div>
+            <div className="">
+                < MyAlert show={Alert.is_show} children={Alert.children} status={Alert.status} onClose={(prev) => setAlert({ ...prev, is_show: false })} />
+            </div>
             <div className="ac_form ">
                 <h2 className="text-2xl font-bold mb-4 text-center"> <MdOutlineAddShoppingCart className="inline text-3xl" /> Add New Product</h2>
                 <form action="" onSubmit={handleSubmit(onSubmit)} >
                     {/* ------------------Product Name */}
-                    <div className="Box">
-                        <label htmlFor="" className="">Product Title</label>
-                        <input
-                            type="text"
-                            defaultValue="Abzar_Camara"
-                            placeholder="e.g Samsung Galaxy S24 Ultra"
-                            {...register("Name",)}
-                            name='Name'
-                            className={`input ${errors.Name ? "border-red-400" : ""}`} />
-                    </div>
-                    <p className="text-red-500 text-sm">{errors.Name?.message}</p>
-                    {/* ------------------Product Category */}
-                    <div className="Box">
-                        <label htmlFor="" className="">Category</label>
-                        <select name="Category" {...register("Category")} id="" className={`input ${errors.Category ? "border-red-400" : ""}`} >
-                            <option value="">Select category</option>
-                            <option value="clothes">Clothes</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="shoes">Shoes</option>
-                            <option value="books">Books</option>
-                            <option value="Phone" defaultValue={"Phone"} >Phone</option>
-                        </select>
+                    <div className="container-input">
+                        <div className="">
+                            <label htmlFor="" className="">Product Name <span className="text-red-500 ">*</span></label>
+                            <input
+                                type="text"
+                                
+                                placeholder="e.g Samsung Galaxy S24 Ultra"
+                                {...register("Name",)}
+                                name='Name'
+                                className={`input ${errors.Name ? "border-red-400" : ""}`} />
+                        </div>
+                        {/* ------------------Product Category */}
+                        <div className="">
+                            <label htmlFor="" className="">Category <span className="text-red-500 ">*</span></label>
+                            <select name="Category" {...register("Category")} id="" className={`input ${errors.Category ? "border-red-400" : ""}`} >
+                                <option value="">Select category</option>
+                                <option value="cable">Cable</option>
+                                <option value="charger">Charger</option>
+                                <option value="airpod">Airpod</option>
+                                <option value="watch">Watch</option>
+                                <option value="iphone"  >Iphone</option>
+                            </select>
+                        </div>
+                        <p className="text-red-500 text-sm">{errors.Name?.message}</p>
                         <p className="text-red-500 text-sm">{errors.Category?.message}</p>
+
                     </div>
                     {/* ------------------Product Brand and SKU/Model */}
                     <div className="container-input">
                         <div className="">
-                            <label htmlFor="">Brand</label>
+                            <label htmlFor="">Brand <span className="text-red-500 ">*</span></label>
                             <input
                                 type="text"
-                                defaultValue="Abzar_Camara"
+                                
                                 name="Brand"
                                 placeholder="e.g Samsung"
                                 className={`input ${errors.Brand ? "border-red-600" : "border"}`}
@@ -153,10 +154,10 @@ function AddProduct() {
                             />
                         </div>
                         <div className="">
-                            <label htmlFor="">Model</label>
+                            <label htmlFor="">Model <span className="text-red-500 ">*</span></label>
                             <input
                                 type="text"
-                                defaultValue="Abzar_Camara"
+                                
                                 name="Model"
                                 placeholder="Unique product ID"
                                 className={`input ${errors.Model ? "border-red-600" : "border"}`}
@@ -174,18 +175,18 @@ function AddProduct() {
                     {/* ------------------Product Price */}
                     <div className="container-input">
                         <div className="">
-                            <label htmlFor="" className="">Price (GHS)</label>
+                            <label htmlFor="" className="">Price (GHS) <span className="text-red-500 ">*</span></label>
                             <input type="number"
-                                defaultValue="123"
+                                
                                 placeholder=""
                                 name="Price"
                                 className={`input ${errors.Price ? "border-red-600" : ""}`}
                                 {...register("Price")} />
                         </div>
                         <div className="Box">
-                            <label htmlFor="" className="">Discount Price (GHS)</label>
+                            <label htmlFor="" className="">Discount Price (GHS) </label>
                             <input type="number"
-                                defaultValue="123"
+                                
                                 placeholder=""
                                 name="Promot_Price"
                                 className={`input ${errors.Promot_Price ? "border-red-600" : ""}`}
@@ -199,10 +200,10 @@ function AddProduct() {
                     </div>
                     {/* ------------------Product Quantity */}
                     <div className="Box">
-                        <label htmlFor="" className="">Stock Quantity</label>
+                        <label htmlFor="" className="">Stock Quantity <span className="text-red-500 ">*</span></label>
                         <input
                             type="number"
-                            defaultValue="123"
+                            
                             placeholder=""
                             name="Quantity"
                             className={`input ${errors.Quantity ? "border-red-600" : ""}`}
@@ -213,8 +214,8 @@ function AddProduct() {
                     {/* ------------------Product Color */}
                     <div className="container_3inputs">
                         <div className="">
-                            <label htmlFor="" className="">Color</label>
-                             <select name="Color" {...register("Color", { required: true })} className={`input ${errors.Color ? "border-red-600" : "border"}`}>
+                            <label htmlFor="" className="">Color <span className="text-red-500 ">*</span></label>
+                            <select name="Color" {...register("Color", { required: true })} className={`input ${errors.Color ? "border-red-600" : "border"}`}>
                                 <option value="">Select Color</option>
                                 <option value="black">Black</option>
                                 <option value="white">White</option>
@@ -227,10 +228,10 @@ function AddProduct() {
                             </select>
                         </div>
                         <div className="">
-                            <label htmlFor="" className="">Size</label>
+                            <label htmlFor="" className="">Size </label>
                             <input
                                 type="text"
-                                defaultValue="Abzar_Camara"
+                                
                                 placeholder="e.g S, M, L, XL,"
                                 name="Size"
                                 id=""
@@ -239,10 +240,10 @@ function AddProduct() {
                             />
                         </div>
                         <div className="">
-                            <label htmlFor="" className="">Weight</label>
+                            <label htmlFor="" className="">Weight </label>
                             <input
                                 type="text"
-                                defaultValue="Abzar_Camara"
+                                
                                 placeholder="e.g 12"
                                 name="Weight"
                                 className={`input ${errors.Weight ? "border-red-600" : "border"}`}
@@ -258,10 +259,10 @@ function AddProduct() {
                     </div>
                     {/* ---------------------Product Dimensions */}
                     <div className="Box">
-                        <label htmlFor="">Dimensions (L x W x H)</label>
+                        <label htmlFor="">Dimensions (L x W x H) </label>
                         <input
                             type="text"
-                            defaultValue="Abzar_Camara"
+                            
                             name="Dimensions"
                             placeholder="e.g 15 x 7 x 0.8cm"
                             className={`input ${errors.Dimensions ? "border-red-600" : "border"}`}
@@ -272,7 +273,7 @@ function AddProduct() {
                     {/* ------------------Product Shipping and Delivery_time */}
                     <div className="container-input">
                         <div className="">
-                            <label htmlFor="" className="">Shipping Option</label>
+                            <label htmlFor="" className="">Shipping Option <span className="text-red-500 ">*</span></label>
                             <select name="Shipping" id="" className={`input ${errors.Shipping ? "border-red-600" : "border"}`}
                                 {...register("Shipping")}>
                                 <option value="">Select </option>
@@ -282,9 +283,9 @@ function AddProduct() {
                             </select>
                         </div>
                         <div className="">
-                            <label htmlFor="" className="">Delivery Time</label>
+                            <label htmlFor="" className="">Delivery Time <span className="text-red-500 ">*</span></label>
                             <input type="text"
-                                defaultValue="Abzar_Camara"
+                                
                                 placeholder="e.g. business days"
 
                                 name="Delivery"
@@ -300,9 +301,9 @@ function AddProduct() {
                     </div>
                     {/* ----------------Product Warranty / return Policy */}
                     <div className="Box">
-                        <label htmlFor="" className="">Warranty / return Policy</label>
+                        <label htmlFor="" className="">Warranty / return Policy <span className="text-red-500 ">*</span></label>
                         <input type="text"
-                            defaultValue="Abzar_Camara"
+                            
                             placeholder="e.g. 1 year Warranty"
                             name="Warranty"
 
@@ -313,9 +314,9 @@ function AddProduct() {
                     <p className="text-red-500 text-sm">{errors.Warranty?.message}</p>
                     {/* ----------------Seller contact Email */}
                     <div className="Box">
-                        <label htmlFor="" className="">Seller contact Email</label>
+                        <label htmlFor="" className="">Seller contact Email <span className="text-red-500 ">*</span></label>
                         <input type="text"
-                            defaultValue="Abzar@gmail.coma"
+
                             placeholder="example@.gmail.com"
                             name="Contact_Email"
 
@@ -326,12 +327,12 @@ function AddProduct() {
                     <p className="text-red-500 text-sm">{errors.Contact_Email?.message}</p>
                     {/* ------------------Product Description */}
                     <div className="Box">
-                        <label htmlFor="">Description </label>
+                        <label htmlFor="">Description  <span className="text-red-500 ">*</span></label>
                         <textarea
                             name="Description"
                             placeholder="Write a detailed description..."
                             rows={5}
-                            defaultValue="lsdjsdnfnjkdsnfjkdbnhjkfbnjkdnjkfndsjklsdjsdnfnjkdsnfjkdbnhjkfbnjkdnjkfndsjklsdjsdnfnjkdsnfjkdbnhjkfbnjkdnjkfndsjklsdjsdnfnjkdsnfjkdbnhjkfbnjkdnjkfndsjk"
+                            
                             className={`textarea ${errors.Description ? "border-red-600" : "border"}`}
                             {...register("Description")}
                         >
@@ -340,13 +341,13 @@ function AddProduct() {
                     <p className="text-red-500 text-sm">{errors.Description?.message}</p>
                     {/* ------------------Product Image */}
                     <div className="Box">
-                        <label htmlFor="">Product Image</label>
+                        <label htmlFor="">Product Image <span className="text-red-500 ">*</span></label>
                         <input
                             type="file"
                             name="Img_url"
                             multiple
                             className={`input ${errors.Img_url ? "border-red-600" : "border"}`}
-                            {...register("Img_url", { onChange:((e) => handleFile(e))})}
+                            {...register("Img_url", { onChange: ((e) => handleFile(e)) })}
                         />
                     </div>
                     <p className="text-red-500 text-sm">{errors.Img_url?.message}</p>

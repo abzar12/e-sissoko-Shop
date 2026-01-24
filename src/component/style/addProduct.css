@@ -4,10 +4,10 @@
 @tailwind utilities;
 
 label{
-    @apply font-bold block text-lg
+    @apply  block text-lg text-[1.1rem]
 }
 .ac_form {
-    @apply border max-w-4xl mx-auto mt-5 sm:mx-auto p-6 bg-white shadow-lg rounded-2xl;
+    @apply border mx-3 my-5 p-6 bg-[var(--bg-primary)] shadow-lg rounded-2xl;
 }
 .Box{
     @apply mb-3
@@ -28,7 +28,7 @@ label{
     @apply text-sm text-gray-500 mb-2
 }
 .ac-btn{
-    @apply border rounded-lg text-center bg-green-600 w-full py-2 text-white hover:bg-green-900 font-[Lora] text-lg transition duration-300 ease-out;
+    @apply border rounded-lg text-center bg-[var(--bg-color)] w-full py-2 text-white hover:bg-[var(--bg-color-primary)] font-[Lora] text-lg transition duration-300 ease-out;
 }
 .input .select{ 
     @apply focus:bg-red-400 focus:outline-none
