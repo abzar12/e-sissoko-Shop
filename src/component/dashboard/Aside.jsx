@@ -12,7 +12,7 @@ import { FaShippingFast, FaMoneyCheckAlt } from "react-icons/fa";
   const  SideBarIconText = [
     {icon: MdDashboard, text:"Dashboard", url: "/e-sissoko/dashboard"},
     {icon: FaProductHunt, text:"Products", url: "/e-dashboard/product"},
-    {icon: MdAddShoppingCart, text:"Orders"},
+    {icon: MdAddShoppingCart, text:"Orders", url: "/e-dashboard/orders"},
     {icon: FaPeopleLine, text:"Customers"},
     {icon: FaMoneyCheckAlt, text:"Payment"},
     {icon: FaShippingFast, text:"Shipping"}

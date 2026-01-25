@@ -7,7 +7,7 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
     // const [page, SetPage] =useState(1)
     const [columnFilters, SetColumnFilter] = useState([])
     const columnHelper = createColumnHelper()
-
+    const [show, setShow] = useState(false)
     const column = [
         columnHelper.accessor("uuid", {
             header: "ID"
@@ -17,7 +17,7 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             cell: ({ getValue }) => {
                 const value = getValue()
                 return (
-                    <span className=" line-clamp-1 w-[170px] ">{value}</span>
+                    <span className= {` ${show ? "line-clamp-3": "line-clamp-1"}  w-[170px] `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),
@@ -94,7 +94,7 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             cell: ({ getValue }) => {
                 const value = getValue()
                 return (
-                    <span className=" line-clamp-1  ">{value}</span>
+                    <span className={` ${show ? "line-clamp-3": "line-clamp-1"} `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),
