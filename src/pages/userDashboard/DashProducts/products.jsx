@@ -1,10 +1,12 @@
 import ProdductTable from "./productData/productsTable"
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import style from "./products.module.css"
 import useDashboardFetch from "../../../component/Context/DashboardContext/dashboardFetch"
 import { MdAddShoppingCart } from "react-icons/md";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { useAuth } from "../../../component/Context/authContext/authContext";
 function DashProduct() {
+    const { user,accessToken } = useAuth()
     const [query, setQuery] = useState({
         quantity_status: "",
         category: "",
@@ -41,8 +43,10 @@ function DashProduct() {
                 return { ...prev, category: value }
             }
         })
-    }
-    console.log(data)
+    } 
+    // if(!accessToken || !user.username && !user.role !== "staff" && !user.role !== "admin"){
+    //     return <Navigate to="/" />
+    // }
     return (
         <>
             <div className={style.container}>

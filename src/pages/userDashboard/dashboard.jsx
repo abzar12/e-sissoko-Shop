@@ -11,9 +11,9 @@ function Dashboard() {
     const handleClick = () =>{
         setIsopen(!isopen)
     }
-    if(!user.role || user.role === "customer"){
+    if(!user.role || user.role !== "staff" && user.role !== "admin"){
         console.log("User role::", user.role)
-        return <Navigate to="/" replace />
+        return null
     }
     return (
         <>
