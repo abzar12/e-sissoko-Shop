@@ -16,6 +16,7 @@ import AddProduct from "./pages/AddProduct"
 import DashHome from "./pages/userDashboard/Dashhome/dashome"
 import DashProduct from "./pages/userDashboard/DashProducts/products"
 import Orders from "./pages/userDashboard/dashOrders/dashOrder"
+import DashCustomers from "./pages/userDashboard/dashCustomers/customers"
 // Payment Url
 import PaymentVerify from "./pages/checkOut/verifyPayment"
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
             <Route path="/e-dashboard/edit-product" element={<EditProduct />} />
             <Route path="/e-dashboard/product" element={<DashProduct />} />
             <Route path="/e-dashboard/orders" element={<Orders />} />
+            <Route path="/e-dashboard/customers" element={< DashCustomers/>} />
           </Route>
 
         </Route>

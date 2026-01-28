@@ -13,7 +13,7 @@ import { FaShippingFast, FaMoneyCheckAlt } from "react-icons/fa";
     {icon: MdDashboard, text:"Dashboard", url: "/e-sissoko/dashboard"},
     {icon: FaProductHunt, text:"Products", url: "/e-dashboard/product"},
     {icon: MdAddShoppingCart, text:"Orders", url: "/e-dashboard/orders"},
-    {icon: FaPeopleLine, text:"Customers"},
+    {icon: FaPeopleLine, text:"Customers", url: "/e-dashboard/customers"},
     {icon: FaMoneyCheckAlt, text:"Payment"},
     {icon: FaShippingFast, text:"Shipping"}
 ]
