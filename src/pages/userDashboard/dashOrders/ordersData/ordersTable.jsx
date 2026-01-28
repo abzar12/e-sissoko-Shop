@@ -2,11 +2,11 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import style from "../orders.module.css"
 import { useReactTable, createColumnHelper, getCoreRowModel, getFilteredRowModel, flexRender } from "@tanstack/react-table"
-import { FaEye, FaTrash, FaArrowAltCircleLeft, FaArrowAltCircleRight, FaCheck } from "react-icons/fa"
- import { FaMoneyBillTransfer } from "react-icons/fa6"
- import { GiCancel } from "react-icons/gi";
+import { FaEye, FaTrash, FaArrowAltCircleLeft, FaArrowAltCircleRight, FaCheck, FaShippingFast } from "react-icons/fa"
+import { FaMoneyBillTransfer } from "react-icons/fa6"
+import { GiCancel } from "react-icons/gi";
 
-function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
+function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpdateStatus }) {
     // const [page, SetPage] =useState(1)
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
@@ -49,7 +49,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 const status = getValue().toLowerCase();
                 const ClassMap = {
                     paid: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
-                    comfirmed: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
+                    confirmed: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
                     pending: "bg-yellow-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     cancelled: "bg-red-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     delivered: "bg-green-600 px-3 py-1 rounded-full text-white text-[0.9rem]",
@@ -67,10 +67,27 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 const value = row.original
                 return (
                     <div className="flex justify-between gap-3">
-                        <FaCheck className=" cursor-pointer hover:text-gray-400 transition duration-300" onClick={() => console.log("view")} />
-                        <FaMoneyBillTransfer className=" cursor-pointer hover:text-gray-400 transition duration-300" onClick={() => console.log("view")} />
-                        <FaEye className=" cursor-pointer hover:text-gray-400 transition duration-300" onClick={() => console.log("view")} />
-                        <GiCancel className="text-red-500 cursor-pointer hover:text-red-800 transition duration-300 " onClick={() => console.log("view")} />
+                        {value.Status.toLowerCase() === "pending" && <FaCheck className={`${value.Status.toLowerCase() !== "pending" ? "text-green-500 cursor-not-allowed pointer-events-none " : "cursor-pointer"}  hover:text-gray-400 transition duration-300`}
+                            onClick={() => onUpdateStatus({ value: "confirmed", id: value.ID })}
+                            disabled={value.Status.toLowerCase() === "comfirmed"} />}
+
+                        {value.Status.toLowerCase() !== "pending" && value.Status.toLowerCase() !== "cancelled" && <FaShippingFast className={`${value.Status.toLowerCase() === "delivered" ? "text-green-500 cursor-not-allowed pointer-events-none" : "cursor-pointer"} hover:text-gray-400 transition duration-300`}
+                            onClick={() => onUpdateStatus({ value: "delivered", id: value.ID })}
+                            disabled={value.Status.toLowerCase() === "delivered"} />}
+
+                        {value.Status.toLowerCase() !== "cancelled" &&
+                            <FaMoneyBillTransfer className={`${value.Payment_Status.toLowerCase() === "paid" ? "text-green-500" : null} cursor-pointer hover:text-gray-400 transition duration-300`}
+                                onClick={() => onUpdateStatus({ value: "paid", id: value.ID })} />
+                        }
+
+                        <FaEye className={` cursor-pointer hover:text-gray-400 transition duration-300`}
+                            onClick={() => console.log("view")} />
+
+                        {
+                            value.Payment_Status.toLowerCase() === "unpaid" &&
+                            <GiCancel className={`text-red-500 cursor-pointer hover:text-red-800 transition duration-300`}
+                                onClick={() => onUpdateStatus({ value: "cancelled", id: value.ID })} />
+                        }
                     </div>
                 )
 
@@ -150,7 +167,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             <div className={style.footer_btn}>
                 <button onClick={onDecrease} disabled={page == 1} className={` ${page == 1 ? "text-gray-300" : null}`}><FaArrowAltCircleLeft /></button>
                 <span className={style.span}> {offset} - {limit}</span>
-                <button onClick={onIncrease} disabled={data?.length < 15} className={` ${data?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
+                <button onClick={onIncrease} disabled={data?.orders?.length < 15} className={` ${data?.orders?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
             </div>
         </>
     )

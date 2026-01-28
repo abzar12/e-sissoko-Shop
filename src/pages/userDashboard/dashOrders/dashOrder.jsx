@@ -5,18 +5,59 @@ import { MdAddShoppingCart } from "react-icons/md"
 import useDashboardFetch from "../../../component/Context/DashboardContext/dashboardFetch"
 import { useState } from "react"
 function Orders() {
-    const [query, setQuery] =useState({
+    const [query, setQuery] = useState({
         page: 1,
-        limit: 15
+        limit: 15,
+        status: "",
+        category: ""
     })
-    const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?page=${query.page}&limit=${query.limit}`)
-    const QuantityFn = () => {
-
+    const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?query=${JSON.stringify(query)}`)
+    const StatusFn = (status) => {
+        setQuery((prev) => {
+            return { ...prev, status: status }
+        })
     }
-    const CategoryFn = () => {
-
+    const CategoryFn = (category) => {
+        setQuery((prev) => {
+            return { ...prev, category: category }
+        })
     }
-    console.log(data)
+    const decreasePage = () => {
+        setQuery((prev) => {
+            if (prev.page > 0) {
+                return { ...prev, page: prev.page - 1 }
+            }
+        })
+    }
+    const increasePage = () => {
+        setQuery((prev) => {
+            return { ...prev, page: prev.page + 1 }
+        })
+    }
+    const updateStatusFn = async ({ value, id }) => {
+        console.log("starting")
+        // const submit = async () => {
+        try {
+            const resp = await fetch(`${import.meta.env.VITE_API_URL}/orders/updateStatus`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    value,
+                    id,
+                }),
+            })
+            const data = resp.json()
+            if (!resp.ok) {
+                console.log(`Error: ${data.message}`)
+                throw new Error(`Error: ${data.message} \n Staus: ${resp.status}`);
+            }
+            console.log("Status Updated Successfully")
+        } catch (error) {
+            throw new Error(error.message);
+        }
+        // }
+        // submit()
+    }
     return (
         <>
             <div className={style.container}>
@@ -26,19 +67,20 @@ function Orders() {
                         <p className={style.p}>Count {data?.orders?.length || 0}</p>
                     </div>
                     <div className={style.mySelect}>
-                        <select onChange={(e) => QuantityFn(e.target.value)}>
-                            <option value="">All Products</option>
-                            <option value="available">Available</option>
-                            <option value="low_stock">Low Stock</option>
-                            <option value="unavailable">Unavailable</option>
-                            <option value="new">recently Added</option>
+                        <select onChange={(e) => StatusFn(e.target.value)}>
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="paid">Paid</option>
+                            <option value="cancelled">Cancelled</option>
                         </select>
                     </div>
 
                     <div className={style.mySelect}>
                         <select onChange={(e) => CategoryFn(e.target.value)}>
                             <option value="">All Categories</option>
-                            <option value="Iphone">Iphone</option>
+                            <option value="iphone">Iphone</option>
                             <option value="watch">Watch</option>
                             <option value="charger">Charger</option>
                             <option value="airpod">Airpod</option>
@@ -51,7 +93,7 @@ function Orders() {
                     </div> */}
                 </div>
                 <div className={style.tableContainer}>
-                    <OrdersTable data={data} limit={data.limitPage} offset={data.offset}/>
+                    <OrdersTable data={data} limit={data.limitPage} offset={data.offset} page={query?.page} onDecrease={decreasePage} onIncrease={increasePage} onUpdateStatus={updateStatusFn} />
                 </div>
             </div>
         </>
