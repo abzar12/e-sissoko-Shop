@@ -20,13 +20,11 @@ function DashProduct() {
                 return { ...prev, page: prev.page - 1 }
             }
         })
-        console.log("Page :", query.page)
     }
     const increasePage = () => {
         setQuery((prev) => {
             return { ...prev, page: prev.page + 1 }
         })
-        console.log("Page :", query.page)
     }
     const QuantityFn = (value) => {
         console.log("Category:", value)

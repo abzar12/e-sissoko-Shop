@@ -8,10 +8,15 @@ import { FaTrash, FaEye, FaArrowAltCircleRight, FaArrowAltCircleLeft } from "rea
 function RecentOrderedTable() {
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
-    let [page, setPage] = useState(1)
-    let [limit, setLimit] = useState(15)
-    const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?page=${page}&limit=${limit}`)
-    console.log("Orders ", data)
+    const [query, setQuery] = useState({
+        page:1,
+        limit: 50,
+        status: "",
+        category: ""
+    })
+    // let [page, setPage] = useState(1)
+    // let [limit, setLimit] = useState(15)
+    const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?query=${JSON.stringify(query)}`)
     const column = [
         columnHelper.accessor("ID", {
             header: "Order_ID"
@@ -50,7 +55,7 @@ function RecentOrderedTable() {
                 const status = getValue().toLowerCase();
                 const ClassMap = {
                     paid: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
-                    comfirmed: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
+                    confirmed: "bg-blue-600 px-3 py-1 rounded-full text-white text-[0.9rem] ",
                     pending: "bg-yellow-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     cancelled: "bg-red-500 px-3 py-1 rounded-full text-white text-[0.9rem]",
                     delivered: "bg-green-600 px-3 py-1 rounded-full text-white text-[0.9rem]",
@@ -81,7 +86,18 @@ function RecentOrderedTable() {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
-    console.log("table:", table)
+     const decreasePage = () => {
+        setQuery((prev) => {
+            if (prev.page > 0) {
+                return { ...prev, page: prev.page - 1 }
+            }
+        })
+    }
+    const increasePage = () => {
+        setQuery((prev) => {
+            return { ...prev, page: prev.page + 1 }
+        })
+    }
     return (
         <>
             <div className={style.OrderContainer}>
@@ -94,9 +110,10 @@ function RecentOrderedTable() {
                                 table.getColumn("Status")?.setFilterValue(e.target.value)
                             }
                         >
-                            <option value="">All</option>
+                            <option value="">All Status</option>
                             <option value="pending">Pending</option>
-                            <option value="paid ">Paid</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="paid">Paid</option>
                             <option value="Delivered">Delivered</option>
                             <option value="cancelled">Cancelled</option>
                         </select>
@@ -141,9 +158,9 @@ function RecentOrderedTable() {
 
                     </table>
                     <div className={style.footer_btn}>
-                        <button onClick={() => setPage(prev => prev - 1)} disabled={page == 1} className={` ${page == 1 ? "text-gray-300" : null}`}><FaArrowAltCircleLeft /></button>
+                        <button onClick={decreasePage} disabled={query?.page === 1} className={` ${query?.page === 1 ? "text-gray-300" : null}`}><FaArrowAltCircleLeft /></button>
                         <span className={style.span}>{data.offset} - {data.limitPage}</span>
-                        <button onClick={() => setPage(prev => prev + 1)} disabled={data?.orders?.length < 15} className={` ${data?.orders?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
+                        <button onClick={increasePage} disabled={data?.orders?.length < 50} className={` ${data?.orders?.length < 50 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
                     </div>
                 </div>
             </div>
