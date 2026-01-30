@@ -21,10 +21,16 @@ function Home() {
 
     const [is_loading, setloading] = useState(false)
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
-    const [limitPage, setlimitPage] = useState(10)
     const [products, SetProducts] = useState([]);
     // const for the filters of product
-    const [query, Setquery] = useState({ Category: [], Price: [], Color: [] })
+    const [query, Setquery] = useState({
+        category: [],
+        price: [],
+        color: [],
+        page: 1,
+        limit: 50,
+        search: ""
+    })
     // authentification
 
     const queryString = new URLSearchParams(query).toString();
@@ -37,22 +43,26 @@ function Home() {
             return { ...prev, [type]: NewValue };
         })
     }
-    // ----------------handle values of select 
+    const searchFn = (values) =>{
+        const value = values.toLowerCase().trim()
+        Setquery((prev) => {
+            return {...prev, search: value}
+        })
+        console.log(query)
+    }
     // fetching the product on the table
     // filters data to the server
     const queryStringFilter = encodeURIComponent(JSON.stringify(query));
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/getAll`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(query)}`);
                 if (!resp.ok) {
                     throw new Error(`Please Check : ${resp.status}`)
                 }
                 const data = await resp.json();
-                console.log(data)
-                SetProducts(data.response);
+                SetProducts(data.response.products);
                 setloading(true)
-
             } catch (Err) {
                 console.log("Fetching Data Failed", Err)
             } finally {
@@ -62,27 +72,27 @@ function Home() {
             }
         }
         fetchData();
-    }, [query, limitPage])
+    }, [query])
     // handle filters 
     const filtersByCategory = filter.Category.map((item, index) => (
         <div className="categories" key={index}>
-            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Category")} id={item.toLowerCase()} value={(item == "All") ? "" : item} /> <label className="text-[15px] font-[lora] hover:text-gray-600 ">{item}</label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "category")} id={item.toLowerCase()} value={item.toLowerCase() == "all" ? "" : item.toLowerCase()} /> <label className="text-[15px] font-[lora] hover:text-gray-600 ">{item}</label>
         </div>
     ))
     const filtersByPrice = filter.Price.map((item, index) => (
         <div className="categories" key={index}>
-            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Price")} id={item.toLowerCase()} value={item} /> <label className="text-[15px] font-[lora] hover:text-gray-600">{item} <span>GHS</span></label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "price")} id={item.toLowerCase()} value={item.toLowerCase()} /> <label className="text-[15px] font-[lora] hover:text-gray-600">{item} <span>GHS</span></label>
         </div>
     ))
     const filterByColor = filter.Color.map((item, index) => (
         <div className="categories" key={index}>
-            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "Color")} id={item.toLowerCase()} value={item == "All" ? "" : item} /> <label className="text-[15px]  font-[lora] hover:text-gray-600">{item}</label>
+            <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "color")} id={item.toLowerCase()} value={item.toLowerCase() == "all" ? null : item.toLowerCase()} /> <label className="text-[15px]  font-[lora] hover:text-gray-600">{item}</label>
         </div>
     ))
     return (
         <>
             <header >
-                <Hero />
+                <Hero onSearch={searchFn}/>
             </header>
             <main className="">
                 <div className={`grid ${filterbutton ? "grid-cols-[1fr,4fr]" : "grid-cols-1fr"}`}>
@@ -148,14 +158,14 @@ function Home() {
                                                 We couldn't find any items. Please try again later.
                                             </p>
                                         </div>
-                                // if data no found ------------------ END ---------------------
+                                        // if data no found ------------------ END ---------------------
                                         :
-                                // if Item found on data base ---------------------------------------
+                                        // if Item found on data base ---------------------------------------
 
                                         <div className="">
                                             < ProductCard title="New Arrivals" titleClass="text-white bg-[rgb(234,179,8)]" ac_ItemClass={filterbutton ? 'is_small' : 'is_large'} Products={products} />
                                             <div className="btn-down">
-                                                <Button type="button" onClick={() => setlimitPage(prev => prev + 10)} children="Download More" />
+                                                <Button type="button" onClick={() => set(prev => prev + 10)} children="Download More" />
                                             </div>
                                         </div>
                                 )
