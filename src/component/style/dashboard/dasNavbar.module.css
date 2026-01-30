@@ -11,7 +11,7 @@
 }
 
 .content {
-    @apply flex justify-between text-lg items-center content-center
+    @apply flex justify-between text-lg items-center content-center 
 }
 
 .form {
