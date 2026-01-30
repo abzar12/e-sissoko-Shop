@@ -10,9 +10,10 @@ import style from "./style/Navbar.module.css"
 import { useContext, useState } from "react";
 import { Cartcontext } from "./Context/cartContext/cartContext";
 import { useAuth } from "./Context/authContext/authContext";
-export default function Navbar() {
+export default function Navbar({onSearch}) {
     const navigate = useNavigate()
     const [showLogin, setShowLogin] = useState(false)
+    const [smallScreen ,setSmallScreen] = useState(false)
     const buttonRef = useRef(null)
     const { cart } = useContext(Cartcontext)
     const { user } = useAuth()
@@ -41,9 +42,16 @@ export default function Navbar() {
                     <label >LOGO</label>
                 </div>
                 <div className={style.ac_search}>
-                    <input type="text" placeholder="Search..." id="search-items" className={`outlinenone  bg-transparent`} />
+                    <input onChange={(e) => onSearch(e.target.value)} type="text" placeholder="Search by name, category, model" id="search-items" className={`outlinenone  bg-transparent`} />
                     <div className={style.search_icon}>
                         <FaSearch />
+                    </div>
+                </div>
+                {/* small screen phone */}
+                <div className={`${style.ac_search_phone} ${smallScreen ? style.active : null}`}>
+                    <input onChange={(e) => onSearch(e.target.value)} type="text" placeholder="Search products, categories, brands" id="search-items" className={`outlinenone  bg-transparent`} />
+                    <div className={style.search_icon_phone }>
+                        <FaSearch  onClick={() => setSmallScreen(prev => !prev)}/>
                     </div>
                 </div>
                 <div className={style.btnBox} >
@@ -65,7 +73,7 @@ export default function Navbar() {
                             )
                                 :
                                 (
-                                    <button type=" button hover:text-white/50 bg-transparent" onClick={() =>  navigate("/login-me")} ref={buttonRef}>
+                                    <button type=" button hover:text-white/50 bg-transparent" onClick={() => navigate("/login-me")} ref={buttonRef}>
                                         <div className={style.iconBox} >
                                             <FaUser className={`${style.icon} mt-0.5`} />
                                             <span>Login</span>
@@ -97,7 +105,8 @@ export default function Navbar() {
                         <div className={style.btn_icon}><Link to="/shop/cart"><FaShoppingCart className="text-[20px]" />
                             <label htmlFor="" className=" absolute top-[-10px] text-black bg-white rounded-full px-1.5 right-[-10px] text-sm"> {cartCount} </label>
                             <span className={style.span}>Cart</span>
-                        </Link></div>
+                        </Link>
+                        </div>
                     </div>
                 </div>
 

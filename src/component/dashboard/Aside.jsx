@@ -5,7 +5,7 @@ import style from "../../component/style/dashboard/dasAside.module.css"
 import { FaCarTunnel } from "react-icons/fa6";
 import { MdDashboard, MdAddShoppingCart } from "react-icons/md"
 import { FaProductHunt, FaPeopleLine } from "react-icons/fa6";
-import { FaShippingFast, FaMoneyCheckAlt } from "react-icons/fa";
+import { FaShippingFast, FaMoneyCheckAlt, FaUserShield } from "react-icons/fa";
 
 
 
@@ -14,7 +14,8 @@ import { FaShippingFast, FaMoneyCheckAlt } from "react-icons/fa";
     {icon: FaProductHunt, text:"Products", url: "/e-dashboard/product"},
     {icon: MdAddShoppingCart, text:"Orders", url: "/e-dashboard/orders"},
     {icon: FaPeopleLine, text:"Customers", url: "/e-dashboard/customers"},
-    {icon: FaMoneyCheckAlt, text:"Payment"},
+    {icon: FaUserShield, text:"Users", url: "/e-dashboard/users"},
+    {icon: FaMoneyCheckAlt, text:"Payment", url:"/e-dashboard/payment"},
     {icon: FaShippingFast, text:"Shipping"}
 ]
 
