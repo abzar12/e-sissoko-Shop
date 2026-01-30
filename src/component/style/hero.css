@@ -3,7 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+.ac-nav{
+    @apply relative
+}
+.image-slide{
+    @apply overflow-hidden sm:max-w-[800px] max-h-[550px] px-3 mx-auto bg-cover
+}
 .image-slide img{
-    @apply h-[550px] w-full object-cover
+    @apply h-full w-full object-cover mx-auto my-3 rounded-lg 
 }
 

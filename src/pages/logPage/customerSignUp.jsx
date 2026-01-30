@@ -4,9 +4,10 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Loading from "../../component/loading/Loading";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function CustomersSignUp() {
     // the form is two if the next if false then we are in step otherwise in the step@
+    const navigate = useNavigate()
     const [next, setNext] = useState(false)
     const [isloading, setIsloading] = useState(false)
     // the schema of controle the input value 
@@ -37,16 +38,17 @@ function CustomersSignUp() {
                 setIsloading(true)
                 const resp = await fetch(`${import.meta.env.VITE_API_URL}/customers/signup-me`, {
                     method: "POST",
-                    headers: {"Content-Type" : "application/json"},
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dataForm)
                 })
-                 const data = await resp.json()
+                const data = await resp.json()
                 console.log(data)
                 if (!resp.ok) {
                     throw new Error(`Please, Sign Up failed status: ${resp.status}`);
                 }
-               
+
                 reset()
+                navigate("/login-me")
             } catch (error) {
                 console.log(`Sign-up Failed: ${error.message}`)
             } finally {
