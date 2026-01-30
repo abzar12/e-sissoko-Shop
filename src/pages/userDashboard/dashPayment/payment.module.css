@@ -1,0 +1,575 @@
+/* Container */
+.container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+    padding: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 2rem;
+    }
+}
+
+/* Header */
+.header {
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 2.25rem;
+    }
+}
+
+.subtitle {
+    color: #4b5563;
+}
+
+/* Summary Cards Grid */
+.summaryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .summaryGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Card */
+.card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.cardTitle {
+    color: #4b5563;
+    font-weight: 500;
+}
+
+.cardIconBox {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardIconBoxGreen {
+    background-color: #dcfce7;
+}
+
+.cardIconBoxYellow {
+    background-color: #fef3c7;
+}
+
+.cardIconBoxBlue {
+    background-color: #dbeafe;
+}
+
+.cardAmount {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.cardSubtext {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+.addNewButton {
+    font-size: 0.875rem;
+    color: #2563eb;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.addNewButton:hover {
+    color: #1d4ed8;
+}
+
+/* Form Styles */
+.formContainer {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.formTitle {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .formGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition: ring 0.2s ease, border-color 0.2s ease;
+    outline: none;
+}
+
+.input:focus {
+    ring: 2px;
+    ring-color: #3b82f6;
+    border-color: transparent;
+}
+
+.formActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .formActions {
+        grid-column: 1 / -1;
+    }
+}
+
+.buttonPrimary {
+    flex: 1;
+    background-color: #2563eb;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.buttonPrimary:hover {
+    background-color: #1d4ed8;
+}
+
+.buttonSecondary {
+    flex: 1;
+    background-color: #e5e7eb;
+    color: #374151;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.buttonSecondary:hover {
+    background-color: #d1d5db;
+}
+
+/* Filter Section */
+.filterContainer {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.filterWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .filterWrapper {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.searchInput {
+    flex: 1;
+    width: 100%;
+}
+
+.filterButtons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filterButton {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+}
+
+.filterButtonActive {
+    background-color: #2563eb;
+    color: white;
+}
+
+.filterButtonInactive {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.filterButtonInactive:hover {
+    background-color: #e5e7eb;
+}
+
+/* Table Styles */
+.tableContainer {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    overflow: scroll;
+}
+
+.desktopView {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktopView {
+        display: block;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableHead {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tableHeadCell {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.tableBodyRow {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+}
+
+.tableBodyRow:hover {
+    background-color: #f9fafb;
+}
+
+.tableCell {
+    padding: 1rem 1.5rem;
+}
+
+.tableCellRight {
+    text-align: right;
+}
+
+.tableReference {
+    font-weight: 500;
+    color: #111827;
+}
+
+.tableAmount {
+    font-weight: 600;
+    color: #111827;
+}
+
+.tableDate {
+    color: #4b5563;
+}
+
+.tableMethod {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+}
+
+.tableBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.badgeCompleted {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.badgePending {
+    background-color: #fefce8;
+    color: #854d0e;
+    border-color: #fde047;
+}
+
+.badgeFailed {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.receiptButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.receiptButton:hover {
+    color: #1d4ed8;
+}
+
+/* Mobile View */
+.mobileView {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .mobileView {
+        display: none;
+    }
+}
+
+.loadingContainer {
+    padding: 2rem;
+    text-align: center;
+}
+
+.emptyContainer {
+    padding: 2rem;
+    text-align: center;
+}
+
+.emptyText {
+    color: #4b5563;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.mobileCard {
+    background-color: #f9fafb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    transition: border-color 0.2s ease;
+}
+
+.mobileCard:hover {
+    border-color: #d1d5db;
+}
+
+.mobileCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+
+.mobileCardTitle {
+    font-weight: 600;
+    color: #111827;
+}
+
+.mobileCardDate {
+    font-size: 0.875rem;
+    color: #4b5563;
+}
+
+.mobileCardBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.mobileCardBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.mobileCardInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobileCardInfoLabel {
+    font-size: 0.75rem;
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.mobileCardAmount {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+.mobileCardReceiptButton {
+    width: 100%;
+    background-color: #eff6ff;
+    color: #2563eb;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.mobileCardReceiptButton:hover {
+    background-color: #dbeafe;
+}
+
+/* Spinner */
+.spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid rgba(37, 99, 235, 0.1);
+    border-top-color: #2563eb;
+    border-radius: 9999px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Footer Info */
+.footerInfo {
+    margin-top: 2rem;
+    background-color: #eff6ff;
+    border-radius: 0.75rem;
+    border: 1px solid #93c5fd;
+    padding: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+.footerIcon {
+    flex-shrink: 0;
+    color: #2563eb;
+    font-size: 1.25rem;
+    margin-top: 0.25rem;
+}
+
+.footerContent {
+    flex: 1;
+}
+
+.footerTitle {
+    font-weight: 600;
+    color: #1e3a8a;
+    margin-bottom: 0.25rem;
+}
+
+.footerText {
+    font-size: 0.875rem;
+    color: #1e40af;
+    line-height: 1.5;
+}
+/* footer btn  */
+  .footer_btn{
+   @apply text-[1.4rem] flex gap-5 text-[rgb(124,58,237)] my-3 mx-3
+  }
+  .footer_btn .span{
+   @apply text-[0.9rem]
+  }
