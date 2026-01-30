@@ -1,0 +1,181 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #f9fafb, #f3f4f6);
+    padding: 1rem;
+}
+/* filters section */
+.filterContainer {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    margin: 1rem;
+}
+
+.filterWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .filterWrapper {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.searchInput {
+    flex: 1;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    outline: none;
+}
+
+.filterButtons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filterButton {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+}
+
+.filterButtonActive {
+    background-color: #2563eb;
+    color: white;
+}
+
+.filterButtonInactive {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.filterButtonInactive:hover {
+    background-color: #e5e7eb;
+}
+/* table */
+.tableContainer {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    overflow: scroll;
+}
+
+
+@media (min-width: 768px) {
+    .desktopView {
+        display: block;
+    }
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableHead {
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tableHeadCell {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.tableBodyRow {
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+}
+
+.tableBodyRow:hover {
+    background-color: #f9fafb;
+}
+
+.tableCell {
+    padding: 1rem 1.5rem;
+}
+
+.tableCellRight {
+    text-align: right;
+}
+
+.tableReference {
+    font-weight: 500;
+    color: #111827;
+}
+
+.tableAmount {
+    font-weight: 600;
+    color: #111827;
+}
+
+.tableDate {
+    color: #4b5563;
+}
+
+.tableMethod {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+}
+
+.tableBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid;
+}
+
+.badgeCompleted {
+    background-color: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.badgePending {
+    background-color: #fefce8;
+    color: #854d0e;
+    border-color: #fde047;
+}
+
+.badgeFailed {
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+.receiptButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.receiptButton:hover {
+    color: #1d4ed8;
+}
