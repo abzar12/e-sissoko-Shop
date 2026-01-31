@@ -9,7 +9,7 @@ function DashProduct() {
     const { user,accessToken } = useAuth()
     const [query, setQuery] = useState({
         quantity_status: "",
-        category: "",
+        category: [],
         page: 1,
         limit: 15
     })
@@ -35,11 +35,9 @@ function DashProduct() {
         })
     }
     const CategoryFn = (value) => {
-        console.log("Category:", value)
+        // let values = value == "all" ? "" : value 
         setQuery((prev) => {
-            if (prev.page > 0) {
-                return { ...prev, category: value }
-            }
+                return { ...prev, category: [value] }
         })
     } 
     // if(!accessToken || !user.username && !user.role !== "staff" && !user.role !== "admin"){
@@ -49,13 +47,10 @@ function DashProduct() {
         <>
             <div className={style.container}>
                 <div className={style.header}>
-                    <h1> Products </h1>
-                    <div className={style.counter}>
-                        <p className={style.p}>Count {data.products?.length || 0}</p>
-                    </div>
+                    <h1> Products <span className={style.count}>{data.products?.length || 0}</span></h1>
                     <div className={style.mySelect}>
                         <select onChange={(e) => QuantityFn(e.target.value)}>
-                            <option value="">All Products</option>
+                            <option value="all">All Products</option>
                             <option value="available">Available</option>
                             <option value="low_stock">Low Stock</option>
                             <option value="unavailable">Unavailable</option>
@@ -79,7 +74,7 @@ function DashProduct() {
                     </div>
                 </div>
                 <div className={style.tableContainer}>
-                    <ProdductTable data={data?.products} offset={data?.offset} limit={data?.limit} page={query.page} onIncrease={increasePage} onDecrease={decreasePage} />
+                    <ProdductTable data={data?.products} offset={data?.offset} limit={data?.limit} page={query?.page} onIncrease={increasePage} onDecrease={decreasePage} />
                 </div>
             </div>
         </>

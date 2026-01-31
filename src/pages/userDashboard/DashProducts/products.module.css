@@ -3,16 +3,16 @@
     @apply bg-[var(--bg-primary)] mx-5 my-5 rounded-3xl min-h-[350px] overflow-scroll
 }
 .container .header{
-    @apply bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] px-5 rounded-t-3xl  flex justify-between h-[60px] items-center text-white
+    @apply bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] px-5 rounded-t-3xl  flex flex-wrap gap-3 justify-between py-3 items-center text-white
 }
 .header .mySelect{
-    @apply shadow-[-0px_1px_5px_1px_rgb(255,255,255)] px-5 py-1 rounded-xl 
+    @apply shadow-[-0px_1px_5px_1px_rgb(255,255,255)] px-5 py-1 rounded-xl w-full sm:w-auto
 }
 .mySelect select{
     @apply  focus:outline-none outline-none bg-transparent w-full text-white
 }
 .header .btnBox{
-    @apply shadow-[-0px_1px_3px_1px_rgb(255,255,255)] hover:shadow-[-0px_1px_10px_3px_rgb(255,255,255)] rounded-lg hover:bg-white hover:text-black transition-all duration-300
+    @apply shadow-[-0px_1px_3px_1px_rgb(255,255,255)] hover:shadow-[-0px_1px_10px_3px_rgb(255,255,255)] w-full text-center sm:w-auto rounded-lg hover:bg-white hover:text-black transition-all duration-300
 }
 .btnBox p{
     @apply inline-flex pb-1 pt-2 px-3
