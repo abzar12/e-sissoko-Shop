@@ -44,7 +44,7 @@ function CustomersLogin() {
                 if (!resp.ok) {
                     throw new Error(`Please, Sign Up failed status: ${resp.status}`);
                 }
-                navigate(-1)
+                navigate("/")
             } catch (error) {
                 console.log(`Sign-up Failed: ${error.message}`)
             } finally {
