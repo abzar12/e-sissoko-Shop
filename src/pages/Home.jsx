@@ -2,24 +2,19 @@ import Navbar from "../component/Navbar"
 import Hero from "../component/hero"
 import Footer from "../component/Footer"
 import filter from '../../FiltersGetting'
-import { FaAward } from "react-icons/fa"
-import { FaLightbulb } from "react-icons/fa"
-import { FaFilter } from "react-icons/fa"
-import { FaRegArrowAltCircleRight } from "react-icons/fa";
-import { FaRegArrowAltCircleLeft } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa"
+import { FaAward, FaLightbulb, FaFilter, FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft, FaPhone, FaHeadphonesAlt } from "react-icons/fa"
 import "../component/style/home.css"
 import { useEffect, useState } from "react"
 import ProductCard from "../component/ProductSection/ProductCard"
 import ProductCardSlide from "../component/ProductSection/ProductCardSlide"
 import Button from "../component/Button/button"
 import Loading from "../component/loading/Loading"
+import useFetchData from "../component/fetchProducts/fetchData"
 import { useLocation } from "react-router-dom"
 function Home() {
-    const location = useLocation()
     console.log("Home rendered ")
 
-    const [is_loading, setloading] = useState(false)
+    // const [is_loading, setloading] = useState(false)
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
     const [products, SetProducts] = useState([]);
     // const for the filters of product
@@ -28,13 +23,33 @@ function Home() {
         price: [],
         color: [],
         page: 1,
-        limit: 50,
+        limit: 15,
         search: ""
     })
-    // authentification
+    const [queryHeadphone, SetqueryHeadphone] = useState({
+        category: ["headphone", "charger"],
+        price: [],
+        color: [],
+        page: 1,
+        limit: 15,
+        search: ""
+    })
+    const [queryPhone, SetqueryPhone] = useState({
+        category: ["iphone"],
+        price: [],
+        color: [],
+        page: 1,
+        limit: 15,
+        search: ""
+    })
+    const { data: globaldata, loading: is_loadingGblobal } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(query)}`)
+    const { data: HeadphoneData, loading: is_loadingHeadphone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(queryHeadphone)}`)
+    const { data: PhoneData, loading: is_loadingPhone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(queryPhone)}`)
 
-    const queryString = new URLSearchParams(query).toString();
-    // funtion to hanldle the product to be save
+    useEffect(() => {
+        SetProducts(globaldata?.products)
+    }, [globaldata, query])
+    // -------------------- globale query function 
     const handleQuery = (e, type) => {
         let valueItem = e.target.value;
         let valueCheck = e.target.checked
@@ -43,37 +58,19 @@ function Home() {
             return { ...prev, [type]: NewValue };
         })
     }
-    const searchFn = (values) =>{
-        const value = values.toLowerCase().trim()
+    const searchFn = (values) => {
+        console.log(values)
+        const value = values?.toLowerCase().trim()
         Setquery((prev) => {
-            return {...prev, search: value}
+            return { ...prev, search: value }
         })
-        console.log(query)
     }
-    // fetching the product on the table
-    // filters data to the server
-    const queryStringFilter = encodeURIComponent(JSON.stringify(query));
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(query)}`);
-                if (!resp.ok) {
-                    throw new Error(`Please Check : ${resp.status}`)
-                }
-                const data = await resp.json();
-                SetProducts(data.response.products);
-                setloading(true)
-            } catch (Err) {
-                console.log("Fetching Data Failed", Err)
-            } finally {
-                setTimeout(() => {
-                    setloading(false)
-                }, 500);
-            }
-        }
-        fetchData();
-    }, [query])
-    // handle filters 
+    const updatePage = () => {
+        Setquery((prev) => {
+            return { ...prev, limit: prev.limit + 15 }
+        })
+    }
+
     const filtersByCategory = filter.Category.map((item, index) => (
         <div className="categories" key={index}>
             <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "category")} id={item.toLowerCase()} value={item.toLowerCase() == "all" ? "" : item.toLowerCase()} /> <label className="text-[15px] font-[lora] hover:text-gray-600 ">{item}</label>
@@ -92,7 +89,7 @@ function Home() {
     return (
         <>
             <header >
-                <Hero onSearch={searchFn}/>
+                <Hero onSearch={searchFn} />
             </header>
             <main className="">
                 <div className={`grid ${filterbutton ? "grid-cols-[1fr,4fr]" : "grid-cols-1fr"}`}>
@@ -127,11 +124,11 @@ function Home() {
                     <section className="section-card h-[100vh] overflow-y-scroll">
                         {/* ac_ItemClass refer in productCart class ac_Items to make it responsible with props */}
                         {
-                            (is_loading === false)
+                            !is_loadingGblobal
                                 ?
                                 // if data no found ---------------------------------------
                                 (
-                                    products.length === 0 ?
+                                    products?.length === 0 ?
                                         <div className="flex flex-col items-center justify-center h-full py-10">
                                             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center shadow-sm">
                                                 <svg
@@ -165,7 +162,7 @@ function Home() {
                                         <div className="">
                                             < ProductCard title="New Arrivals" titleClass="text-white bg-[rgb(234,179,8)]" ac_ItemClass={filterbutton ? 'is_small' : 'is_large'} Products={products} />
                                             <div className="btn-down">
-                                                <Button type="button" onClick={() => set(prev => prev + 10)} children="Download More" />
+                                                <Button type="button" disabled={query?.limit > globaldata?.products?.length} onClick={updatePage} children="Download More" />
                                             </div>
                                         </div>
                                 )
@@ -188,9 +185,20 @@ function Home() {
                     <ProductCardSlide title="Recommended for You" titleClass="bg-[var(--bg-color-primary)] text-white" icon={<FaLightbulb className="text-blue-500 text-4xl mr-3" />} reverse="true" Products={products} />
                 </section>
                 {/* ------------------Phone section -------- */}
-                <section className="section-card min-h[100vh] pb-5">
-                    <ProductCard title="Phone" titleClass="bg-[var(--bg-color-primary)] text-white" Icon={< FaPhone className="text-4xl" />} ac_ItemClass="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 " Products={products} />
-                </section>
+                {
+                    PhoneData?.products.length > 0 &&
+                    <section className="section-card min-h[100vh] pb-5">
+                        <ProductCard title="Phone" titleClass="bg-[var(--bg-color-primary)] text-white" Icon={< FaPhone className="text-4xl" />} ac_ItemClass="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 " Products={PhoneData.products} />
+                    </section>
+                }
+
+                {/* ------------------Charger and e  section -------- */}
+                {
+                    HeadphoneData?.products.length > 0 &&
+                    <section className="section-card min-h[100vh] pb-5">
+                        <ProductCard title="Headphones- Chargers" titleClass="bg-[var(--bg-color-primary)] text-white" Icon={< FaHeadphonesAlt className="text-4xl" />} ac_ItemClass="sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 " Products={HeadphoneData?.products} />
+                    </section>
+                }
             </main >
             <footer>
                 <Footer />

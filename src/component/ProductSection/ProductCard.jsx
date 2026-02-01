@@ -10,7 +10,7 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                 <h1 className={`title ${titleClass}`}> {Icon} {title}</h1>
                 <div className={`ac_Items ${ac_ItemClass}`}>
                     {
-                        Products.map((prod, index) => (
+                        Products?.map((prod, index) => (
                             <div key={index} className="items">
                                 <div className="card-image">
                                     {

@@ -21,14 +21,20 @@ function ProductCardSlide({ title, Products, reverse, icon,titleClass }) {
                     320: { slidesPerView: 1, spaceBetween: 10, }, 640: { slidesPerView: 2, spaceBetween: 15, }, 768: { slidesPerView: 3, spaceBetween: 20, }, 1024: {   slidesPerView: 4,   spaceBetween: 25, }, 1280: {   slidesPerView: 6,   spaceBetween: 30, },
                 }} autoplay={{ delay: 2000, reverseDirection: `${reverse}` }} modules={[Autoplay, Pagination, Navigation]} className="ac_Items p-5">
                     {
-                        Products.map((prod, index) => (
+                        Products?.map((prod, index) => (
                             <SwiperSlide key={index} className="items">
                                 <div className="card-image slide">
                                     {
                                         prod.Image_Name
                                             ?
-                                            <Link to={`/product/product-detail?${prod.slug}`}>
-                                                <img src={`http://localhost:7000/public/upload/Product_img/${prod.Image_Name}`} alt={prod.Image} />
+                                            <Link to={`/shop/product-detail?Id=${prod.Slug}`}>
+                                                {(() => {
+                                                    const image = JSON.parse(prod.Image_Name);
+                                                    return (
+                                                        <img src={`http://localhost:7000/public/upload/Product_img/${image[0]}`} alt={prod.Image} />
+                                                    )
+                                                }
+                                            )()}
                                             </Link>
                                             :
                                             <div className="Image_Erro w-full h-full flex items-center justify-center bg-gray-100">
@@ -52,7 +58,7 @@ function ProductCardSlide({ title, Products, reverse, icon,titleClass }) {
 
                                 </div>
                                 <div className="card_btn">
-                                    <Link to={`/shop/product-detail?Id=${prod.Id_phone}`} >
+                                    <Link to={`/shop/product-detail?Id=${prod.Slug}`} >
                                         <Button type="button" children= "Add to Cart" />
                                     </Link>
                                 </div>

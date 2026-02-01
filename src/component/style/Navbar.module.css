@@ -77,15 +77,15 @@
 }
 
 .loginContent {
-    @apply absolute bg-gray-400 w-[170px] -left-12 pt-5 pb-2 px-3 rounded-[5px] z-50 text-left mt-3 opacity-0 pointer-events-none overflow-hidden transition-all duration-200 ease-linear
+    @apply absolute bg-[var(--bg-color-primary)] w-[170px] -left-12 pt-5 pb-2 px-3 rounded-[5px] z-30 text-left mt-3 opacity-0 invisible overflow-hidden transition-all duration-200 ease-linear
 }
 
 .loginContent.expand {
-    @apply h-auto opacity-100 pointer-events-auto
+    @apply h-auto opacity-100 visible
 }
 
 .loginContent .text {
-    @apply mb-3 py-1 rounded-sm pl-3 transition-all duration-300 ease-in font-[Poppins]
+    @apply mb-3 py-1 rounded-sm pl-3 transition-all duration-300 ease-in font-[Poppins] z-50
 }
 
 .loginContent .text:hover {
