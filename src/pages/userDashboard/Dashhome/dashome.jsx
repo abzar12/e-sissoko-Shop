@@ -22,6 +22,7 @@ function DashHome() {
     const CharBarYearOption = CharBarYearOptionFn(YearsOrdersSales.orders)
     const CharPieOption = ChartPieOptionFn()
     //  Total Amount of week
+    console.log(DailyOrdersData)
     const Amount_Orders = useMemo(() => {
         if (!DailyOrdersData?.Orders) return 0
         const Amount = DailyOrdersData.Orders.reduce((acc, currentSum) => {
@@ -31,9 +32,11 @@ function DashHome() {
     }, [DailyOrdersData])
     //  Daily Amount
     const Daily_Amount = useMemo(() => {
-        let today = new Date().getDate()
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let today = days[new Date().getDay() ];
+        console.log(today)
         return DailyOrdersData.Orders
-            ?.filter((item) => item.date === today)
+            ?.filter((item) => item.day === today)
             .reduce((acc, item) => {
                 return acc + Number(item.Total_Amount)
             }, 0)
@@ -110,7 +113,7 @@ function DashHome() {
                     </div>
                     <div className={style.Curve}>
                         {
-                            YearsOrdersSales?.orders?.length == 0  ?
+                            YearsOrdersSales?.orders?.length == 0 ?
                                 <p className={style.p}>No Sales In this Year</p>
                                 :
                                 <Chart options={CharBarYearOption.option} series={CharBarYearOption.series} type="line" height="100%" />

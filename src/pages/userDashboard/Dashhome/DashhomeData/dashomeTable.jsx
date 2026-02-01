@@ -4,18 +4,20 @@ import useDashboardFetch from "../../../../component/Context/DashboardContext/da
 import style from "../dashome.module.css"
 import { useState } from "react";
 import { FaTrash, FaEye, FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function RecentOrderedTable() {
+    const navigate = useNavigate()
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
     const [query, setQuery] = useState({
-        page:1,
+        page: 1,
         limit: 50,
         status: "",
-        category: ""
+        category: "",
+        search: ""
     })
-    // let [page, setPage] = useState(1)
-    // let [limit, setLimit] = useState(15)
+
     const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?query=${JSON.stringify(query)}`)
     const column = [
         columnHelper.accessor("ID", {
@@ -42,7 +44,7 @@ function RecentOrderedTable() {
                 return (<span className=" whitespace-nowrap ">{spliteDate[0]}</span>)
             }
         }),
-        columnHelper.accessor("Payment", {
+        columnHelper.accessor("Payment_Status", {
             header: "Payment"
         }),
         columnHelper.accessor("Amount", {
@@ -69,10 +71,19 @@ function RecentOrderedTable() {
         }),
         columnHelper.accessor("action", {
             header: "Action",
-            cell: (<div className="flex justify-between">
-                <FaEye className=" cursor-pointer hover:text-gray-400 transition duration-300" onClick={() => console.log("view")} />
-                <FaTrash className="text-red-500 cursor-pointer hover:text-red-800 transition duration-300 " onClick={() => console.log("view")} />
-            </div>)
+            cell: ({ row }) => {
+                const value = row.original
+                return (
+                    <div className="flex justify-between">
+                        <FaEye className=" cursor-pointer hover:text-gray-400 transition duration-300" onClick={() => navigate(`/e-dashboard/view-orders?Id=${value.ID}`)} />
+                     {
+                        value.Status !== "delevered" || value.Payment_Status !== "paid" &&
+                         <FaTrash className="text-red-500 cursor-pointer hover:text-red-800 transition duration-300 " onClick={() => onUpdateStatus({ value: "cancelled", id: value.ID })} />
+                     }  
+                    </div>
+                )
+
+            }
         }),
     ]
 
@@ -86,7 +97,7 @@ function RecentOrderedTable() {
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
     });
-     const decreasePage = () => {
+    const decreasePage = () => {
         setQuery((prev) => {
             if (prev.page > 0) {
                 return { ...prev, page: prev.page - 1 }
@@ -98,11 +109,19 @@ function RecentOrderedTable() {
             return { ...prev, page: prev.page + 1 }
         })
     }
+    const searchFn = (value) => {
+        setQuery((prev) => {
+            return { ...prev, search: value.toLowerCase() }
+        })
+    }
     return (
         <>
             <div className={style.OrderContainer}>
                 <div className={style.OrderHeader}>
                     <h1 className={style.OrderTitle}>Recent Orders</h1>
+                    <div className={style.searchBox}>
+                        <input type="text" className={style.search} onChange={(e) => searchFn(e.target.value)} placeholder="Search by Order ID, Email...  " />
+                    </div>
                     <div className={style.FilterBox}>
                         <select className={style.filter}
                             value={table.getColumn("Status").getFilterValue() ?? ""}
