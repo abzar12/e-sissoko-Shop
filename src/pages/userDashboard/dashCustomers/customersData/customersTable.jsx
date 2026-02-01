@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import style from "../customers.module.css"
 import { useReactTable, createColumnHelper, getCoreRowModel, getFilteredRowModel, flexRender } from "@tanstack/react-table"
-import { FaTrash, FaArrowAltCircleLeft, FaArrowAltCircleRight, FaEye } from "react-icons/fa"
+import { FaTrash, FaArrowAltCircleLeft, FaArrowAltCircleRight, FaEye, FaCheckCircle, FaTimesCircle } from "react-icons/fa"
 function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
     // const [page, SetPage] =useState(1)
     const [columnFilters, SetColumnFilter] = useState([])
@@ -15,7 +15,7 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 let id = getValue()
                 return (
                     <>
-                        <p className="line-clamp-1 ">{id}</p>
+                        <p className="min-w-[150px]">{id}</p>
                     </>
                 )
             }
@@ -32,48 +32,34 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
         columnHelper.accessor("Email", {
             header: "Email"
         }),
+        columnHelper.accessor("Amount", {
+            header: "Amount"
+        }),
+        columnHelper.accessor("Quantity", {
+            header: "Quantity",
+        }),
+        columnHelper.accessor("Status", {
+            header: "Status",
+            cell: ({ getValue }) => {
+                const value = getValue()
+                return (
+                    <>
+                        {value === "paid" && <p className="bg-green-50 px-3 py-1 rounded-[50px] text-green-700 border-green-200 flex gap-1 items-center">
+                            <FaCheckCircle className="text-green-600" />{value}
+                        </p>}
+                        {value === "unpaid" && <p className="bg-red-50 px-3 py-1 rounded-[50px] text-red-700 border-red-200 flex gap-1 items-center">
+                            <FaTimesCircle className="text-red-600" />{value}
+                        </p>}
+                    </>
+                )
+            }
+        }),
         columnHelper.accessor("Area", {
             header: "Area"
         }),
         columnHelper.accessor("City", {
             header: "City"
         }),
-        columnHelper.accessor("Amount", {
-            header: "Amount"
-        }),
-        columnHelper.accessor("Quantity", {
-            header: "Quantity",
-            // cell: ({ getValue }) => {
-            //     const value = getValue()
-            //     let ClassMap
-            //     if (value > 5) {
-            //         ClassMap = "bg-green-500 p-2 rounded-[50%] text-white"
-            //     }
-            //     if (value < 5) {
-            //         ClassMap = "bg-yellow-500 p-2 rounded-[50%] text-white"
-            //     }
-            //     if (value === 0) {
-            //         ClassMap = "bg-red-500 p-2 rounded-[50%] text-white"
-            //     }
-            //     return (
-            //         <span className={ClassMap}>
-            //             {value}
-            //         </span>
-            //     )
-            // }
-        }),
-        // columnHelper.accessor("Color", {
-        //     header: "Color"
-        // }),
-        // columnHelper.accessor("Shipping", {
-        //     header: "Shipping"
-        // }),
-        // columnHelper.accessor("Delevery", {
-        //     header: "Delevery"
-        // }),
-        // columnHelper.accessor("Warranty", {
-        //     header: "Warranty"
-        // }),
 
         columnHelper.accessor("Created_at", {
             header: "Date",

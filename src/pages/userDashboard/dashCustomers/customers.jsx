@@ -1,16 +1,16 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import useDashboardFetch from "../../../component/Context/DashboardContext/dashboardFetch"
 import style from "./customers.module.css"
 import CustomersTable from "./customersData/customersTable"
 function DashCustomers() {
     const [query, setQuery] = useState({
-        quantity_status: "",
-        category: "",
+        status: "all",
         page: 1,
-        limit: 50
+        limit: 50,
+        search: ""
     })
+    const [isactive, setIsactive] = useState(query.status)
     const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/customers/getAllCustomers/?query=${JSON.stringify(query)}`)
-    console.log(data)
     const decreasePage = () => {
         setQuery((prev) => {
             if (prev.page > 0) {
@@ -23,13 +23,39 @@ function DashCustomers() {
             return { ...prev, page: prev.page + 1 }
         })
     }
+    const searchFn = (value) => {
+        setQuery((prev) => {
+            return { ...prev, search: value.toLowerCase() }
+        })
+    }
+    const FiltterFn = (value) => {
+        setIsactive(value)
+        setQuery((prev) => {
+            return { ...prev, status: value }
+        })
+
+    }
+    // console.log(data)
     return (
         <>
             <div className={style.container}>
                 <div className={style.header}>
-                    <h1>Customers</h1>
-                    <div className={style.counter}>
-                        <p className={style.p}>Count {data?.customers?.length || 0}</p>
+                    <h1>Customers <span className={style.p}>{data?.customers?.length || 0}</span></h1>
+                    <div className={style.searchBox}>
+                        <input type="text" className={style.search} onChange={(e) => searchFn(e.target.value)} placeholder="Search by email, name, ID " />
+                    </div>
+                    <div className={style.filterBtnBox}>
+                        <div className={style.filterButtons}>
+                            {["all", "paid", "unpaid"].map((filter) => (
+                                <button
+                                    key={filter}
+                                    onClick={() => FiltterFn(filter)}
+                                    className={`${style.filterButton} ${isactive === filter ? style.active : null}`}
+                                >
+                                    {filter}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div className={style.tableContainer}>
