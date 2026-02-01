@@ -49,16 +49,21 @@
    @apply bg-white rounded-2xl  mx-5 pb-5 mt-5 mb-10 h-[400px] overflow-hidden overflow-y-scroll 
 }
 .OrderContainer .OrderHeader{
-   @apply flex justify-between mb-5 bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] py-3 px-3  sticky top-0 
+   @apply flex flex-wrap gap-3 justify-between mb-5 bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] py-3 px-3   sticky top-0 
+}
+/* search --------- */
+.searchBox{
+    @apply shadow-[-0px_0px_5px_1px_rgb(255,255,255)]  min-w-[150px] w-[350px] py-1  rounded-lg px-3
+}
+.searchBox .search{
+    @apply w-full bg-transparent focus:outline-none  text-white
 }
 .OrderContainer .OrderTitle{
    @apply  text-[1.1rem]  text-white
 }
-.tableContainer{
-   @apply overflow-scroll px-3
-}
+/* Table header ----------- */
  .OrderTable{
-    @apply  mx-auto px-3 
+    @apply  mx-auto px-3  
  }
 .OrderTable .titleBox{
     @apply border-y-2 py-3 bg-gray-200 
@@ -67,11 +72,15 @@
     @apply  py-3 px-3 text-start 
  }
  .OrderHeader .FilterBox{
-   @apply border border-white px-5 py-1 rounded-xl 
+   @apply border border-white px-5 py-1 rounded-xl w-full sm:w-auto
  }
  .OrderHeader .FilterBox .filter{
    @apply focus:outline-none outline-none bg-transparent w-full text-white
  }
+ /* table container --------- */
+.tableContainer{
+   @apply overflow-scroll px-3
+}
  .OrderTable .Row{
     @apply border-b-2 
  }

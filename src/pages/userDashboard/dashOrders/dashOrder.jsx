@@ -9,13 +9,20 @@ function Orders() {
         page: 1,
         limit: 15,
         status: "",
-        category: ""
+        category: "",
+        search: ""
     })
     const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?query=${JSON.stringify(query)}`)
     const StatusFn = (status) => {
         setQuery((prev) => {
             return { ...prev, status: status }
         })
+    }
+    const searchFn = (value) => {
+        setQuery((prev) => {
+            return { ...prev, search: value.toLowerCase() }
+        })
+        console.log(value)
     }
     const CategoryFn = (category) => {
         setQuery((prev) => {
@@ -35,8 +42,6 @@ function Orders() {
         })
     }
     const updateStatusFn = async ({ value, id }) => {
-        console.log("starting")
-        // const submit = async () => {
         try {
             const resp = await fetch(`${import.meta.env.VITE_API_URL}/orders/updateStatus`, {
                 method: "PUT",
@@ -62,9 +67,9 @@ function Orders() {
         <>
             <div className={style.container}>
                 <div className={style.header}>
-                    <h1> Orders </h1>
-                    <div className={style.counter}>
-                        <p className={style.p}>Count {data?.orders?.length || 0}</p>
+                    <h1> Orders <span>{data?.orders?.length || 0}</span></h1>
+                    <div className={style.searchBox}>
+                        <input type="text" className={style.search} onChange={(e) => searchFn(e.target.value)} placeholder="Search by Email, Order ID" />
                     </div>
                     <div className={style.mySelect}>
                         <select onChange={(e) => StatusFn(e.target.value)}>
@@ -86,11 +91,6 @@ function Orders() {
                             <option value="airpod">Airpod</option>
                         </select>
                     </div>
-                    {/* <div className={style.btnBox}>
-                        <Link to={`/e-dashboard/add-product`} >
-                            <p><MdAddShoppingCart /> <span>Add New </span> </p>
-                        </Link>
-                    </div> */}
                 </div>
                 <div className={style.tableContainer}>
                     <OrdersTable data={data} limit={data.limitPage} offset={data.offset} page={query?.page} onDecrease={decreasePage} onIncrease={increasePage} onUpdateStatus={updateStatusFn} />

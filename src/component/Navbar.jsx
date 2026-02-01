@@ -14,6 +14,7 @@ export default function Navbar({onSearch}) {
     const navigate = useNavigate()
     const [showLogin, setShowLogin] = useState(false)
     const [smallScreen ,setSmallScreen] = useState(false)
+    const [searchValue, setSearchValue] = useState("")
     const buttonRef = useRef(null)
     const { cart } = useContext(Cartcontext)
     const { user } = useAuth()
@@ -34,6 +35,9 @@ export default function Navbar({onSearch}) {
     const handleExpandIn = () => {
         setShowLogin(prev => !prev)
     }
+    const onInputValue = (e) => {
+        setSearchValue(e.target.value)
+    }
 
     return (
         <>
@@ -42,8 +46,8 @@ export default function Navbar({onSearch}) {
                     <label >LOGO</label>
                 </div>
                 <div className={style.ac_search}>
-                    <input onChange={(e) => onSearch(e.target.value)} type="text" placeholder="Search by name, category, model" id="search-items" className={`outlinenone  bg-transparent`} />
-                    <div className={style.search_icon}>
+                    <input type="text" onChange={(e) => onInputValue(e)} placeholder="Search by name, category, model" id="search-items" className={`outlinenone  bg-transparent`} />
+                    <div  onClick={() => onSearch(searchValue)} className={style.search_icon}>
                         <FaSearch />
                     </div>
                 </div>
@@ -85,10 +89,10 @@ export default function Navbar({onSearch}) {
                         <div className={`${style.loginContent} ${showLogin && user ? style.expand : null}`}>
                             <ul className={style.list}>
                                 <li className={style.text}>
-                                    <Link>My Account</Link>
+                                    <Link >My Account</Link>
                                 </li>
                                 <li className={style.text}>
-                                    <Link>Orders</Link>
+                                    <Link to="/customer/orders">Orders</Link>
                                 </li>
                                 <li className={style.text}>
                                     <Link>Logout</Link>

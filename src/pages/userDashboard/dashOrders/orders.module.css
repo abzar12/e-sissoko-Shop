@@ -1,12 +1,22 @@
 
+/* container  */
 .container{
     @apply bg-[var(--bg-primary)] mx-5 my-5 rounded-3xl min-h-[350px] overflow-scroll
 }
 .container .header{
-    @apply bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] px-5 rounded-t-3xl  flex justify-between h-[60px] items-center text-white
+    @apply bg-gradient-to-r from-[rgb(124,58,237)] to-[rgb(192,38,211)] px-5 rounded-t-3xl  flex justify-between py-3 flex-wrap gap-y-3 items-center text-white
 }
+/* filter -------- */
+.searchBox{
+    @apply shadow-[-0px_0px_5px_1px_rgb(255,255,255)]  min-w-[150px] w-[350px] py-1  rounded-lg px-3
+}
+.searchBox .search{
+    @apply w-full bg-transparent focus:outline-none  text-white
+}
+/* Select -------- */
+
 .header .mySelect{
-    @apply shadow-[-0px_1px_5px_1px_rgb(255,255,255)] px-5 py-1 rounded-xl 
+    @apply shadow-[-0px_1px_5px_1px_rgb(255,255,255)] px-5 py-1 rounded-xl w-full sm:w-auto
 }
 .mySelect select{
     @apply  focus:outline-none outline-none bg-transparent w-full text-white

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import style from "../orders.module.css"
 import { useReactTable, createColumnHelper, getCoreRowModel, getFilteredRowModel, flexRender } from "@tanstack/react-table"
 import { FaEye, FaTrash, FaArrowAltCircleLeft, FaArrowAltCircleRight, FaCheck, FaShippingFast } from "react-icons/fa"
@@ -10,10 +10,10 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
     // const [page, SetPage] =useState(1)
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
-    // const [show, setShow] = useState(false)
+    const navigate = useNavigate()
     const column = [
         columnHelper.accessor("ID", {
-            header: "Order_ID"
+            header: "Order ID"
         }),
         columnHelper.accessor("Email", {
             header: "Email"
@@ -36,7 +36,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
                 return (<span className=" whitespace-nowrap ">{spliteDate[0]}</span>)
             }
         }),
-        columnHelper.accessor("Payment", {
+        columnHelper.accessor("Payment_Status", {
             header: "Payment"
         }),
         columnHelper.accessor("Amount", {
@@ -69,7 +69,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
                     <div className="flex justify-between gap-3">
                         {value.Status.toLowerCase() === "pending" && <FaCheck className={`${value.Status.toLowerCase() !== "pending" ? "text-green-500 cursor-not-allowed pointer-events-none " : "cursor-pointer"}  hover:text-gray-400 transition duration-300`}
                             onClick={() => onUpdateStatus({ value: "confirmed", id: value.ID })}
-                            disabled={value.Status.toLowerCase() === "comfirmed"} />}
+                            disabled={value.Status.toLowerCase() === "confirmed"} />}
 
                         {value.Status.toLowerCase() !== "pending" && value.Status.toLowerCase() !== "cancelled" && <FaShippingFast className={`${value.Status.toLowerCase() === "delivered" ? "text-green-500 cursor-not-allowed pointer-events-none" : "cursor-pointer"} hover:text-gray-400 transition duration-300`}
                             onClick={() => onUpdateStatus({ value: "delivered", id: value.ID })}
@@ -81,7 +81,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
                         }
 
                         <FaEye className={` cursor-pointer hover:text-gray-400 transition duration-300`}
-                            onClick={() => console.log("view")} />
+                            onClick={() => navigate(`/e-dashboard/view-orders?Id=${value.ID}`)} />
 
                         {
                             value.Payment_Status.toLowerCase() === "unpaid" &&
