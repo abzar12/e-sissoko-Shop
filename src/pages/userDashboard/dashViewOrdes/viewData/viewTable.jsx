@@ -54,10 +54,13 @@ function ViewTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 return (
                     <>
                         {value.Payment_Status === "paid" && <p className="bg-green-50 px-3 py-1 rounded-[50px] text-green-700 border-green-200 flex gap-1 items-center">
-                            <FaCheckCircle className="text-green-600" />{value.Payment_Status}
+                            <FaCheckCircle className="text-green-600" />{value.Payment_Status }
                         </p>}
-                        {value.Status === "unpaid" && <p className="bg-red-50 px-3 py-1 rounded-[50px] text-red-700 border-red-200 flex gap-1 items-center">
+                        {value.Status === "cancelled" && <p className="bg-red-50 px-3 py-1 rounded-[50px] text-red-700 border-red-200 flex gap-1 items-center">
                             <FaTimesCircle className="text-red-600" />{value.Status}
+                        </p>}
+                        {(value.Status === "confirmed" || value.Status === "delevered") && <p className="bg-blue-50 px-3 py-1 rounded-[50px] text-green-600 border-red-200 flex gap-1 items-center">
+                            <FaCheckCircle className="text-green-600" />{value.Status}
                         </p>}
                     </>
                 )

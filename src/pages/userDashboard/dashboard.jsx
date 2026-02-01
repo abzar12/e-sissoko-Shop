@@ -4,7 +4,6 @@ import { useAuth } from "../../component/Context/authContext/authContext";
 import Aside from "../../component/dashboard/Aside";
 import style from "../../component/style/dashboard/dashboard.module.css"
 import Content from "../../component/dashboard/content";
-import useDashboardFetch from "../../component/Context/DashboardContext/dashboardFetch";
 function Dashboard() {
     const { user } = useAuth()
     const [isopen, setIsopen] = useState(true)
