@@ -7,6 +7,7 @@ import CheckOut from "./pages/checkOut/checkOut"
 import CustomersLogin from "./pages/logPage/customerLogin"
 import CustomersSignUp from "./pages/logPage/customerSignUp"
 import CustomerOrders from "./pages/customerOrder/customerOrders"
+import CustomerProfile from "./pages/customerProfile/profile"
 import PaymentPopup from "./component/PopUp/paymentValidation"
 import OrdersItems from "./pages/customerOrder/ordersItems"
 import Test from "./pages/test"
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="/customer/orders" element={<OrdersItems />} />
             <Route path="/orders/view" element={<ItemsView />} />
           </Route>
+            <Route path="/customer/profile" element={<CustomerProfile/>} />
         </Route>
         {/* login and logout */}
         <Route path="/login-me" element={<CustomersLogin />} />

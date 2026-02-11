@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { FaSearch } from "react-icons/fa"
 import { FaRegHeart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
@@ -10,14 +10,15 @@ import style from "./style/Navbar.module.css"
 import { useContext, useState } from "react";
 import { Cartcontext } from "./Context/cartContext/cartContext";
 import { useAuth } from "./Context/authContext/authContext";
-export default function Navbar({onSearch}) {
+export default function Navbar({ onSearch }) {
     const navigate = useNavigate()
+    const [successMessage, setSuccessMessage] = useState(null)
     const [showLogin, setShowLogin] = useState(false)
-    const [smallScreen ,setSmallScreen] = useState(false)
+    const [smallScreen, setSmallScreen] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const buttonRef = useRef(null)
     const { cart } = useContext(Cartcontext)
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
     const cartCount = cart.length || [];
     useEffect(() => {
         const handleExpandout = (e) => {
@@ -38,7 +39,6 @@ export default function Navbar({onSearch}) {
     const onInputValue = (e) => {
         setSearchValue(e.target.value)
     }
-
     return (
         <>
             <div className={style.ac_navbar} >
@@ -47,15 +47,15 @@ export default function Navbar({onSearch}) {
                 </div>
                 <div className={style.ac_search}>
                     <input type="text" onChange={(e) => onInputValue(e)} placeholder="Search by name, category, model" id="search-items" className={`outlinenone  bg-transparent`} />
-                    <div  onClick={() => onSearch(searchValue)} className={style.search_icon}>
+                    <div onClick={() => onSearch(searchValue)} className={style.search_icon}>
                         <FaSearch />
                     </div>
                 </div>
                 {/* small screen phone */}
                 <div className={`${style.ac_search_phone} ${smallScreen ? style.active : null}`}>
                     <input onChange={(e) => onSearch(e.target.value)} type="text" placeholder="Search products, categories, brands" id="search-items" className={`outlinenone  bg-transparent`} />
-                    <div className={style.search_icon_phone }>
-                        <FaSearch  onClick={() => setSmallScreen(prev => !prev)}/>
+                    <div className={style.search_icon_phone}>
+                        <FaSearch onClick={() => setSmallScreen(prev => !prev)} />
                     </div>
                 </div>
                 <div className={style.btnBox} >
@@ -89,13 +89,13 @@ export default function Navbar({onSearch}) {
                         <div className={`${style.loginContent} ${showLogin && user ? style.expand : null}`}>
                             <ul className={style.list}>
                                 <li className={style.text}>
-                                    <Link >My Account</Link>
+                                    <Link to="/customer/profile">My Account</Link>
                                 </li>
                                 <li className={style.text}>
                                     <Link to="/customer/orders">Orders</Link>
                                 </li>
                                 <li className={style.text}>
-                                    <Link>Logout</Link>
+                                    <button type="button" onClick={() => logout()}>Logout</button>
                                 </li>
                             </ul>
                         </div>
