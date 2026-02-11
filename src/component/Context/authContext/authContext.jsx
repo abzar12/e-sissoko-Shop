@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
+    const navigate = useNavigate()
     const [accessToken, setAccessToken] = useState()
     const [user, setUser] = useState(null)
     const [isloading, setIsloading] = useState(true)
@@ -11,10 +12,23 @@ export const AuthProvider = ({ children }) => {
         setAccessToken(newtoken)
         setUser(userData)
     }
-    const logout = () => {
-        setAccessToken(null);
-        setUser(null);
-        fetch('/auth/logout', { credential: true })
+    const logout = async () => {
+        try {
+            const resp = await fetch(`${import.meta.env.VITE_API_URL}/customers/logout`, {
+                method: "POST",
+                credentials: "include", // 👈 important
+            });
+            const data = await resp.json()
+            if (!resp.ok || !data.success) {
+                throw new Error("Failed to Logout");
+            }
+            // setSuccessMessage(data.message)
+            setAccessToken(null);
+            setUser(null);
+            logout()
+        } catch (error) {
+            throw new Error(`${error.message}`)
+        }
     }
     useEffect(() => {
         const IniatialRefresh = async () => {
@@ -24,16 +38,18 @@ export const AuthProvider = ({ children }) => {
                     method: "POST",
                     credentials: "include",
                 })
-                if (!resp.ok){
-                    console.log("Unauthorize request")
+                if (!resp.ok) {
+                    // console.log("Unauthorize request")
                     throw new Error("Unauthorize request");
-                } 
+                }
                 const data = await resp.json()
                 setAccessToken(data.token)
                 setUser(data.user)
-                console.log("InitialAUth:", data)
+                // console.log("InitialAUth:", data)
             } catch (error) {
-                logout()
+                // logout()
+                 setAccessToken(data.token)
+                setUser(data.user)
                 throw new Error(`Unauthorize request: : ${error}`);
             } finally {
                 setIsloading(false)
