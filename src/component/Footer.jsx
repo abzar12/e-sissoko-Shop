@@ -53,7 +53,7 @@ export default function Footer() {
                                 <h1 className="text-[1.3rem] text-yellow-600 uppercase ">New on E-Sissoko ?</h1>
                                 <p className="text-[.8rem]">Join the E-Sissoko newsletter and never miss our latest deals</p>
                             </div>
-                            <form onSubmit={handleSubmit(onSubmit)} className="flex items-center justify-center">
+                            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap gap-y-2 items-center justify-center">
                                 <div className="relative">
                                     <MdMarkEmailRead className=" text-3xl absolute top-1 text-[var(--bg-color)] left-1" />
                                     <input type="email" name="message" {...register("message", { required: true })} className="outline-none py-1 rounded-lg text-black pl-10 pr-3 text-[1rem]" />
