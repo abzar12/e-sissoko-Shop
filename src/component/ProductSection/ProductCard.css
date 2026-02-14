@@ -1,24 +1,63 @@
 .section-card {
-    @apply bg-[var(--bg-primary)] m-3 rounded-lg ;
+    @apply bg-[var(--bg-primary)] m-3 rounded-lg;
 }
-.container-slide{
-    @apply bg-[var(--bg-primary)] rounded-lg mx-3 ;
+
+.container-slide {
+    @apply bg-[var(--bg-primary)] rounded-lg mx-3;
 }
-.container-slide .title{
+
+.container-slide .title {
     @apply text-center py-1 rounded-t-lg w-[100%] text-xl font-[Lora] flex justify-center items-center;
 }
-.section-card .title{
+
+.section-card .title {
     @apply flex justify-center items-center gap-2 text-center py-1 rounded-t-lg w-[100%] tracking-[2px] text-xl font-[Lora];
 }
+
 .ac_Items {
-    @apply sm:grid flex flex-wrap mx-2 justify-around items-center gap-y-3  gap-x-2 my-7 sm:mx-3
+    @apply sm:grid mx-2 justify-around items-center gap-y-3 gap-x-2 my-7 sm:mx-3
 }
+
 .ac_Items .items {
-    @apply shadow-[0px_1px_7px_1px_var(--bg-secondary)] rounded-xl pt-2 overflow-hidden max-w-[200px] min-w-[170px] ;
+    @apply shadow-[0px_1px_7px_1px_var(--bg-secondary)] rounded-xl pt-2 overflow-hidden max-w-[200px] min-w-[110px];
 }
-.ac_Items .items .card-image.slide{
+
+@media (min-width:288px) and (max-width:470px){
+    .ac_Items  {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-size: 0.8rem;
+    }
+}
+@media (min-width:471px) and (max-width: 640px){
+    .ac_Items  {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        font-size: 1rem;
+    }
+}
+
+/* @media (min-width:330px){
+    .ac_Items .items {
+        width: 150px;
+    }
+} */
+
+/* @media (min-width:300px){
+    .ac_Items .items{
+        width: 180px;
+    }
+} */
+@media (min-width:499px) {
+    .ac_Items {
+        display: grid;
+    }
+}
+
+.ac_Items .items .card-image.slide {
     @apply h-[100px]
 }
+
 .ac_Items .items .card-image {
     @apply h-[120px] overflow-hidden;
 }
@@ -28,11 +67,11 @@
 }
 
 .ac_Items .items .ac_textItem {
-    @apply  p-2 relative;
+    @apply p-2 relative;
 }
 
 .ac_textItem .Prod-title {
-    @apply text-[var(--text-size)] line-clamp-1 ;
+    @apply text-[var(--text-size)] line-clamp-1;
     font-family: var(--font-family);
 }
 
@@ -51,13 +90,16 @@
 .ac_textItem .price .special {
     @apply font-normal text-[1rem] line-through ml-[50px];
 }
+
 /* ------------------Promotion design---------- */
-.ac_textItem .PromoContent{
-    @apply absolute right-[-5px] bg-[var(--text-color-promot)] rounded-l-[5px] top-14 overflow-hidden ;
+.ac_textItem .PromoContent {
+    @apply absolute right-[-5px] bg-[var(--text-color-promot)] rounded-l-[5px] top-14 overflow-hidden;
 }
-.ac_textItem .PromoContent h1{
-    @apply  text-white px-2 py-1 text-[12px] text-[Lora] ;
+
+.ac_textItem .PromoContent h1 {
+    @apply text-white px-2 py-1 text-[12px] text-[Lora];
 }
+
 .ac_Items .card_btn {
     @apply text-center mb-2 mx-3
 }
