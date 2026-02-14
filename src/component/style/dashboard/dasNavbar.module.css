@@ -3,11 +3,11 @@
 }
 
 .shortNavbar {
-    @apply  h-[60px] bg-[var(--bg-primary)] text-[var(--bg-color)] px-5 flex justify-between items-center
+    @apply  h-[60px] bg-[var(--bg-primary)] text-[var(--bg-color)] px-3 flex justify-between items-center
 }
 
 .shortNavbar .link {
-    @apply hover:text-[var(--text-color)] transition duration-300 ease-in ml-3
+    @apply hover:text-[var(--text-hover-color)] transition duration-300 ease-in ml-3
 }
 
 .content {
@@ -35,20 +35,34 @@
 }
 
 .ac_btn_Box {
-    @apply text-2xl relative
+    @apply relative
 }
 
 .ac_iconBell {
-    @apply my-2 ml-3 hover:text-[var(--text-color)] transition duration-300 ease-in
-}
-
-.ac_icon {
-    @apply text-2xl
+    @apply my-2 ml-3 hover:text-[var(--text-hover-color)] transition duration-300 ease-in text-[25px] mb-[-2px]
 }
 
 .ac_btn_Box .notification {
     @apply absolute top-[-7px] text-[18px]  right-0 content-center text-red-500
 }
 .UserName{
-    @apply text-[1rem] mx-2 border hover:bg-[var(--bg-color)] text-[var(--bg-color-primary)] p-1 rounded-lg transition-all duration-300 ease-in cursor-default
+    @apply  text-center relative 
+}
+ .icon{
+    @apply text-[25px] mx-2 hover:text-[var(--text-hover-color)] hover:cursor-pointer
+}
+.userInfoBox{
+    @apply absolute right-[0] top-10 border bg-[var(--bg-color-primary)] text-white pb-3 z-50 rounded-lg text-[0.9rem] sm:text-[1rem] scale-50 overflow-hidden opacity-0 h-0 pointer-events-none transition-all duration-700 ease-in-out
+}
+.userInfoBox.active{
+    @apply opacity-100 scale-100 pointer-events-auto h-[175px] ;
+}
+.userInfoBox .header{
+    @apply w-full opacity-50 mb-3 border-b-2 my-2
+}
+.userInfoBox .content{
+    @apply text-[0.9rem] sm:text-[1rem] grid grid-cols-1  w-[150px] sm:w-[170px]
+}
+.userInfoBox .content .text{
+    @apply flex gap-3  w-full  justify-start items-center hover:cursor-pointer hover:bg-[var(--bg-color)] pl-2 py-1 
 }
