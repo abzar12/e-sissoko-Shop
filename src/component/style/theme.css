@@ -3,27 +3,37 @@
 :root {
   --bg-color-primary: rgb(30, 41, 59);
   --bg-color: rgb(100, 116, 139);
-  --text-color: #000000;
-  --text-hover-color: rgb(30, 41, 59);
-  --text-size: 1rem;
   --bg-primary: rgb(255, 255, 255);
   --bg-secondary: rgb(226, 232, 240);
   --font-family: 'Merriweather', sans-serif;
   --btn-color: rgb(71, 85, 105);
+  --card-shadow: rgb(255, 255, 255);
+  --text-color: #000000;
+  --text-hover-color: rgb(30, 41, 59);
+  --text-color-secondary: rgb(255, 255, 255);
+  --text-size: 1rem;
   --text-color-promot: rgb(101, 163, 13);
 }
 
 /* dark theme */
 [data-theme="dark"] {
- --bg-color-primary: rgb(15, 23, 42); /* darker than 30,41,59 */
-  --bg-color: rgb(30, 41, 59);          /* darker than 100,116,139 */
-  --text-color: rgb(230, 230, 230);    /* light text on dark bg */
-  --text-size: 1rem;                   /* keep same */
-  --bg-primary: rgb(55, 65, 81);       /* background for cards/buttons */
-  --bg-secondary: rgb(55, 65, 81);     /* secondary surfaces */
-  --font-family: 'Merriweather', sans-serif; /* keep same */
-  --btn-color: rgb(100, 116, 139);     /* slightly lighter button color */
-  --text-color-promot: rgb(163, 230, 101); 
+  --bg-color-primary: rgb(15, 23, 42);
+  /* darker than 30,41,59 */
+  --bg-color: rgb(30, 41, 59);
+  /* darker than 100,116,139 */
+  --text-color: rgb(230, 230, 230);
+  /* light text on dark bg */
+  --text-size: 1rem;
+  /* keep same */
+  --bg-primary: rgb(55, 65, 81);
+  /* background for cards/buttons */
+  --bg-secondary: rgb(55, 65, 81);
+  /* secondary surfaces */
+  --font-family: 'Merriweather', sans-serif;
+  /* keep same */
+  --btn-color: rgb(100, 116, 139);
+  /* slightly lighter button color */
+  --text-color-promot: rgb(163, 230, 101);
 }
 
 /* Red Theme */

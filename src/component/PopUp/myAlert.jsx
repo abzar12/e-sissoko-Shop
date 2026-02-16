@@ -23,7 +23,7 @@ function MyAlert({ show, children, status, onClose }) {
                         </div>
                     </div>
                     <div className="">
-                        <p>{children}</p>
+                        <p className="text-black">{children}</p>
                         <div className="absolute bottom-3.5 w-full left-0 text-center">
                             <button type="button" onClick={onClose} className="w-[120px] border py-2 mx-auto bg-[var(--bg-color)] hover:bg-[var(--bg-color-primary)] transition-all duration-300 ease-in rounded-lg hover:text-white ">Close</button>
                         </div>
