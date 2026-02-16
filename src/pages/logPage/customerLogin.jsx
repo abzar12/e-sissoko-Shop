@@ -17,7 +17,7 @@ function CustomersLogin() {
     // the schema of controle the input value 
     const schema = z.object({
         email: z.string().email("Email field is required"),
-        password: z.string().min(8, "Password must more than 8 characteres "),
+        password: z.string().min(3, "Password must more than 8 characteres "),
     })
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
         mode: "onChange",
@@ -78,7 +78,7 @@ function CustomersLogin() {
                         </div>
                         {errors.password ? <p className={style.Error}>{errors.password?.message}</p> : null}
                         <div className={style.cardPassword}>
-                            <Link className={style.ForgotPassword}>forgot password</Link>
+                            <Link to="/customer/forgot-password" className={style.ForgotPassword}>forgot password</Link>
                         </div>
                         <div className={style.btnBox}>
                             {

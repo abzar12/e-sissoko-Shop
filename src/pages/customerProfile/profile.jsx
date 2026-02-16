@@ -42,11 +42,13 @@ function CustomerProfile() {
                     </div>
                     <div className="border border-[var(--bg-color)] my-2 py-1 px-3 rounded-full sm:rounded-[10px] sm:mt-5 sm:py-2 text-center mx-3 hover:bg-[var(--bg-color)] hover:cursor-pointer transition-all duration-300  ">
                         <Link to="/customer/orders">
-                        <h1>Orders</h1>
+                            <h1>Orders</h1>
                         </Link>
                     </div>
                     <div className="border border-[var(--bg-color)] my-2 py-1 px-3 rounded-full sm:rounded-[10px] sm:mt-5 sm:py-2 text-center mx-3 hover:bg-[var(--bg-color)] hover:cursor-pointer transition-all duration-300  ">
-                        <h1>Password</h1>
+                        <Link to="/customer/forgot-password">
+                            <h1>Password</h1>
+                        </Link>
                     </div>
                 </div>
                 <div className="bg-[var(--bg-color-primary)] rounded-xl">
