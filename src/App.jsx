@@ -13,6 +13,10 @@ import OrdersItems from "./pages/customerOrder/ordersItems"
 import Test from "./pages/test"
 import { Routes, Route } from "react-router-dom"
 import Cart from "./pages/Cart"
+import { CustomerPassword } from "./pages/password/customerPassword"
+import { VerifyOTP } from "./pages/password/customerVerifyOTP"
+import { NewPassword } from "./pages/password/changePassword"
+
 // Dashboard import 
 import Dashboard from "./pages/userDashboard/dashboard"
 import EditProduct from "./pages/editProduct/EditProduct"
@@ -65,8 +69,13 @@ export default function App() {
             <Route path="/customer/orders" element={<OrdersItems />} />
             <Route path="/orders/view" element={<ItemsView />} />
           </Route>
-            <Route path="/customer/profile" element={<CustomerProfile/>} />
+          <Route path="/customer/profile" element={<CustomerProfile />} />
+
         </Route>
+        {/* Forgot Password */}
+        <Route path="/customer/verify-OTP/" element={<VerifyOTP />} />
+        <Route path="/customer/new-password/" element={<NewPassword />} />
+        <Route path="/customer/forgot-password" element={<CustomerPassword />} />
         {/* login and logout */}
         <Route path="/login-me" element={<CustomersLogin />} />
         <Route path="/e-sissoko/login-me" element={<Login />} />

@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
             // setSuccessMessage(data.message)
             setAccessToken(null);
             setUser(null);
-            logout()
+            // logout()
         } catch (error) {
             throw new Error(`${error.message}`)
         }
@@ -39,7 +39,6 @@ export const AuthProvider = ({ children }) => {
                     credentials: "include",
                 })
                 if (!resp.ok) {
-                    // console.log("Unauthorize request")
                     throw new Error("Unauthorize request");
                 }
                 const data = await resp.json()
@@ -57,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         }
         IniatialRefresh()
     }, [])
+         console.log("AuthContext Page rendered")
     return (
         <>
             <AuthContext.Provider value={{ accessToken, user, login, logout, isloading }} >
