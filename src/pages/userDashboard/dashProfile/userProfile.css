@@ -1,0 +1,210 @@
+
+
+    /* main card – pure minimal profile section */
+    .profile-card {
+        margin-inline: auto;
+      /* max-width: 700px; */
+      width: 100%;
+      background: #ffffff;
+      padding: 2rem 2rem 2.25rem;
+      transition: all 0.2s ease;
+    }
+
+    /* no extra ornaments, just clean spacing */
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(145deg, #eaeef2, #dce2e8);
+      border-radius: 24px;          /* slightly softer than circle, modern */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 460;
+      color: #1e2b37;
+      box-shadow: inset 0 2px 3px rgba(255,255,255,0.7), 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .name-role h2 {
+      font-size: 1.7rem;
+      font-weight: 520;
+      letter-spacing: -0.02em;
+      color: #12181c;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+
+    .name-role .role {
+      font-size: 0.95rem;
+      color: #566b7c;
+      background: #f0f3f7;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-weight: 470;
+    }
+
+    /* minimal stats grid – three key e‑commerce metrics */
+    .stats-minimal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 1.5rem;
+      justify-content: space-between;
+      background: #f9fbfd;
+      padding: 1.4rem 1.6rem;
+      border-radius: 22px;
+      margin-bottom: 1.8rem;
+      border: 1px solid #edf2f7;
+    }
+
+    .stat-item {
+      flex: 1 1 auto;
+      min-width: 90px;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #6b7f8f;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .stat-value {
+      font-size: 1.65rem;
+      font-weight: 540;
+      color: #0d1c28;
+      line-height: 1.2;
+    }
+
+    .stat-value small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #66809b;
+      margin-left: 0.2rem;
+    }
+
+    /* minimal info rows — only what matters for an e‑commerce admin */
+    .detail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.9rem;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: center;
+      padding: 0.1rem 0;
+      border-bottom: 1px dashed #e2eaf0;
+      padding-bottom: 0.7rem;
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .detail-icon {
+      width: 2rem;
+      font-size: 1.25rem;
+      color: #7b95ab;
+      line-height: 1;
+    }
+
+    .detail-content {
+      flex: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .detail-label {
+      font-size: 0.95rem;
+      color: #4a5f6e;
+      font-weight: 430;
+    }
+
+    .detail-value {
+      font-weight: 500;
+      color: #1a2b36;
+      background: #f2f6fa;
+      padding: 0.25rem 1rem 0.25rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      border: 1px solid #dde5ed;
+    }
+
+    .detail-value.highlight {
+      background: #e2eaf2;
+      border-color: #bacee0;
+      font-weight: 520;
+    }
+
+    /* store status — minimal extra */
+    .store-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f2f6fc;
+      border-radius: 18px;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid #dee9f2;
+      margin-top: 0.4rem;
+    }
+
+    .store-badge span:first-child {
+      font-weight: 450;
+      color: #1a333f;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .store-badge .pill {
+      background: #d7e2eb;
+      padding: 0.25rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      color: #1b3b4e;
+      font-weight: 500;
+    }
+
+    /* no edit buttons / overwhelming UI – just the essential */
+    hr {
+      border: none;
+      border-top: 1.5px solid #e6edf5;
+      margin: 1.5rem 0 1.2rem;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #7b92a3;
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-note div {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* adjust for tiny screens */
+    @media (max-width: 450px) {
+      .profile-card { padding: 1.5rem; }
+      .avatar { width: 60px; height: 60px; font-size: 1.6rem; border-radius: 20px; }
+      .name-role h2 { font-size: 1.4rem; }
+      .stat-value { font-size: 1.4rem; }
+    }
