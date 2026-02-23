@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import style from "../../component/style/Shopdetail.module.css"
+import style from "../../component/style/shopdetail.module.css"
 import { React, useContext, useEffect, useMemo, useState } from 'react';
 import { Link } from "react-router-dom";
 import { Navigation, Pagination, Autoplay, Thumbs } from "swiper/modules";
