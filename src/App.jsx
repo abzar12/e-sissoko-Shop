@@ -28,6 +28,8 @@ import DashCustomers from "./pages/userDashboard/dashCustomers/customers"
 import DashUsers from "./pages/userDashboard/dashUsers/dashUser"
 import DashPayment from "./pages/userDashboard/dashPayment/dashPayment"
 import ViewOrders from "./pages/userDashboard/dashViewOrdes/viewOrders"
+import UserProfile from "./pages/userDashboard/dashProfile/userProfile"
+
 // Payment Url
 import PaymentVerify from "./pages/checkOut/verifyPayment"
 import ItemsView from "./pages/customerOrder/itemsView"
@@ -57,6 +59,7 @@ export default function App() {
             <Route path="/e-dashboard/users" element={< DashUsers />} />
             <Route path="/e-dashboard/payment" element={< DashPayment />} />
             <Route path="/e-dashboard/view-orders" element={<ViewOrders />} />
+            <Route path="/e-dashboard/user/profile" element={<UserProfile />} />
 
           </Route>
 
