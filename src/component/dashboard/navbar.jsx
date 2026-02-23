@@ -22,10 +22,6 @@ function Navbar({ onButtonClick }) {
                         </div>
                     </div>
                     <div className={style.content}>
-                        <form action="" className={style.searchBox}>
-                            <input type="text" placeholder="Search..." />
-                            <button type="submit"> <BiSearch className={style.ac_iconSearch} /> </button>
-                        </form>
                         <div className={style.ac_btn_Box}>
                             <button type="button"> <BiBell className={style.ac_iconBell} /> <span className={style.notification}>0</span></button>
                         </div>
@@ -36,7 +32,7 @@ function Navbar({ onButtonClick }) {
                                             <h1>{user?.username}</h1>
                                         </div>
                                         <div className={style.content}>
-                                            <p className={style.text}> <span><FaUserCircle /></span> Profile</p>
+                                            <Link to='/e-dashboard/user/profile'><p className={style.text}><span><FaUserCircle /></span> Profile</p></Link> 
                                             <p className={style.text}> <span><IoShieldCheckmarkOutline /></span> Settings</p>
                                             <p className={`${style.text} text-red-500`}><span><IoLogOutOutline /></span> Logout </p>
                                         </div>
