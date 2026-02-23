@@ -1,9 +1,9 @@
 import { GiCash } from "react-icons/gi";
 import { FaCcMastercard, FaCcVisa, } from "react-icons/fa"
-import style from "../../component/style/checkOut/CheckoutInfo.module.css"
+import style from "../../component/style/checkOut/checkoutInfo.module.css"
 import { useAuth } from "../../component/Context/authContext/authContext";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-function CheckOutInfo({ProductNumbers, handleOrdered, deleveryValues, Delevery_value_Change, Edit, submitClicked, deleveryMethod }) {
+function CheckOutInfo({ ProductNumbers, handleOrdered, deleveryValues, Delevery_value_Change, Edit, submitClicked, deleveryMethod }) {
     const { user } = useAuth()
     console.log(user)
     return (
@@ -18,8 +18,8 @@ function CheckOutInfo({ProductNumbers, handleOrdered, deleveryValues, Delevery_v
                 </div>
                 <div className={style.deleveryFields}>
                     <div className={style.title}>
-                    <h2 >Delivery Details</h2>
-                   {!deleveryValues.editDeleveryMethod && <button type="button" onClick={Edit}>Edit</button>}
+                        <h2 >Delivery Details</h2>
+                        {!deleveryValues.editDeleveryMethod && <button type="button" onClick={Edit}>Edit</button>}
                     </div>
                     {
                         // edit Section once the click on the button to edit delevery information
@@ -123,8 +123,8 @@ function CheckOutInfo({ProductNumbers, handleOrdered, deleveryValues, Delevery_v
                         </div>
                         <p>Please click on the following button to do your payment</p>
                         <div className={`${style.payment_btnBox} `}>
-                            <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed ":""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() =>handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
-                            <span className={style.span}> <FaArrowAltCircleRight className={style.icon}/></span>
+                            <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed " : ""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() => handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
+                            <span className={style.span}> <FaArrowAltCircleRight className={style.icon} /></span>
                         </div>
                     </div>
                 </div >
