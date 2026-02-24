@@ -42,9 +42,9 @@ function Home() {
         limit: 15,
         search: ""
     })
-    const { data: globaldata, loading: is_loadingGblobal } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(query)}`)
-    const { data: HeadphoneData, loading: is_loadingHeadphone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(queryHeadphone)}`)
-    const { data: PhoneData, loading: is_loadingPhone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?query=${JSON.stringify(queryPhone)}`)
+    const { data: globaldata, loading: is_loadingGblobal } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${query}`)
+    const { data: HeadphoneData, loading: is_loadingHeadphone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${queryHeadphone}`)
+    const { data: PhoneData, loading: is_loadingPhone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${queryPhone}`)
 
     useEffect(() => {
         SetProducts(globaldata?.products)

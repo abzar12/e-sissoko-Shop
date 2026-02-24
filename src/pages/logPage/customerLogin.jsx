@@ -65,7 +65,7 @@ function CustomersLogin() {
                 {/* form submition */}
                 <form action="" className={style.form} onSubmit={handleSubmit(onSubmit)}>
                     <h2 className={`${style.formTitle} ${style.except}`}>Log-in</h2>
-                    {errormessage && <p className="bg-red-400 text-white  text-sm w-full h-14 content-center text-center">{errormessage}</p>}
+                    {errormessage && <p className="mt-[-15px] mb-5 bg-red-400 text-white  text-sm w-full h-14 content-center text-center">{errormessage}</p>}
                     <div className={`${style.cards} ${style.except}`}>
                         <div className={style.card}>
                             <input {...register("email", { required: true })} className={style.cardInput} type="email" name="email" required />

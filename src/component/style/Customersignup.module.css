@@ -10,7 +10,7 @@
 }
 /* Form contains */
 .form {
-    @apply  h-full
+    @apply  h-full relative 
 }
 .form .formTitle{
     @apply text-center mt-10 mb-5 text-[1.1rem] font-[Lora] font-extrabold
@@ -22,7 +22,7 @@
     @apply mb-7 relative mx-5
 }
 .form .cards.except{
-    @apply mb-7 relative mt-14
+    @apply mb-7 relative
 }
 .form .card .cardText{
     @apply font-[Lora] font-normal text-gray-400 absolute top-1/2 left-3 -translate-y-1/2 pointer-events-none transition-all duration-300 ease-in;
