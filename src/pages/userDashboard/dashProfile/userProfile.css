@@ -154,6 +154,7 @@
     /* store status — minimal extra */
     .store-badge {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       background: #f2f6fc;
