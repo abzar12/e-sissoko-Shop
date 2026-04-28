@@ -24,12 +24,16 @@ body {
     @apply bg-[var(--bg-secondary)] rounded-xl m-3 px-0 min-w-[200px] max-w-[220px] relative;
 }
 
-.aside-btn{
-    @apply bg-[var(--bg-color)] items-center absolute mt-10 px-5 py-3 z-40 rounded-xl text-white
+ .aside-btn{
+    @apply bg-[var(--bg-color)] items-center absolute mt-10 px-5 py-3 z-40 rounded-xl text-white hidden
 }
+.aside-btn.active{
+    @apply opacity-100 block
+}
+    /*
 .container h2 {
     @apply text-[16px] text-center mt-5 font-bold uppercase font-[lora];
-}
+} */
 
 .ac-filter .container {
     @apply relative block mx-0 px-2;
@@ -45,6 +49,21 @@ body {
 }
 .is_small{
     @apply  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5
+}
+.filterContainer{
+    @apply absolute w-[0px] h-full left-0 top-3 bg-[rgb(0,0,0,0.2)] text-white transition-all duration-300 ease-in-out overflow-hidden pointer-events-none opacity-0 z-10
+}
+.filterContainer.active{
+    @apply absolute w-[100%] left-0 pointer-events-auto opacity-100 
+}
+.filterContainer.active .container{
+    @apply relative bg-[var(--bg-color-primary)] min-w-[150px] max-w-[250px] sm:w-[250px] h-[100vh] overflow-hidden px-5 py-3 rounded-r-lg z-20
+}
+.filterContainer.active .container .filterBtn{
+    @apply absolute cursor-pointer right-[0px] top-[50%] bg-[var(--bg-secondary)] text-[var(--bg-color-primary)] py-2 text-[40px] rounded-l-full z-50 
+}
+.filterContainer.active .container .CatgTitle{
+    @apply text-[1.2rem] text-center mt-5 font-bold uppercase font-[lora]
 }
 /*------------------End of Filter------------------- */
 

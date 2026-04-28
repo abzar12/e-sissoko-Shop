@@ -2,7 +2,7 @@ import Navbar from "../component/Navbar"
 import Hero from "../component/hero"
 import Footer from "../component/Footer"
 import filter from '../../FiltersGetting'
-import { FaAward, FaLightbulb, FaFilter, FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft, FaPhone, FaHeadphonesAlt } from "react-icons/fa"
+import { FaAward, FaFilter, FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft, FaPhone, FaHeadphonesAlt } from "react-icons/fa"
 import "../component/style/home.css"
 import { useEffect, useState } from "react"
 import ProductCard from "../component/ProductSection/ProductCard"
@@ -10,7 +10,7 @@ import ProductCardSlide from "../component/ProductSection/ProductCardSlide"
 import Button from "../component/Button/button"
 import Loading from "../component/loading/Loading"
 import useFetchData from "../component/fetchProducts/fetchData"
-import { useLocation } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
 function Home() {
     console.log("Home rendered ")
 
@@ -18,6 +18,7 @@ function Home() {
     const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
     const [products, SetProducts] = useState([]);
     // const for the filters of product
+    // each queries represent here the section we have three section newArrival, headPhone, and Phone
     const [query, Setquery] = useState({
         category: [],
         price: [],
@@ -88,37 +89,42 @@ function Home() {
     ))
     return (
         <>
+            <Helmet>
+                <title>Buy Electronics Online | e-sissoko</title>
+                    <meta name="description" content="Shop the latest electronics with fast delivery in Ghana." />
+                    <meta name="keywords" content="electronics, phones, laptops, Ghana store" />
+            </Helmet>
             <header >
                 <Hero onSearch={searchFn} />
             </header>
-            <main className="">
-                <div className={`grid ${filterbutton ? "grid-cols-[1fr,4fr]" : "grid-cols-1fr"}`}>
-                    {/* ---------aside */}
+            <main className="relative">
+                <div className={`grid grid-cols-1fr`}>
                     {/* display this button only if filters card is false mean hid */}
                     <button
-                        className={`aside-btn ${filterbutton ? 'hidden' : 'flex'} `}
+                        className={`aside-btn ${!filterbutton ? 'active' : ''} `}
                         onClick={() => setfilterbutton(!filterbutton)}
-                    >
+                        >
                         <FaFilter />
                         <span > <FaRegArrowAltCircleRight className="absolute  right-[-20px] bg-[var(--bg-color)] py-2 top-0 text-[40px] rounded-r-full " /></span>
                     </button>
-                    <aside className={`${filterbutton ? 'block' : 'hidden'} ac-filter max-h-[750px]`}>
-                        <span > <FaRegArrowAltCircleLeft onClick={() => setfilterbutton(false)} className={`${filter ? " " : ""} absolute cursor-pointer right-[-20px] top-[50%] bg-[var(--bg-secondary)] text-[var(--bg-color-primary)] py-2 text-[40px] rounded-r-full `} /></span>
+
+                        {/* ---------aside---------------------------------------------------- */}
+                    <aside className={`filterContainer ${filterbutton ? 'active' : ''}`} onClick={()=>setfilterbutton(false)}>
                         <div className="container">
+                        <span > <FaRegArrowAltCircleLeft onClick={() => setfilterbutton(!filterbutton)} className='filterBtn' /></span>
                             <div className="ac-Category" >
-                                <h2 className="">Category</h2>
+                                <h2 className="CatgTitle">Category</h2>
                                 {filtersByCategory}
                             </div>
                             <div className="ac-Price">
-                                <h2 className="">Price</h2>
+                                <h3 className="CatgTitle">Price</h3>
                                 {filtersByPrice}
                             </div>
                             <div className="ac-Color">
-                                <h2 className="">Color</h2>
+                                <h4 className="CatgTitle">Color</h4>
                                 {filterByColor}
                             </div>
                         </div>
-
                     </aside>
                     {/* ------------------New Arrivals Product------------------ */}
                     <section className="section-card h-[100vh] overflow-y-scroll">
@@ -128,7 +134,7 @@ function Home() {
                                 ?
                                 // if data no found ---------------------------------------
                                 (
-                                    products?.length === 0 ?
+                                    !products || !products?.length ?
                                         <div className="flex flex-col items-center justify-center h-full py-10">
                                             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center shadow-sm">
                                                 <svg
@@ -162,7 +168,7 @@ function Home() {
                                         <div className="">
                                             < ProductCard title="New Arrivals" titleClass="text-white bg-[rgb(234,179,8)]" ac_ItemClass={filterbutton ? 'is_small' : 'is_large'} Products={products} />
                                             <div className="btn-down">
-                                                <Button type="button" disabled={query?.limit > globaldata?.products?.length} onClick={updatePage} children="Download More" />
+                                                <Button type="button" disabled={query?.limit > (globaldata?.products?.length ?? 0)} onClick={updatePage} children="Download More" />
                                             </div>
                                         </div>
                                 )
@@ -176,14 +182,20 @@ function Home() {
 
                     </section>
                 </div>
-                {/* ------------------New Arrivals Product------------------ */}
-                <section className="section-cardSlide ">
-                    <ProductCardSlide title="Most Popular" titleClass="bg-red-600 text-white" reverse="" icon={<FaAward className="text-yellow-300 text-4xl mr-3" />} Products={products} />
-                </section>
+                {/* ------------------Most popular section ------------------ */}
+                {
+                    products && products?.length > 10 &&
+                    <section className="section-cardSlide ">
+                        <ProductCardSlide title="Most Popular" titleClass="bg-red-600 text-white" reverse="" icon={<FaAward className="text-yellow-300 text-4xl mr-3" />} Products={products} />
+                    </section>
+                }
                 {/* ------------------recommended section -------- */}
-                <section className="section-cardSlide ">
+                {/*
+                // this section needs work I deceded to exclude the part 
+                 <section className="section-cardSlide ">
                     <ProductCardSlide title="Recommended for You" titleClass="bg-[var(--bg-color-primary)] text-white" icon={<FaLightbulb className="text-blue-500 text-4xl mr-3" />} reverse="true" Products={products} />
-                </section>
+                </section> 
+                */}
                 {/* ------------------Phone section -------- */}
                 {
                     PhoneData?.products.length > 0 &&
