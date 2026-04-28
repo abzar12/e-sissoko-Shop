@@ -58,13 +58,14 @@ function CustomersSignUp() {
         submitData()
     }
     const ErrorExit = Object.values(errors).some(Boolean)
+    console.log("Customer Sign-up loaded")
     return (
         <>
             <div className={style.container}>
                 {/* side Images */}
 
                 <div className={style.sideImg}>
-                    <img src="/image/login.jpg" alt="E-commerce" className={style.img} />
+                    <img src="/image/login.jpeg" alt="E-commerce" loading="lazy"  className={style.img} />
                 </div>
                 {/* form submition */}
                 <form action="" className={style.form} onSubmit={handleSubmit(onSubmit)}>
