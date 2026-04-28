@@ -4,6 +4,8 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+// helmet configure
+import { Helmet } from "react-helmet-async";
 
 const slides = [
     { src: "/image/hero1.jpg", alt: "Fresh products on display" },
@@ -20,7 +22,6 @@ function Hero({onSearch}) {
             <div className="relative h-[60vh] md:h-[70vh] lg:h-[80vh]">
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
-                    navigation
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 5000, disableOnInteraction: false }}
                     loop

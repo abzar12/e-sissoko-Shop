@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 function useFetchData(url) {
     const [loading, setloading] = useState(true)
     const [error, setError] = useState("")
@@ -26,7 +25,7 @@ function useFetchData(url) {
             } finally {
                 setTimeout(() => {
                     setloading(false)
-                }, 300);
+                }, 500);
             }
         }
         getData()
