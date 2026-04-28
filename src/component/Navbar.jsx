@@ -43,7 +43,7 @@ export default function Navbar({ onSearch }) {
         <>
             <div className={style.ac_navbar} >
                 <div className={style.ac_logo}>
-                    <label >LOGO</label>
+                    <label >3SThreeI</label>
                 </div>
                 <div className={style.ac_search}>
                     <input type="text" onChange={(e) => onInputValue(e)} placeholder="Search by name, category, model" id="search-items" className={`outlinenone  bg-transparent`} />
@@ -87,17 +87,33 @@ export default function Navbar({ onSearch }) {
                         }
 
                         <div className={`${style.loginContent} ${showLogin && user ? style.expand : null}`}>
-                            <ul className={style.list}>
-                                <li className={style.text}>
-                                    <Link to="/customer/profile">My Account</Link>
-                                </li>
-                                <li className={style.text}>
-                                    <Link to="/customer/orders">Orders</Link>
-                                </li>
-                                <li className={style.text}>
-                                    <button type="button" onClick={() => logout()}>Logout</button>
-                                </li>
-                            </ul>
+                            {
+                               user && user.role === 'customer' ?
+                                    (
+                                        <ul className={style.list}>
+                                            <li className={style.text}>
+                                                <Link to="/customer/profile">My Account</Link>
+                                            </li>
+                                            <li className={style.text}>
+                                                <Link to="/customer/orders">Orders</Link>
+                                            </li>
+                                            <li className={style.text}>
+                                                <button type="button" onClick={() => logout()}>Logout</button>
+                                            </li>
+                                        </ul>
+                                    )
+                                    :
+                                    (
+                                        <ul className={style.list}>
+                                            <li className={style.text}>
+                                                <Link to="/e-sissoko/dashboard">Dashboard</Link>
+                                            </li>
+                                            <li className={style.text}>
+                                                <button type="button" onClick={() => logout()}>Logout</button>
+                                            </li>
+                                        </ul>
+                                    )
+                            }
                         </div>
                     </div>
                     <div className={style.btn_icon}>
