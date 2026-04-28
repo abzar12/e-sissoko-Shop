@@ -6,7 +6,7 @@ import Footer from "../../component/Footer"
 import { Outlet, useNavigate } from "react-router-dom"
 import useFetchData from "../../component/fetchProducts/fetchData"
 import { useAuth } from "../../component/Context/authContext/authContext"
-import { socket } from "../../component/socket/socket"
+// import { socket } from "../../component/socket/socket"
 
 
 function CustomerOrders() {
