@@ -18,24 +18,25 @@ export default function UserProfile() {
         search: ""
     })
     const { user } = useAuth()
-    const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/users/${user.email}`)
+    const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/users/${user.email}`) 
     const { data: itemsCount } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${query}`)
     const { data: OrdersCount } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getYearly?year=${new Date().getFullYear()}`)
-    console.log(itemsCount)
-    console.log(OrdersCount)
+    console.log(data)
+    // console.log(OrdersCount)
     const date = new Date(data.date);
 
     const formattedDate =
         date.getFullYear() + "-" +
         String(date.getMonth() + 1).padStart(2, "0") + "-" +
         String(date.getDate()).padStart(2, "0");
+    const initialsName = `${data?.FirstName?.[0] ?? ""}${data?.LastName?.[0] ?? ""}`;
     return (
         <>
             <div class="profile-card">
 
                 {/* <!-- top: avatar + name + role (minimal) --> */}
                 <div class="profile-header">
-                    <div class="avatar">{data?.FirstName[0]}{data?.LastName[0]}</div>
+                    <div class="avatar">{initialsName}</div>
                     <div class="name-role">
                         <h2>{data?.FirstName} {data?.LastName}</h2>
                         <span class="role">{data?.Role} · e‑commerce</span>
