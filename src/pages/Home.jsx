@@ -15,7 +15,7 @@ function Home() {
     console.log("Home rendered ")
 
     // const [is_loading, setloading] = useState(false)
-    const [filterbutton, setfilterbutton] = useState(true); // for the small screen to hide an aside card refer to filter 
+    const [filterbutton, setfilterbutton] = useState(false); // for the small screen to hide an aside card refer to filter 
     const [products, SetProducts] = useState([]);
     // const for the filters of product
     // each queries represent here the section we have three section newArrival, headPhone, and Phone
