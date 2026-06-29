@@ -73,7 +73,6 @@ export default function App() {
             <Route path="/orders/view" element={<ItemsView />} />
           </Route>
           <Route path="/customer/profile" element={<CustomerProfile />} />
-
         </Route>
         {/* Forgot Password */}
         <Route path="/customer/verify-OTP/" element={<VerifyOTP />} />
