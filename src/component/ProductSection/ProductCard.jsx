@@ -17,7 +17,8 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                                         prod.Image_Name ? (
                                             <Link to={`/shop/product-detail?Id=${prod.Slug}`}>
                                                 {(() => {
-                                                    const Image = JSON.parse(prod.Image_Name);
+                                                    // console.log("type of prod.Image_Name: ", typeof(prod.Image_Name))
+                                                    const Image = typeof(prod.Image_Name) === Array ? JSON.parse(prod.Image_Name) : prod.Image_Name;
                                                     return (
                                                         <img
                                                             src={`${import.meta.env.VITE_API_URL}/public/upload/Product_img/${Image[0]}`}

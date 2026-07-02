@@ -1,18 +1,20 @@
 import { createContext, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 export const Cartcontext = createContext()
 const CartProvider = ({ children }) => {
+    const navigate = useNavigate()
     const [cart, setcart] = useState(() => {
         const stored = localStorage.getItem('ordP')
         return stored ? JSON.parse(stored) : [];
     });
     const sub_Total = useMemo(() => {
-        const Total = cart.reduce((acc, item ) =>{
-          return acc + item.sub_total
-        },0)
+        const Total = cart.reduce((acc, item) => {
+            return acc + item.sub_total
+        }, 0)
         return Total ? Total : 0
     }, [cart])
-    const ProductNumbers = cart.length ;
-    console.log("this is the Sub Total:", sub_Total + " :: " + ProductNumbers )
+    const ProductNumbers = cart.length;
+    console.log("this is the Sub Total:", sub_Total + " :: " + ProductNumbers)
     const AddProductToCart = (product) => {
         //const existing = cart.find(item => item.id === product.id)
         setcart((prev) => {
@@ -26,7 +28,7 @@ const CartProvider = ({ children }) => {
         })
     }
     const RemoveFromCart = (productId) => {
-        setcart((prev) => prev.filter(item => item.id !== productId));
+        setcart((prev) =>prev.filter(item => Number(item.id) !== Number(productId)))
     };
     const IncreaseQuantity = (productId) => {
         setcart((prev) =>
@@ -50,15 +52,15 @@ const CartProvider = ({ children }) => {
                 .filter((item) => item.quantity > 0)
         )
     }
-    const clearCart =() =>{
+    const clearCart = () => {
         setcart([])
-        localStorage.setItem("ordP",  JSON.stringify([]))
+        localStorage.setItem("ordP", JSON.stringify([]))
     }
     // mantain the ord to be update 
     useEffect(() => {
-        if(cart.length > 0){
+        // if (cart.length >= 0) {
             localStorage.setItem('ordP', JSON.stringify(cart))
-        }
+        // }
     }, [cart]);
     // add product to cart 
     return (
