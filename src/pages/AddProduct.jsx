@@ -83,14 +83,16 @@ function AddProduct() {
 
         // sending data to server
         try {
-            const resp = await fetch(`http://localhost:5330/Product?table=Phone&folder=Product_images`, {
+            const resp = await fetch(`http://localhost:4000/Product?table=Phone&folder=Product_images`, {
                 method: "POST",
                 body: formData,
+                credentials: "include"
             });
+            const data = await resp.json();
+            console.log("***", data)
             if (!resp.ok) {
                 throw new Error(`HTTP error! status: ${resp.status}. `);
             }
-            const data = await resp.json();
             // reset the field after submit 
             reset();
             SetFileImage([]);
