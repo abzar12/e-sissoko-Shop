@@ -124,7 +124,7 @@ function CheckOutInfo({ loading, ProductNumbers, handleOrdered, deleveryValues, 
                         </div>
                         <p>Please click on the following button to do your payment</p>
                         <div className={`${style.payment_btnBox} `}>
-                            {git 
+                            {
                                 !loading ?
                                     <>
                                         <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed " : ""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() => handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
