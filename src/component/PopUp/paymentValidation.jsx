@@ -58,9 +58,9 @@ function PaymentPopup({isShow, Reference, Amount}) {
                     <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-6 pb-4">
                         <button
                             onClick={() => {
+                                if ( _reference) navigate(`/customer/orders`);
+                                else navigate("/customer/orders");
                                 onClose?.();
-                                if ( _reference) navigate(`/shop/cart`);
-                                else navigate("/shop/cart");
                             }}
                             className="w-full sm:w-auto px-5 py-2 rounded-lg bg-[var(--bg-color-primary)] text-white font-medium hover:opacity-90 transition"
                         >
@@ -70,6 +70,7 @@ function PaymentPopup({isShow, Reference, Amount}) {
                         <button
                             onClick={() => {
                                 navigate("/shop/cart");
+                                onClose?.();
                             }}
                             className="w-full sm:w-auto px-5 py-2 rounded-lg border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 transition"
                         >
