@@ -5,6 +5,7 @@ import {
 } from "react-icons/fa";
 import styles from "./payment.module.css";
 import PaymentTable from "./paymentData/paymentTable";
+import { useAuth } from "../../../component/Context/authContext/authContext";
 function DashPayment() {
     const [query, setQuery] = useState({
         page: 1,
@@ -13,6 +14,7 @@ function DashPayment() {
         category: "",
         search: ""
     })
+    const {user} =  useAuth()
     const { data, error, isLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getAll?query=${JSON.stringify(query)}`)
     const [loading, setLoading] = useState(false);
     const FiltterFn = (Status) => {
@@ -105,7 +107,7 @@ function DashPayment() {
                         </div>
                     </div>
                     <p className={styles.cardAmount}>
-                        GHS {Amount_OrdersPaid}
+                        GHS {user?.role == "admin" ? Amount_OrdersPaid : "****"}
                     </p>
                     <p className={styles.cardSubtext}>
                         {PaidTransaction} transactions

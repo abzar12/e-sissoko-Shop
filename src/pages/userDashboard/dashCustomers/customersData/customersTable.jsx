@@ -9,7 +9,7 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
     const columnHelper = createColumnHelper()
     const [show, setShow] = useState(false)
     const column = [
-        columnHelper.accessor("User_ID", {
+        columnHelper.accessor("user_id", {
             header: "ID",
             cell: ({ getValue }) => {
                 let id = getValue()
@@ -20,16 +20,16 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 )
             }
         }),
-        columnHelper.accessor("FirstName", {
+        columnHelper.accessor("firstname", {
             header: "FirstName",
         }),
-        columnHelper.accessor("LastName", {
+        columnHelper.accessor("lastname", {
             header: "LastName"
         }),
-        columnHelper.accessor("Phone", {
+        columnHelper.accessor("phone", {
             header: "Number"
         }),
-        columnHelper.accessor("Email", {
+        columnHelper.accessor("email", {
             header: "Email"
         }),
         columnHelper.accessor("Amount", {
@@ -54,14 +54,14 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 )
             }
         }),
-        columnHelper.accessor("Area", {
+        columnHelper.accessor("area", {
             header: "Area"
         }),
-        columnHelper.accessor("City", {
+        columnHelper.accessor("city", {
             header: "City"
         }),
 
-        columnHelper.accessor("Created_at", {
+        columnHelper.accessor("created_at", {
             header: "Date",
             cell: ({ getValue }) => {
                 const date = getValue()
