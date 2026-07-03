@@ -24,14 +24,14 @@ function OrdersItems() {
 
                             orders.map((item, index) => (
                                 <div key={index || item.Order_Number} className="bg-[var(--bg-primary)] sm:flex gap-3 flex-wrap items-center shadow-md rounded-md">
-                                    <div className=" flex ">
-                                        <img src={`http://localhost:7000/public/upload/Product_img/${JSON.parse(item.Images)[0]}`} className="h-28 w-28 rounded-md" />
+                                    <div className=" flex flex-wrap">
+                                        <img src={`${item?.Images[0]?.url ? item.Images[0].url : import.meta.env.VITE_API_URL+"/public/upload/Product_img/"+item.Images[0]}`} className="h-28 w-28 rounded-md" />
                                         <div className="overflow-hidden ">
                                             <h3 className="text-lg line-clamp-1 font-semibold text-gray-500 truncate">{item.Name}</h3>
                                             <p className="text-sm text-gray-500">Order: <span className="font-medium">{item.Order_Number}</span></p>
                                             <p className="text-sm text-gray-500">Qty: <span className="font-medium">{item.Quantity}</span></p>
                                             <p className="text-sm text-gray-500">Price: <span className="font-medium">{item.Price}</span></p>
-                                            <p className="text-sm text-gray-500">Delivery: <span className="font-medium">{item.Delevery_Method || '—'}</span></p>
+                                            <p className="text-sm text-gray-500">Delivery: <span className="font-medium">{item.Delivery_Method || '—'}</span></p>
                                             <p className="text-xs text-gray-400 mt-1">Placed: {formatDate(item.Create_At)}</p>
                                         </div>
                                     </div>

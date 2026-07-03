@@ -3,7 +3,7 @@ import { FaCcMastercard, FaCcVisa, } from "react-icons/fa"
 import style from "../../component/style/checkOut/checkoutInfo.module.css"
 import { useAuth } from "../../component/Context/authContext/authContext";
 import { FaArrowAltCircleRight } from "react-icons/fa";
-function CheckOutInfo({ ProductNumbers, handleOrdered, deleveryValues, Delevery_value_Change, Edit, submitClicked, deleveryMethod }) {
+function CheckOutInfo({ loading, ProductNumbers, handleOrdered, deleveryValues, Delevery_value_Change, Edit, submitClicked, deleveryMethod }) {
     const { user } = useAuth()
     console.log(user)
     return (
@@ -67,6 +67,7 @@ function CheckOutInfo({ ProductNumbers, handleOrdered, deleveryValues, Delevery_
                     {/* Delevering items  */}
                     <div className={style.ItemsContainer} >
                         <h2 className={style.title}>Delevery within 24 hours</h2>
+                        <p className={style.sub_total}> Sub Total: <span className="text-xl">{deleveryValues.total}</span>GHS</p>
                         <div className={`${style.items} `}>
                             {
                                 deleveryValues.cart.map((item, index) => (
@@ -92,10 +93,10 @@ function CheckOutInfo({ ProductNumbers, handleOrdered, deleveryValues, Delevery_
                                                 Quantity: <span className={style.span}>{item.quantity}</span>
                                             </p>
                                             <p className={style.price}>
-                                                Price: <span className={style.span}>{item.price}</span>
+                                                Price: <span className={style.span}>{item.price} GHS</span>
                                             </p>
                                             <p className={style.sub_total}>
-                                                Sub Total: <span className={style.span}>{deleveryValues.total}</span>
+                                                Sub Total: <span className={style.span}>{item.price * item.quantity} GHS</span>
                                             </p>
                                         </div>
                                     </div>
@@ -123,8 +124,18 @@ function CheckOutInfo({ ProductNumbers, handleOrdered, deleveryValues, Delevery_
                         </div>
                         <p>Please click on the following button to do your payment</p>
                         <div className={`${style.payment_btnBox} `}>
-                            <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed " : ""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() => handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
-                            <span className={style.span}> <FaArrowAltCircleRight className={style.icon} /></span>
+                            {git 
+                                !loading ?
+                                    <>
+                                        <button type="button" className={` ${deleveryValues.editDeleveryMethod ? " cursor-not-allowed " : ""}`} disabled={deleveryValues.editDeleveryMethod} onClick={() => handleOrdered("paystack")}>PayNow ({deleveryValues.total})</button>
+                                        <span className={style.span}> <FaArrowAltCircleRight className={style.icon} /></span>
+                                    </>
+                                    :
+                                    <div className="flex items-center justify-end gap-2">
+                                        <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
+                                        <p className="text-gray-500">Loading...</p>
+                                    </div>
+                            }
                         </div>
                     </div>
                 </div >
