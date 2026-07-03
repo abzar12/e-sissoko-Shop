@@ -45,11 +45,11 @@ function CustomerProfile() {
                             <h1>Orders</h1>
                         </Link>
                     </div>
-                    <div className="border border-[var(--bg-color)] my-2 py-1 px-3 rounded-full sm:rounded-[10px] sm:mt-5 sm:py-2 text-center mx-3 hover:bg-[var(--bg-color)] hover:cursor-pointer transition-all duration-300  ">
+                    {/* <div className="border border-[var(--bg-color)] my-2 py-1 px-3 rounded-full sm:rounded-[10px] sm:mt-5 sm:py-2 text-center mx-3 hover:bg-[var(--bg-color)] hover:cursor-pointer transition-all duration-300  ">
                         <Link to="/customer/forgot-password">
                             <h1>Password</h1>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="bg-[var(--bg-color-primary)] rounded-xl">
                     <h1 className=" py-2 pl-3 border-b-2 font-bold border-white/30 mb-5 mt-1">Cutomer Profile</h1>
