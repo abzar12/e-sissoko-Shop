@@ -107,7 +107,7 @@ function ProductInfo({ data, uuid }) {
         }
     }
     console.log("editproductInfo rendered ")
-    const Oldimages = data.Image_Name ? JSON.parse(data.Image_Name) : []
+    const Oldimages = data.Image_Name ? data.Image_Name : []
     return (
         <>
             <div className="ac_form border max-w-[700px] mt-5 mx-5 sm:mx-auto p-6 bg-white shadow-lg rounded-2xl">
@@ -128,7 +128,7 @@ function ProductInfo({ data, uuid }) {
                                 <option value="electronics">Electronics</option>
                                 <option value="shoes">Shoes</option>
                                 <option value="books">Books</option>
-                                <option value="Phone">Phone</option>
+                                <option value="iphone">Iphone</option>
                             </select>
                         </div>
                     </div>
@@ -218,13 +218,13 @@ function ProductInfo({ data, uuid }) {
                             <label >Old image</label>
                             {
                                 Oldimages.map((images, index) => (
-                                    <img key={index} src={`${import.meta.env.VITE_API_URL}/public/upload/Product_img/${images}`} className="h-32" />
+                                    <img key={index} src={`${images?.url ? images.url : import.meta.env.VITE_API_URL+"/public/upload/Product_img/"+images}`} className="h-32" />
                                 ))
                             }
                         </div>
                     </div>
                     <div className="">
-                        <button type="submit" className="ac-btn">Add Product</button>
+                        <button type="submit" className="ac-btn">Update</button>
                     </div>
                 </form >
             </div >

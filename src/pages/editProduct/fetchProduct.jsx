@@ -11,7 +11,8 @@ function FetchProduct(uuid){
                 return
             }
             try {
-                const resp = await fetch(`http://localhost:7000/product/${uuid}`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/${uuid}`);
+                const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/${uuid}`);
                 if (!resp.ok) {
                     throw new Error(`Could not fetch data error: ${resp.status}`)
                 }
