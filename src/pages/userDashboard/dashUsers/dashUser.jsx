@@ -2,6 +2,8 @@ import { useState } from "react"
 import useDashboardFetch from "../../../component/Context/DashboardContext/dashboardFetch"
 import style from "../dashCustomers/customers.module.css"
 import UsersTable from "./userData/userTable"
+import { useAuth } from "../../../component/Context/authContext/authContext"
+import Unauthorize from "../../../component/unauthorize"
 function DashUsers() {
     const [query, setQuery] = useState({
         quantity_status: "",
@@ -10,6 +12,7 @@ function DashUsers() {
         limit: 50,
         search: ""
     })
+    const user = useAuth()
     const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/users/getAllUsers?query=${JSON.stringify(query)}`)
     const decreasePage = () => {
         setQuery((prev) => {
@@ -38,7 +41,12 @@ function DashUsers() {
                     </div>
                 </div>
                 <div className={style.tableContainer}>
-                    <UsersTable data={data?.users} offset={data?.offset} limit={data?.limitPage} page={query.page} onIncrease={increasePage} onDecrease={decreasePage} />
+                    {
+                        user.role == "admin" ?
+                            <UsersTable data={data?.users} offset={data?.offset} limit={data?.limitPage} page={query.page} onIncrease={increasePage} onDecrease={decreasePage} />
+                            :
+                            <Unauthorize/>
+                    }
                 </div>
             </div>
         </>

@@ -18,10 +18,13 @@ export default function UserProfile() {
         search: ""
     })
     const { user } = useAuth()
-    const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/users/${user.email}`) 
-    const { data: itemsCount } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${query}`)
-    const { data: OrdersCount } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getYearly?year=${new Date().getFullYear()}`)
-    console.log(data)
+    const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/users/email/${user.email}`, ) 
+    const { data: itemsCount } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll`, query)
+    const year = new Date().getFullYear()
+    const { data: OrdersCount } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getYearly`, {
+    year: new Date().getFullYear(),
+  })
+    console.log(OrdersCount)
     // console.log(OrdersCount)
     const date = new Date(data.date);
 
@@ -29,7 +32,10 @@ export default function UserProfile() {
         date.getFullYear() + "-" +
         String(date.getMonth() + 1).padStart(2, "0") + "-" +
         String(date.getDate()).padStart(2, "0");
-    const initialsName = `${data?.FirstName?.[0] ?? ""}${data?.LastName?.[0] ?? ""}`;
+    const initialsName = `${data?.firstname?.[0] ?? ""}${data?.lastname?.[0] ?? ""}`;
+    const total_Amount_Sale = OrdersCount?.number_order?.reduce((acc, item) => {
+        return acc + item.Amount | "26.4k"
+    }, 0)
     return (
         <>
             <div class="profile-card">
@@ -38,8 +44,8 @@ export default function UserProfile() {
                 <div class="profile-header">
                     <div class="avatar">{initialsName}</div>
                     <div class="name-role">
-                        <h2>{data?.FirstName} {data?.LastName}</h2>
-                        <span class="role">{data?.Role} · e‑commerce</span>
+                        <h2>{data?.firstname} {data?.lastname}</h2>
+                        <span class="role">{data?.role} · e‑commerce</span>
                     </div>
                 </div>
 
@@ -47,11 +53,11 @@ export default function UserProfile() {
                 <div class="stats-minimal">
                     <div class="stat-item">
                         <div class="stat-label">Net sales</div>
-                        <div class="stat-value">$26.4k <small>↑ 8%</small></div>
+                        <div class="stat-value">GHS{data.role === "admin" ? total_Amount_Sale : "****"}<small>↑ 8%</small></div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-label">Orders</div>
-                        <div class="stat-value">{OrdersCount?.orders?.length}</div>
+                        <div class="stat-value">{OrdersCount?.number_order?.length}</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-label">Items</div>
@@ -66,7 +72,7 @@ export default function UserProfile() {
                         <div class="detail-icon"><MdEmail /></div>
                         <div class="detail-content">
                             <span class="detail-label">Email</span>
-                            <span class="detail-value">{data.Email}</span>
+                            <span class="detail-value">{data.email}</span>
                         </div>
                     </div>
                     {/* <!-- store / shop name – essential e‑commerce context --> */}
@@ -82,7 +88,7 @@ export default function UserProfile() {
                         <div class="detail-icon"><FaLock /></div>
                         <div class="detail-content">
                             <span class="detail-label">Access</span>
-                            <span class="detail-value">{data.Role} {data.Role === 'admin' && '· owner'}</span>
+                            <span class="detail-value">{data.role} {data.Role === 'admin' && '· owner'}</span>
                         </div>
                     </div>
                     {/* <!-- joined / tenant – light info --> */}
