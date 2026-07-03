@@ -8,11 +8,12 @@ import { useAuth } from "../../../component/Context/authContext/authContext";
 function DashProduct() {
     const { user,accessToken } = useAuth()
     const [query, setQuery] = useState({
-        quantity_status: "",
+        quantity_status: "available",
         category: [],
         page: 1,
         limit: 15
     })
+    
     const { data } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/product/getAll/?query=${JSON.stringify(query)}`)
     const decreasePage = () => {
         setQuery((prev) => {
@@ -43,15 +44,16 @@ function DashProduct() {
     // if(!accessToken || !user.username && !user.role !== "staff" && !user.role !== "admin"){
     //     return <Navigate to="/" />
     // }
+    console.log("rendere")
     return (
         <>
             <div className={style.container}>
                 <div className={style.header}>
                     <h1> Products <span className={style.count}>{data.products?.length || 0}</span></h1>
                     <div className={style.mySelect}>
-                        <select onChange={(e) => QuantityFn(e.target.value)}>
+                        <select defaultValue="available" onChange={(e) => QuantityFn(e.target.value)}>
                             <option value="all">All Products</option>
-                            <option value="available">Available</option>
+                            <option  value="available">Available</option>
                             <option value="low_stock">Low Stock</option>
                             <option value="unavailable">Unavailable</option>
                             <option value="new">recently Added</option>
@@ -61,7 +63,7 @@ function DashProduct() {
                     <div className={style.mySelect}>
                         <select onChange={(e) => CategoryFn(e.target.value)}>
                             <option value="">All Categories</option>
-                            <option value="Iphone">Iphone</option>
+                            <option value="iphone">Iphone</option>
                             <option value="watch">Watch</option>
                             <option value="charger">Charger</option>
                             <option value="airpod">Airpod</option>

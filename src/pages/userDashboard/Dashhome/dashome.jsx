@@ -17,6 +17,7 @@ function DashHome() {
     const { data: YearsOrdersSales, error: YearsOrdersSalesError, isLoading: YearsOrdersSalesLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getYearly?year=${year}`)
     // getting week's Daily orders 
     const { data: DailyOrdersData, error: DailyOrdersError, isLoading: DailyOrdersLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getDaily/`)
+    console.log("DAily ord ***", DailyOrdersData)
     const ChartBarOption = ChartBarOptionFn(DailyOrdersData.Orders)
     const ChartLineOption = ChartLineOptionFn(DailyOrdersData.Items)
     const CharBarYearOption = CharBarYearOptionFn(YearsOrdersSales.orders)
@@ -75,7 +76,7 @@ function DashHome() {
                         <div className={style.chart}>
                             {
                                 ChartLineOption.series?.length > 0 && (
-                                    <Chart options={ChartLineOption.option} series={ChartLineOption.series} height="100%" />
+                                    <Chart options={ChartLineOption.option} type="area" series={ChartLineOption.series} height="100%" />
                                 )
                             }
                         </div>
