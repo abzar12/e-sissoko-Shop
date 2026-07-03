@@ -8,7 +8,7 @@ function UsersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
     const [columnFilters, SetColumnFilter] = useState([])
     const columnHelper = createColumnHelper()
     const column = [
-        columnHelper.accessor("User_ID", {
+        columnHelper.accessor("user_id", {
             header: "ID",
             cell: ({ getValue }) => {
                 let id = getValue()
@@ -19,22 +19,34 @@ function UsersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
                 )
             }
         }),
-        columnHelper.accessor("FirstName", {
-            header: "FirstName",
+        columnHelper.accessor("username", {
+            header: "User_Name",
         }),
-        columnHelper.accessor("LastName", {
-            header: "LastName"
+        columnHelper.accessor("firstname", {
+            header: "First_Name",
         }),
-        columnHelper.accessor("Phone", {
-            header: "Number"
+        columnHelper.accessor("lastname", {
+            header: "Last_Name"
         }),
-        columnHelper.accessor("Email", {
+        columnHelper.accessor("phone", {
+            header: "Number",
+            cell: ({getValue}) => {
+                if(!getValue()){
+                    return (<small className="text-orange-500"> Empty </small>)
+                }else{
+                    return (
+                        <p>{getValue()}</p>
+                    )
+                }
+            }
+        }),
+        columnHelper.accessor("email", {
             header: "Email"
         }),
-        columnHelper.accessor("Role", {
+        columnHelper.accessor("role", {
             header: "Role",
         }),
-        columnHelper.accessor("Create_at", {
+        columnHelper.accessor("create_at", {
             header: "Date",
             cell: ({ getValue }) => {
                 const date = getValue()
