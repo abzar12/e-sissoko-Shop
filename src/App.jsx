@@ -1,5 +1,6 @@
 import Home from "./pages/Home"
 import Login from "./pages/logPage/Log-in"
+import SignUp from "./pages/logPage/Sign-up"
 import ShopDetail from "./pages/shopDetails/shop_detail"
 import ProtectUserRoute from "./component/Middleware/protectRoute"
 import ProtectCustomerRoute from "./component/Middleware/protectCustomerRoute"
@@ -41,7 +42,6 @@ export default function App() {
         <Route path="/" element={<Home />} />
         {/* verification popup ----------------*/}
         <Route path="/payment/validated" element={< PaymentPopup />} />
-        <Route path="/e-sissoko/log-in" element={<Login />} />
         <Route path="/shop/product-detail" element={<ShopDetail />} />
         <Route path="/shop/product" element={<Test />} />
         <Route path="/shop/cart" element={<Cart />} />
@@ -60,7 +60,7 @@ export default function App() {
             <Route path="/e-dashboard/payment" element={< DashPayment />} />
             <Route path="/e-dashboard/view-orders" element={<ViewOrders />} />
             <Route path="/e-dashboard/user/profile" element={<UserProfile />} />
-
+            <Route path="/e-sissoko/signup-me" element={<SignUp />} />
           </Route>
 
         </Route>
