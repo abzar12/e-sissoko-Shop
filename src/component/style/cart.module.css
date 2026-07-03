@@ -1,0 +1,40 @@
+@reference "tailwindcss";
+
+.cart_section{
+    @apply px-5 py-3
+}
+.cartBox{
+    @apply mx-auto w-full flex-wrap bg-[var(--bg-primary)] mb-5 rounded-lg flex items-center justify-between
+}
+.cartContent{
+    @apply  flex flex-wrap gap-3 h-full items-center
+}
+.imageBox{
+    @apply max-w-[150px] h-full overflow-hidden rounded-lg
+}
+.img{
+    @apply h-fit w-fit object-cover rounded-lg
+}
+.contenText{
+    @apply px-3
+}
+.cartButton{
+    @apply flex flex-wrap justify-center gap-3 px-2 py-5
+}
+@media(max-width: 447px){
+    .cartBox{
+        @apply max-w-[230px]
+    }
+    .cartContent{
+        @apply w-full
+    }
+    .cartButton{
+        @apply mx-auto
+    }
+    .imageBox{
+        @apply max-w-full
+    }
+    .img{
+        @apply w-full object-cover
+    }
+}
