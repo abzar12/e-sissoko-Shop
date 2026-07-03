@@ -17,38 +17,37 @@ function CustomerOrders() {
         email: user?.email || "",
         status: ""
     })
-    const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders?query=${JSON.stringify(query)}`)
-
-    const [Data, SetData] = useState(data)
+    const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders`,query)
     const StatusFn = (value) => {
-        console.log(value)
+        // console.log(value)
         setQuery((prev) => {
             return { ...prev, status: value }
         })
     }
+    const [Data, SetData] = useState(data)
     useEffect(() => {
         SetData(data)
-    }, [data])
-    useEffect(() => {
-        if (!socket) return;
-        const handleOrderUpdate = (updatedOrder) => {
-            SetData((prev) => {
-                if (!Array.isArray(prev)) return prev;
-                return prev.map((o) =>
-                    o._id === updatedOrder._id ? updatedOrder : o
-                );
-            });
-        };
+    }, [query, data])
+    // useEffect(() => {
+    //     if (!socket) return;
+    //     const handleOrderUpdate = (updatedOrder) => {
+    //         SetData((prev) => {
+    //             if (!Array.isArray(prev)) return prev;
+    //             return prev.map((o) =>
+    //                 o._id === updatedOrder._id ? updatedOrder : o
+    //             );
+    //         });
+    //     };
 
-        socket.on("orderUpdated", handleOrderUpdate);
-        socket.on("connect", () => {
-            console.log("✅ socket connected", socket.id);
-        });
+    //     socket.on("orderUpdated", handleOrderUpdate);
+    //     socket.on("connect", () => {
+    //         console.log("✅ socket connected", socket.id);
+    //     });
 
-        return () => {
-            socket.off("orderUpdated", handleOrderUpdate);
-        };
-    }, []);
+    //     return () => {
+    //         socket.off("orderUpdated", handleOrderUpdate);
+    //     };
+    // }, []);
     return (
         <>
             <Navbar />
@@ -62,14 +61,14 @@ function CustomerOrders() {
                         <select onChange={(e) => StatusFn(e.target.value)} className="bg-transparent border border-gray-700 px-3 py-1 rounded text-white focus:outline-none ">
                             <option value="">All</option>
                             <option value="pending">Pending</option>
-                            <option value="shipping">Shipped</option>
+                            <option value="shipping">Shipping</option>
                             <option value="delivered">Delivered</option>
-                            <option value="Confirmed">Confirmed</option>
+                            <option value="confirmed">Confirmed</option>
                         </select>
                         <Button children="Refresh" className="px-4 py-1 text-white rounded-full bg-[var(--bg-color-primary)]" />
                     </div>
                 </header>
-
+                {/* Outlet is orderview and ordersItems */}
                 <section className="space-y-6">
                     < Outlet context={{ Data }} />
                 </section>

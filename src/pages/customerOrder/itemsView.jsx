@@ -11,16 +11,16 @@ function ItemsView() {
 
     const { user } = useAuth()
     const Order_ID = searchParams.get("ID")
-    console.log(Order_ID)
     const [query, setQuery] = useState({
         page: 1,
         limit: 50,
         email: user?.email || "",
         status: "",
-        id: Order_ID ?? Order_ID
+        id: Order_ID
     })
-    const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders?query=${JSON.stringify(query)}`)
+    const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders`, query)
 
+    console.log(query)
     useEffect(() => {
         setQuery((prev) => ({
             ...prev,
@@ -48,7 +48,14 @@ function ItemsView() {
                             orders.map((item, index) => (
                                 <div key={index || item.Order_Number} className="bg-[var(--bg-primary)] sm:flex gap-3 flex-wrap items-center shadow-md rounded-md">
                                     <div className=" flex ">
-                                        <img src={`http://localhost:7000/public/upload/Product_img/${JSON.parse(item.Images)[0]}`} className="h-28 w-28 rounded-md" />
+                                        <img
+                                            src={
+                                                item?.Images?.[0]?.url
+                                                    ? item.Images[0].url
+                                                    : `${import.meta.env.VITE_API_URL}/public/upload/Product_img/${item?.Images?.[0]}`
+                                            }
+                                            className="h-28 w-28 rounded-md"
+                                        />
                                         <div className="overflow-hidden ">
                                             <h3 className="text-lg line-clamp-1 font-semibold text-gray-500 truncate">{item.Name}</h3>
                                             <p className="text-sm text-gray-500">Order: <span className="font-medium">{item.Order_Number}</span></p>
