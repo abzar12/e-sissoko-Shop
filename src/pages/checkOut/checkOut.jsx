@@ -10,6 +10,7 @@ import { Cartcontext } from "../../component/Context/cartContext/cartContext"
 function CheckOut() {
     const navigate = useNavigate()
     const { user } = useAuth()
+    const [loading, setLoading] = useState(false)
     const { cart, sub_Total, ProductNumbers } = useContext(Cartcontext)
     // my state
     const deleveryFees = 25;
@@ -48,7 +49,7 @@ function CheckOut() {
     }
     // function to send data to back-end 
     const handleOrdered = async (paymentMethod) => {
-
+        setLoading(true)
         try {
             const resp = await fetch(`${import.meta.env.VITE_API_URL}/check-out/ordered/create`, {
                 method: "POST",
@@ -74,6 +75,8 @@ function CheckOut() {
         } catch (error) {
             console.log(`CheckOut Error: ${error}`)
             throw new Error(`CheckOut Error: ${error.message}`);
+        }finally{
+            setLoading(false)
         }
     }
     // my condition
@@ -89,11 +92,11 @@ function CheckOut() {
             <div className="flex flex-wrap sm:flex-nowrap gap-5 p-5">
                 {/* this component contains the customer detail and delevery details form  */}
                 <div className="w-full ">
-                    <CheckOutInfo ProductNumbers={ProductNumbers} handleOrdered={handleOrdered} deleveryValues={deleveryFormValues} Delevery_value_Change={handleChange} submitClicked={handleClick} Edit={handleEdit} deleveryMethod={deleveryFormValues.deleveryMethod} total={deleveryFormValues.total} cart={cart} />
+                    <CheckOutInfo loading={loading} ProductNumbers={ProductNumbers} handleOrdered={handleOrdered} deleveryValues={deleveryFormValues} Delevery_value_Change={handleChange} submitClicked={handleClick} Edit={handleEdit} deleveryMethod={deleveryFormValues.deleveryMethod} total={deleveryFormValues.total} cart={cart} />
                 </div>
                 {/* this is the Orders Summary */}
                 <div className="w-full sm:w-[350px] bg-white max-h-[250px] rounded-lg ">
-                    <ItemInfo deleveryValues={deleveryFormValues} handleOrdered={handleOrdered} cart={cart} sub_Total={sub_Total} deleveryFees={deleveryFees} />
+                    <ItemInfo loading={loading} deleveryValues={deleveryFormValues} handleOrdered={handleOrdered} cart={cart} sub_Total={sub_Total} deleveryFees={deleveryFees} />
                 </div>
             </div>
         </>

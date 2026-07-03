@@ -43,9 +43,14 @@ function Home() {
         limit: 15,
         search: ""
     })
-    const { data: globaldata, loading: is_loadingGblobal } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${query}`)
-    const { data: HeadphoneData, loading: is_loadingHeadphone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${queryHeadphone}`)
-    const { data: PhoneData, loading: is_loadingPhone } = useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll?${queryPhone}`)
+    const { data: globaldata, loading: is_loadingGblobal } = 
+    useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll`, query)
+
+    const { data: HeadphoneData, loading: is_loadingHeadphone } = 
+    useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll`, queryHeadphone)
+
+    const { data: PhoneData, loading: is_loadingPhone } = 
+    useFetchData(`${import.meta.env.VITE_API_URL}/product/getAll`, queryPhone)
 
     useEffect(() => {
         SetProducts(globaldata?.products)
@@ -60,7 +65,7 @@ function Home() {
         })
     }
     const searchFn = (values) => {
-        console.log(values)
+        // console.log(values)
         const value = values?.toLowerCase().trim()
         Setquery((prev) => {
             return { ...prev, search: value }
@@ -87,6 +92,7 @@ function Home() {
             <input type="checkbox" className="cursor-pointer" onChange={(e) => handleQuery(e, "color")} id={item.toLowerCase()} value={item.toLowerCase() == "all" ? null : item.toLowerCase()} /> <label className="text-[15px]  font-[lora] hover:text-gray-600">{item}</label>
         </div>
     ))
+    // console.log("Peoduct: ", products)
     return (
         <>
             <Helmet>
