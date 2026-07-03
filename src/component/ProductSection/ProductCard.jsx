@@ -20,7 +20,13 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                                                     // console.log("type of prod.Image_Name: ", typeof(prod.Image_Name))
                                                     const Image = typeof(prod.Image_Name) === Array ? JSON.parse(prod.Image_Name) : prod.Image_Name;
                                                     return (
+                                                           Image[0].url ? 
                                                         <img
+                                                            src={`${Image[0].url}`}
+                                                            alt={Image[0]}
+                                                            className="w-full h-full object-cover" />
+                                                            :
+                                                            <img
                                                             src={`${import.meta.env.VITE_API_URL}/public/upload/Product_img/${Image[0]}`}
                                                             alt={Image[0]}
                                                             className="w-full h-full object-cover" />

@@ -10,7 +10,7 @@
 }
 /* Form contains */
 .form {
-    @apply  h-full relative 
+    @apply  h-full relative my-3
 }
 .form .formTitle{
     @apply text-center mt-10 mb-5 text-[1.1rem] font-[Lora] font-extrabold
