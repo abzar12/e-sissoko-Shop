@@ -10,14 +10,20 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
     const [show, setShow] = useState(false)
     const column = [
         columnHelper.accessor("uuid", {
-            header: "ID"
+            header: "ID",
+            cell: ({ getValue }) => {
+                const value = getValue()
+                return (
+                    <span className= {` ${show ? "line-clamp-3": "line-clamp-1"}  w-[170px] `}  onClick={() => setShow(!show)}>{value}</span>
+                )
+            }
         }),
         columnHelper.accessor("Name", {
             header: "Products",
             cell: ({ getValue }) => {
                 const value = getValue()
                 return (
-                    <span className= {` ${show ? "line-clamp-3": "line-clamp-1"}  w-[170px] `}  onClick={() => setShow(!show)}>{value}</span>
+                    <span className= {` ${show ? "line-clamp-2": "line-clamp-1"}  w-[170px] `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),
@@ -41,7 +47,7 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             cell: ({ getValue }) => {
                 const value = getValue()
                 let ClassMap
-                if (value > 5) {
+                if (value >= 5) {
                     ClassMap = "bg-green-500 p-2 rounded-[50%] text-white"
                 }
                 if (value < 5) {
@@ -94,7 +100,7 @@ function ProdductTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             cell: ({ getValue }) => {
                 const value = getValue()
                 return (
-                    <span className={` ${show ? "line-clamp-3": "line-clamp-1"} `}  onClick={() => setShow(!show)}>{value}</span>
+                    <span className={` ${show ? "line-clamp-2 min-w-[250px]": "line-clamp-1 min-w-[250px]"} `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),

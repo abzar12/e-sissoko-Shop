@@ -23,7 +23,7 @@ function ShopDetail() {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     // variable for loading 
     const [is_Loading, setIs_loading] = useState(false);
-    const { AddProductToCart, RemoveFromCart, cart } = useContext(Cartcontext); // getting the function from usecontext
+    const { AddProductToCart, RemoveFromCart, cart, IncreaseQuantity, DecreaseQuantity } = useContext(Cartcontext); // getting the function from usecontext
     // iniatialize product to localstorage
     const [product, setproduct] = useState({
         uuid: 1,
@@ -101,8 +101,32 @@ function ShopDetail() {
             })
         }, 700);
     }
+    const AddQuantity = () => {
+        if(!itemFound_lst){
+            setQuantity(data.Quantity > quantity ? quantity + 1 : quantity)
+        }else{
+            IncreaseQuantity(itemFound_lst.id)
+        }
+    }
+    const ReduceQuantity = () => {
+        if(!itemFound_lst){
+           setQuantity(Math.max(0, quantity - 1))
+        }else{
+            DecreaseQuantity(itemFound_lst.id)
+        }
+    }
+    
     // image is getting in type object so we should parse it and then use map to be display
-    const images = data?.Image_Name ? JSON.parse(data.Image_Name) : []
+    // console.log("typeof of image", typeof(data?.Image_Name))
+    let images = [];
+
+    try {
+        images = data?.Image_Name ? JSON.parse(data.Image_Name) : [];
+    } catch (e) {
+        console.warn("Invalid JSON in Image_Name:", data.Image_Name);
+        images = data.Image_Name ? [data.Image_Name][0] : [];
+    }
+    // console.log("********", images)
     if (!product) {
         return null; // not found yet or invalid ID
     }
@@ -119,7 +143,7 @@ function ShopDetail() {
                             <Swiper spaceBetween={30} thumbs={{ swiper: thumbsSwiper }} slidesPerView={1} modules={[Navigation, Thumbs]}>
                                 {
                                     images.map((image, index) => (
-                                        <SwiperSlide className={style.swiper} key={index}><img className={style.img} src={`http://localhost:7000/public/upload/Product_img/${image}`} alt={`Product image ${index + 1}`}></img></SwiperSlide>
+                                        <SwiperSlide className={style.swiper} key={index}><img className={style.img} src={`${ image.url ? image.url : import.meta.env.VITE_API_URL+"/public/upload/Product_img/"+image }`} alt={product.name}></img></SwiperSlide>
                                     ))
                                 }
                             </Swiper>
@@ -131,9 +155,9 @@ function ShopDetail() {
                                         className={style.thumbSwiper}
                                     >
                                         <img
-                                            src={`http://localhost:7000/public/upload/Product_img/${img}`}
+                                            src={`${ img?.url ? img.url : import.meta.env.VITE_API_URL+"/public/upload/Product_img/"+img }`}
                                             className=""
-                                            alt={`Thumbnail ${index + 1}`}
+                                            alt={product.name}
                                         />
                                     </SwiperSlide>
                                 ))}
@@ -168,8 +192,8 @@ function ShopDetail() {
                                 <div className={style.quantity}>
                                     <p>Quantity :<span> {quantity} </span></p>
                                     <div className={style.qtn_btn}>
-                                        <button type="button" onClick={() => setQuantity(data.Quantity > quantity ? quantity + 1 : quantity)}> < FaPlus /></button>
-                                        <button type="button" onClick={() => setQuantity(Math.max(0, quantity - 1))}> < FaMinus /></button>
+                                        <button type="button" onClick={AddQuantity}> < FaPlus /></button>
+                                        <button type="button" onClick={ReduceQuantity}> < FaMinus /></button>
                                     </div>
                                 </div>
                                 {/* ------total */}
