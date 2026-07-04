@@ -20,7 +20,7 @@ function ItemsView() {
     })
     const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders`, query)
 
-    console.log(query)
+    console.log(data)
     useEffect(() => {
         setQuery((prev) => ({
             ...prev,
@@ -47,7 +47,7 @@ function ItemsView() {
 
                             orders.map((item, index) => (
                                 <div key={index || item.Order_Number} className="bg-[var(--bg-primary)] sm:flex gap-3 flex-wrap items-center shadow-md rounded-md">
-                                    <div className=" flex ">
+                                    <div className=" flex w-full">
                                         <img
                                             src={
                                                 item?.Images?.[0]?.url
@@ -61,8 +61,8 @@ function ItemsView() {
                                             <p className="text-sm text-gray-500">Order: <span className="font-medium">{item.Order_Number}</span></p>
                                             <p className="text-sm text-gray-500">Qty: <span className="font-medium">{item.Quantity}</span></p>
                                             <p className="text-sm text-gray-500">Price: <span className="font-medium">{item.Price}</span></p>
-                                            <p className="text-sm text-gray-500">Delivery: <span className="font-medium">{item.Delevery_Method || '—'}</span></p>
-                                            <p className="text-xs text-gray-400 mt-1">Placed: {formatDate(item.Create_At)}</p>
+                                            <p className="text-sm text-gray-500">Delivery: <span className="font-medium">{item.Delivery_Method || '—'}</span></p>
+                                            <p className="text-xs text-gray-400 mt-1">Placed: {formatDate(item.Created_At)}</p>
                                         </div>
                                     </div>
                                     <div className=" py-2 flex-shrink-0 flex-1 flex flex-wrap sm:flex-nowrap justify-center items-center gap-3 border rounded-md px-1">
