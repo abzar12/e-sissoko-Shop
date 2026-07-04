@@ -167,7 +167,7 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
             <div className={style.footer_btn}>
                 <button onClick={onDecrease} disabled={page == 1} className={` ${page == 1 ? "text-gray-300" : null}`}><FaArrowAltCircleLeft /></button>
                 <span className={style.span}> {offset} - {limit}</span>
-                <button onClick={onIncrease} disabled={data?.orders?.length < 15} className={` ${data?.orders?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
+                <button onClick={onIncrease} disabled={data?.orders?.length < 1} className={` ${data?.orders?.length < 15 ? "text-gray-300" : null}`}><FaArrowAltCircleRight /></button>
             </div>
         </>
     )
