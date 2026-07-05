@@ -47,7 +47,7 @@ const ProductSchema = z.object({
 })
 function AddProduct() {
     console.log("AddProduct rendered ")
-    const [loading, setLoading]= useState(false)
+    const [loading, setLoading] = useState(false)
     const [Alert, setAlert] = useState({
         is_show: false,
         status: false,
@@ -71,7 +71,6 @@ function AddProduct() {
     };
     // function for handling submition 
     const onSubmit = async (data) => {
-        setLoading(true)
         const formData = new FormData();
         // Append form data
         Object.entries(data).forEach(([key, value]) => {
@@ -82,6 +81,7 @@ function AddProduct() {
         // Append images
         fileImage.forEach(file => formData.append("Img_url", file));
         console.log('My image files : ', fileImage)
+        setLoading(true)
 
         // sending data to server
         try {
@@ -104,7 +104,7 @@ function AddProduct() {
             })
         } catch (err) {
             console.error("fetching Data failed: ", err);
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
@@ -362,14 +362,14 @@ function AddProduct() {
                         <button type="submit" className="">
                             {
                                 !loading ?
-                                <>
-                                    <MdOutlineAddShoppingCart className="inline text-3xl" /> Add Product
-                                </>
-                            :
-                            <div className="flex items-center justify-end gap-2">
-                                <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
-                                <p className="text-gray-500">Loading...</p>
-                            </div>
+                                    <>
+                                        <MdOutlineAddShoppingCart className="inline text-3xl" /> Add Product
+                                    </>
+                                    :
+                                    <div className="flex items-center justify-end gap-2">
+                                        <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
+                                        <p className="text-gray-500">Loading...</p>
+                                    </div>
                             }
                         </button>
                     </div>

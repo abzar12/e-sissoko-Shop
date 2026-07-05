@@ -44,10 +44,10 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                                 <div className="ac_textItem">
                                     <p className="Prod-title">{prod.Name}</p>
                                     {/* <p className="desc">{prod.Description}</p> */}
-                                    <p className="price"><span> Price: </span>{prod.Promot_Price ? prod.Promot_Price : prod.Price} GHS </p>
-                                    <p className="price"> <span className="special">{prod.Promot_Price ? prod.Price + " GHS" : ""} </span></p>
+                                    <p className="price"><span> Price: </span>{prod.Promot_Price && prod.Promot_Price > 0 ? prod.Promot_Price : prod.Price} GHS </p>
+                                    <p className="price"> <span className="special">{prod.Promot_Price  ? prod.Price + " GHS" : ""} </span></p>
                                     {
-                                        (prod.Promot_Price || prod.Promot_Price < 0) && (
+                                        (prod.Promot_Price && prod.Promot_Price > 0) && (
                                             <div className="PromoContent">
                                                 <h1>Promotion</h1>
                                             </div>
