@@ -47,6 +47,7 @@ const ProductSchema = z.object({
 })
 function AddProduct() {
     console.log("AddProduct rendered ")
+    const [loading, setLoading]= useState(false)
     const [Alert, setAlert] = useState({
         is_show: false,
         status: false,
@@ -70,6 +71,7 @@ function AddProduct() {
     };
     // function for handling submition 
     const onSubmit = async (data) => {
+        setLoading(true)
         const formData = new FormData();
         // Append form data
         Object.entries(data).forEach(([key, value]) => {
@@ -102,6 +104,8 @@ function AddProduct() {
             })
         } catch (err) {
             console.error("fetching Data failed: ", err);
+        }finally{
+            setLoading(false)
         }
     }
 
@@ -120,7 +124,7 @@ function AddProduct() {
                             <label htmlFor="" className="">Product Name <span className="text-red-500 ">*</span></label>
                             <input
                                 type="text"
-                                
+
                                 placeholder="e.g Samsung Galaxy S24 Ultra"
                                 {...register("Name",)}
                                 name='Name'
@@ -148,7 +152,7 @@ function AddProduct() {
                             <label htmlFor="">Brand <span className="text-red-500 ">*</span></label>
                             <input
                                 type="text"
-                                
+
                                 name="Brand"
                                 placeholder="e.g Samsung"
                                 className={`input ${errors.Brand ? "border-red-600" : "border"}`}
@@ -159,7 +163,7 @@ function AddProduct() {
                             <label htmlFor="">Model <span className="text-red-500 ">*</span></label>
                             <input
                                 type="text"
-                                
+
                                 name="Model"
                                 placeholder="Unique product ID"
                                 className={`input ${errors.Model ? "border-red-600" : "border"}`}
@@ -179,7 +183,7 @@ function AddProduct() {
                         <div className="">
                             <label htmlFor="" className="">Price (GHS) <span className="text-red-500 ">*</span></label>
                             <input type="number"
-                                
+
                                 placeholder=""
                                 name="Price"
                                 className={`input ${errors.Price ? "border-red-600" : ""}`}
@@ -188,7 +192,7 @@ function AddProduct() {
                         <div className="Box">
                             <label htmlFor="" className="">Discount Price (GHS) </label>
                             <input type="number"
-                                
+
                                 placeholder=""
                                 name="Promot_Price"
                                 className={`input ${errors.Promot_Price ? "border-red-600" : ""}`}
@@ -205,7 +209,7 @@ function AddProduct() {
                         <label htmlFor="" className="">Stock Quantity <span className="text-red-500 ">*</span></label>
                         <input
                             type="number"
-                            
+
                             placeholder=""
                             name="Quantity"
                             className={`input ${errors.Quantity ? "border-red-600" : ""}`}
@@ -233,7 +237,7 @@ function AddProduct() {
                             <label htmlFor="" className="">Size </label>
                             <input
                                 type="text"
-                                
+
                                 placeholder="e.g S, M, L, XL,"
                                 name="Size"
                                 id=""
@@ -245,7 +249,7 @@ function AddProduct() {
                             <label htmlFor="" className="">Weight </label>
                             <input
                                 type="text"
-                                
+
                                 placeholder="e.g 12"
                                 name="Weight"
                                 className={`input ${errors.Weight ? "border-red-600" : "border"}`}
@@ -264,7 +268,7 @@ function AddProduct() {
                         <label htmlFor="">Dimensions (L x W x H) </label>
                         <input
                             type="text"
-                            
+
                             name="Dimensions"
                             placeholder="e.g 15 x 7 x 0.8cm"
                             className={`input ${errors.Dimensions ? "border-red-600" : "border"}`}
@@ -287,7 +291,7 @@ function AddProduct() {
                         <div className="">
                             <label htmlFor="" className="">Delivery Time <span className="text-red-500 ">*</span></label>
                             <input type="text"
-                                
+
                                 placeholder="e.g. business days"
 
                                 name="Delivery"
@@ -305,7 +309,7 @@ function AddProduct() {
                     <div className="Box">
                         <label htmlFor="" className="">Warranty / return Policy <span className="text-red-500 ">*</span></label>
                         <input type="text"
-                            
+
                             placeholder="e.g. 1 year Warranty"
                             name="Warranty"
 
@@ -334,7 +338,7 @@ function AddProduct() {
                             name="Description"
                             placeholder="Write a detailed description..."
                             rows={5}
-                            
+
                             className={`textarea ${errors.Description ? "border-red-600" : "border"}`}
                             {...register("Description")}
                         >
@@ -355,7 +359,19 @@ function AddProduct() {
                     <p className="text-red-500 text-sm">{errors.Img_url?.message}</p>
                     <p className="p">Upload up to 8 images</p>
                     <div className="ac-btn">
-                        <button type="submit" className=""><MdOutlineAddShoppingCart className="inline text-3xl" /> Add Product</button>
+                        <button type="submit" className="">
+                            {
+                                !loading ?
+                                <>
+                                    <MdOutlineAddShoppingCart className="inline text-3xl" /> Add Product
+                                </>
+                            :
+                            <div className="flex items-center justify-end gap-2">
+                                <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
+                                <p className="text-gray-500">Loading...</p>
+                            </div>
+                            }
+                        </button>
                     </div>
                 </form>
             </div>
