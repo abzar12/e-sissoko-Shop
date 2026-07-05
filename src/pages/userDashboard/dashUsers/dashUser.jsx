@@ -31,6 +31,7 @@ function DashUsers() {
             return { ...prev, search: value.toLowerCase() }
         })
     }
+    console.log("role",user.user.role)
     return (
         <>
             <div className={style.container}>
@@ -42,7 +43,7 @@ function DashUsers() {
                 </div>
                 <div className={style.tableContainer}>
                     {
-                        user.role == "admin" ?
+                        user?.user.role || user?.role == "admin" ?
                             <UsersTable data={data?.users} offset={data?.offset} limit={data?.limitPage} page={query.page} onIncrease={increasePage} onDecrease={decreasePage} />
                             :
                             <Unauthorize/>

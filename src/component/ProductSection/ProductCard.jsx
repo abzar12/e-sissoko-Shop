@@ -4,6 +4,7 @@ import "./ProductCard.css"
 import { Link } from "react-router-dom";
 import { IoMdHelpCircle } from "react-icons/io";
 function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
+    console.log("product ", Products)
     return (
         <>
             <div className="">
@@ -17,10 +18,10 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                                         prod.Image_Name ? (
                                             <Link to={`/shop/product-detail?Id=${prod.Slug}`}>
                                                 {(() => {
-                                                    // console.log("type of prod.Image_Name: ", typeof(prod.Image_Name))
-                                                    const Image = typeof(prod.Image_Name) === Array ? JSON.parse(prod.Image_Name) : prod.Image_Name;
+                                                    console.log("type of prod.Image_Name:", typeof(prod.Image_Name))
+                                                    const Image = typeof(prod.Image_Name) == "object" ? prod.Image_Name : JSON.parse(prod.Image_Name)
                                                     return (
-                                                           Image[0].url ? 
+                                                           Image[0]?.url ? 
                                                         <img
                                                             src={`${Image[0].url}`}
                                                             alt={Image[0]}
@@ -45,7 +46,7 @@ function ProductCard({ title, Products, ac_ItemClass, titleClass, Icon }) {
                                     <p className="Prod-title">{prod.Name}</p>
                                     {/* <p className="desc">{prod.Description}</p> */}
                                     <p className="price"><span> Price: </span>{prod.Promot_Price && prod.Promot_Price > 0 ? prod.Promot_Price : prod.Price} GHS </p>
-                                    <p className="price"> <span className="special">{prod.Promot_Price  ? prod.Price + " GHS" : ""} </span></p>
+                                    <p className="price"> <span className="special">{prod.Promot_Price && prod.Promot_Price > 0 ? prod.Price + " GHS" : ""} </span></p>
                                     {
                                         (prod.Promot_Price && prod.Promot_Price > 0) && (
                                             <div className="PromoContent">
