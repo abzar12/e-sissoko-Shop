@@ -6,6 +6,7 @@ import z, { array } from "zod";
 import { useNavigate } from "react-router-dom";
 
 function ProductInfo({ data, uuid }) {
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const Schema = z.object({
         Name: z.string().min(2, "Name must be at least 2 characters"),
@@ -77,6 +78,7 @@ function ProductInfo({ data, uuid }) {
     }
     // function to handle the submittion 
     const onSubmit = async (data) => {
+        setLoading(true)
         const formData = new FormData()
         Object.entries(data).forEach(([key, value]) => {
             if (key != "Img_url") {
@@ -91,7 +93,8 @@ function ProductInfo({ data, uuid }) {
         try {
             const resp = await fetch(`${import.meta.env.VITE_API_URL}/product/${uuid}`, {
                 method: "PUT",
-                body: formData
+                body: formData,
+                credentials: "include",
             })
             if (!resp.ok) {
                 throw new Error(`Client Error, Status: ${resp.status}`);
@@ -104,6 +107,8 @@ function ProductInfo({ data, uuid }) {
             navigate("/e-dashboard/product");
         } catch (error) {
             console.log(`CLient Error: ${error.message}`)
+        } finally {
+            setLoading(false)
         }
     }
     console.log("editproductInfo rendered ")
@@ -218,13 +223,23 @@ function ProductInfo({ data, uuid }) {
                             <label >Old image</label>
                             {
                                 Oldimages.map((images, index) => (
-                                    <img key={index} src={`${images?.url ? images.url : import.meta.env.VITE_API_URL+"/public/upload/Product_img/"+images}`} className="h-32" />
+                                    <img key={index} src={`${images?.url ? images.url : import.meta.env.VITE_API_URL + "/public/upload/Product_img/" + images}`} className="h-32" />
                                 ))
                             }
                         </div>
                     </div>
                     <div className="">
-                        <button type="submit" className="ac-btn">Update</button>
+                        <button type="submit" className="ac-btn">
+                        {
+                            !loading ?
+                                    "Update"
+                                :
+                                <div className="flex items-center justify-center gap-2">
+                                    <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-500 rounded-full animate-spin"></div>
+                                    <p className="text-gray-500">Loading...</p>
+                                </div>
+                        }
+                        </button>
                     </div>
                 </form >
             </div >

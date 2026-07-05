@@ -80,7 +80,7 @@ function CheckOutInfo({ loading, ProductNumbers, handleOrdered, deleveryValues, 
                                                         try {
                                                             const images = JSON.parse(item.image);
                                                             return images?.length > 0 ? (
-                                                                <img src={`${import.meta.env.VITE_API_URL_IMG}/${images[0]}`} alt={images[0]} />
+                                                                <img src={`${ images[0]?.url ? images[0].url : import.meta.env.VITE_API_URL_IMG+"/"+images[0]}`} alt={images[0] || images[0].url} />
                                                             ) : null;
                                                         } catch {
                                                             return null;

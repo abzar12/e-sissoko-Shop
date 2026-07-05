@@ -51,9 +51,10 @@ function ItemsView() {
                                         <img
                                             src={
                                                 item?.Images?.[0]?.url
-                                                    ? item.Images[0].url
+                                                    ? item?.Images[0]?.url
                                                     : `${import.meta.env.VITE_API_URL}/public/upload/Product_img/${item?.Images?.[0]}`
                                             }
+                                            alt={item?.Images[0]?.url ? item?.Images[0]?.url : item?.Images?.[0]}
                                             className="h-28 w-28 rounded-md"
                                         />
                                         <div className="overflow-hidden ">
