@@ -7,7 +7,7 @@ import { FaMoneyBillTransfer } from "react-icons/fa6"
 import { GiCancel } from "react-icons/gi";
 
 function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpdateStatus }) {
-    // const [page, SetPage] =useState(1)
+    const [show, setShow] =useState(false)
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
     const navigate = useNavigate()
@@ -21,9 +21,9 @@ function OrdersTable({ data, page, onDecrease, onIncrease, offset, limit, onUpda
         columnHelper.accessor("Products", {
             header: "Products",
             cell: ({ getValue }) => {
-                const product = getValue()
+                const value = getValue()
                 return (
-                    <span className=" line-clamp-1  ">{product}</span>
+                    <span className={` ${show ? "line-clamp-2 min-w-[250px]": "line-clamp-1 min-w-[100px]"} `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),

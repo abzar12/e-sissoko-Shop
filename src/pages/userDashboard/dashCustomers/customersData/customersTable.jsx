@@ -65,9 +65,9 @@ function CustomersTable({ data, page, onDecrease, onIncrease, offset, limit }) {
             header: "Date",
             cell: ({ getValue }) => {
                 const date = getValue()
-                const spliteDate = date?.split("T") || Date()
+                const spliteDate = date ? date?.split("T") : "----"
 
-                return (<span className=" whitespace-nowrap ">{spliteDate[0]}</span>)
+                return (<span className=" whitespace-nowrap ">{date ? spliteDate[0]: spliteDate }</span>)
             }
         }),
         columnHelper.display({

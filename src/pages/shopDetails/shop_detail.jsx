@@ -173,8 +173,8 @@ function ShopDetail() {
                                 {/*  show Price */}
                                 {data.Price ?
                                     <p>Price :
-                                        <span className=" text-[var(--bg-color-primary)] text-3xl mr-3"> GHS {data.Promot_Price}</span>
-                                        <span className={`${data.Promot_Price ? " text-gray-400 line-through mr-3" : null}`}>{data.Price} </span></p>
+                                        <span className=" text-[var(--bg-color-primary)] text-3xl mr-3"> GHS{ data.Promot_Price > 0 && data.Promot_Price}</span>
+                                        <span className={`${data.Promot_Price && data.Promot_Price > 0 ? " text-gray-400 line-through mr-3" : null}`}>{data.Price}</span></p>
                                     : null
                                 }
                                 <div className="my-3">

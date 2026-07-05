@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function RecentOrderedTable() {
     const navigate = useNavigate()
+    const [show, setShow] =useState(false)
     const [columnFilters, SetColumnFilters] = useState([])
     const columnHelper = createColumnHelper()
     const [query, setQuery] = useState({
@@ -29,9 +30,9 @@ function RecentOrderedTable() {
         columnHelper.accessor("Products", {
             header: "Products",
             cell: ({ getValue }) => {
-                const product = getValue()
+                const value = getValue()
                 return (
-                    <span className=" line-clamp-1  ">{product}</span>
+                    <span className={` ${show ? "line-clamp-2 min-w-[250px]": "line-clamp-1 min-w-[100px]"} `}  onClick={() => setShow(!show)}>{value}</span>
                 )
             }
         }),
