@@ -83,7 +83,7 @@ function AddProduct() {
 
         // sending data to server
         try {
-            const resp = await fetch(`http://localhost:4000/Product?table=Phone&folder=Product_images`, {
+            const resp = await fetch(`${import.meta.env.VITE_API_URL}/Product?table=Phone&folder=Product_images`, {
                 method: "POST",
                 body: formData,
                 credentials: "include"

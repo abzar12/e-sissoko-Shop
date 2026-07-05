@@ -20,7 +20,6 @@ function ItemsView() {
     })
     const { data, error, loading } = useFetchData(`${import.meta.env.VITE_API_URL}/orders/getCustomer/orders`, query)
 
-    console.log(data)
     useEffect(() => {
         setQuery((prev) => ({
             ...prev,
@@ -29,7 +28,6 @@ function ItemsView() {
         }))
     }, [user, Order_ID])
     const orders = data?.orders || []
-    // console.log(data)
 
     const formatDate = (d) => {
         try {
@@ -38,10 +36,12 @@ function ItemsView() {
             return d
         }
     }
+    console.log(data)
+
     return (
         <>
             {
-                data?.orders.length > 0 ?
+                orders.length > 0 ?
                     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
                         {
 
