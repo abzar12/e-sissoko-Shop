@@ -63,7 +63,7 @@ function ChartWhenVisible(props) {
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}>
             {isVisible && (
                 <Suspense fallback={<ChartLoading />}>
-                    <LazyChart {...props} />
+                    <LazyChart {...props} /> 
                 </Suspense>
             )}
         </div>
@@ -76,7 +76,7 @@ function DashHome() {
     // getting week's Daily orders 
     const { data: DailyOrdersData, error: DailyOrdersError, isLoading: DailyOrdersLoading } = useDashboardFetch(`${import.meta.env.VITE_API_URL}/orders/getDaily/`)
     console.log("DAily ord ***", DailyOrdersData)
-    const ChartBarOption = ChartBarOptionFn(DailyOrdersData?.Orders ?? [])
+    const ChartBarOption = ChartBarOptionFn(DailyOrdersData?.Orders )
     const ChartLineOption = ChartLineOptionFn(DailyOrdersData?.Items ?? [])
     const CharBarYearOption = CharBarYearOptionFn(YearsOrdersSales?.orders ?? [])
     const CharPieOption = ChartPieOptionFn()
@@ -114,11 +114,11 @@ function DashHome() {
                             {
                                 ChartBarOption.series?.length > 0 && (
                                     <ChartWhenVisible
-                                        className={style.Chart1}
-                                        options={ChartBarOption.option}
-                                        series={ChartBarOption.series}
-                                        type="bar"
-                                        height="100%"
+                                       className={style.Chart1}
+                                       options={ChartBarOption.option}
+                                       series={ChartBarOption.series}
+                                       type="bar"
+                                       height="100%"
                                     />
                                     // <Chart className={style.Chart1} options={ChartBarOption.option} series={ChartBarOption.series} type="bar" height="100%" />
                                 )
@@ -142,11 +142,11 @@ function DashHome() {
                             {
                                 ChartLineOption.series?.length > 0 && (
                                     <ChartWhenVisible
-                                        className={style.Chart1}
-                                        options={ChartLineOption.option}
-                                        series={ChartLineOption.series}
-                                        type="area"
-                                        height="100%"
+                                       className={style.Chart1}
+                                       options={ChartLineOption.option}
+                                       series={ChartLineOption.series}
+                                       type="area"
+                                       height="100%"
                                     />
                                     // <Chart options={ChartLineOption.option} type="area" series={ChartLineOption.series} height="100%" />
                                 )
@@ -162,11 +162,11 @@ function DashHome() {
                             {
                                 CharPieOption.series?.length > 0 && (
                                     <ChartWhenVisible
-                                        className={style.Chart1}
-                                        options={CharPieOption.option}
-                                        series={CharPieOption.series}
-                                        type="donut"
-                                        height="100%"
+                                       className={style.Chart1}
+                                       options={CharPieOption.options}
+                                       series={CharPieOption.series}
+                                       type="donut"
+                                       height="100%"
                                     />
                                     // <Chart options={CharPieOption.options} series={CharPieOption.series} type="donut" height="100%" />
                                 )
@@ -199,10 +199,10 @@ function DashHome() {
                                 <p className={style.p}>No Sales In this Year</p>
                             ) : (
                                 <ChartWhenVisible
-                                    options={CharBarYearOption.option}
-                                    series={CharBarYearOption.series}
-                                    type="line"
-                                    height="100%"
+                                   options={CharBarYearOption.option}
+                                   series={CharBarYearOption.series}
+                                   type="line"
+                                   height="100%"
                                 />
                             )}
                     </div>
@@ -229,11 +229,11 @@ function DashHome() {
                     </div>
                     <div className={style.Curve}>
                         <ChartWhenVisible
-                            className={style.Chart1}
-                            options={ChartPieMonthsOption.options}
-                            series={ChartPieMonthsOption.series}
-                            type="donut"
-                            height="100%"
+                           className={style.Chart1}
+                           options={ChartPieMonthsOption.options}
+                           series={ChartPieMonthsOption.series}
+                           type="donut"
+                           height="100%"
                         />
                         {/* <Chart options={ChartPieMonthsOption.options} series={ChartPieMonthsOption.series} type="donut" height="100%" /> */}
                     </div>
