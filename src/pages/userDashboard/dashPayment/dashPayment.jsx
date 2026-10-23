@@ -219,7 +219,7 @@ function DashPayment() {
                                             </p>
                                         </div>
                                     </div>
-                                    <button className={styles.mobileCardReceiptButton}>
+                                    <button className={styles.mobileCardReceiptButton} >
                                         <FaDownload />
                                         Download Receipt
                                     </button>
