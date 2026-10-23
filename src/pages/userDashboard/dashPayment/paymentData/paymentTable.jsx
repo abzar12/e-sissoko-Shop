@@ -75,6 +75,7 @@ function PaymentTable({ data, page, onDecrease, onIncrease, offset, limit }) {
         getFilteredRowModel: getFilteredRowModel(),
     })
     const DownloadReceipt = async (id) => {
+     window.print("abzar 1234")
     }
     return (
         <>
