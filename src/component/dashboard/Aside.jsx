@@ -8,18 +8,19 @@ import { FaProductHunt, FaPeopleLine } from "react-icons/fa6";
 import { FaShippingFast, FaMoneyCheckAlt, FaUserShield } from "react-icons/fa";
 
 
-
   const  SideBarIconText = [
     {icon: MdDashboard, text:"Dashboard", url: "/e-sissoko/dashboard"},
-    {icon: FaProductHunt, text:"Products", url: "/e-dashboard/product"},
+    {icon: FaProductHunt, text:"Products", url: "/e-dashboard/products"},
     {icon: MdAddShoppingCart, text:"Orders", url: "/e-dashboard/orders"},
     {icon: FaPeopleLine, text:"Customers", url: "/e-dashboard/customers"},
     {icon: FaUserShield, text:"Users", url: "/e-dashboard/users"},
     {icon: FaMoneyCheckAlt, text:"Payment", url:"/e-dashboard/payment"},
     {icon: FaShippingFast, text:"Shipping"}
 ]
-
 function Aside({ isopen }) {
+    const url = window.location.href.split("/")
+    const currentPage = url.at(-1)
+    console.log(currentPage)
     return (
         <>
             <div className={`${style.shortAside} ${isopen ? style.activeBtn : null}`}>
@@ -32,7 +33,7 @@ function Aside({ isopen }) {
                         {
                             SideBarIconText.map((item, index) => (
                                 <div key={index} >
-                                    <Link to={item.url} className={`${style.iconBox} `}>
+                                    <Link to={item.url} className={`${style.iconBox} ${item.text.toLowerCase()=== currentPage && style.active} `}>
                                         <item.icon className={style.icon} />
                                         {isopen && <label className={style.textIcon} >{item.text}</label>}
                                     </Link>
