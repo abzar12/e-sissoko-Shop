@@ -95,7 +95,7 @@ export default function App() {
             <Route path="/e-sissoko/dashboard" element={<DashHome />} />
             <Route path="/e-dashboard/add-product" element={<AddProduct />} />
             <Route path="/e-dashboard/edit-product" element={<EditProduct />} />
-            <Route path="/e-dashboard/product" element={<DashProduct />} />
+            <Route path="/e-dashboard/products" element={<DashProduct />} />
             <Route path="/e-dashboard/orders" element={<Orders />} />
             <Route path="/e-dashboard/customers" element={<DashCustomers />} />
             <Route path="/e-dashboard/users" element={<DashUsers />} />
