@@ -13,6 +13,9 @@
 .iconBox{
     @apply h-[50px] content-center flex  items-center gap-5 mx-2 my-3 
 }
+.iconBox.active{
+    @apply bg-[var(--bg-color)] rounded-lg cursor-pointer
+}
 .iconBox:hover{
     @apply bg-[var(--bg-color)] rounded-lg cursor-pointer
 }
