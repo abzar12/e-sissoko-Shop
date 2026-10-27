@@ -7,7 +7,7 @@ label{
     @apply  block text-lg text-[1.1rem]
 }
 .ac_form {
-    @apply border mx-3 my-5 p-6 bg-[var(--bg-primary)] shadow-lg rounded-2xl;
+    @apply border mx-auto my-5 p-6 bg-[var(--bg-primary)] shadow-lg rounded-2xl max-w-[700px]; 
 }
 .Box{
     @apply mb-3
